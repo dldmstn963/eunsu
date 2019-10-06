@@ -1,0 +1,62 @@
+package classs.model.vo;
+
+/**
+ * @author admin
+ *
+ */
+public class classs implements java.io.Serializable{
+	private static final long serialVersionUID = 4567L;
+	private String classNo;
+	private String className;
+	private String classType;
+	private String departmentNo;
+	private String preatendingClassNo;
+	public classs() {
+		super();
+	}
+	public classs(String classNo, String className, String classType, String departmentNo, String preatendingClassNo) {
+		super();
+		this.classNo = classNo;
+		this.className = className;
+		this.classType = classType;
+		this.departmentNo = departmentNo;
+		this.preatendingClassNo = preatendingClassNo;
+	}
+	public String getClassNo() {
+		return classNo;
+	}
+	public void setClassNo(String classNo) {
+		this.classNo = classNo;
+	}
+	public String getClassName() {
+		return className;
+	}
+	public void setClassName(String className) {
+		this.className = className;
+	}
+	public String getClassType() {
+		return classType;
+	}
+	public void setClassType(String classType) {
+		this.classType = classType;
+	}
+	public String getDepartmentNo() {
+		return departmentNo;
+	}
+	public void setDepartmentNo(String departmentNo) {
+		this.departmentNo = departmentNo;
+	}
+	public String getPreatendingClassNo() {
+		return preatendingClassNo;
+	}
+	public void setPreatendingClassNo(String preatendingClassNo) {
+		this.preatendingClassNo = preatendingClassNo;
+	}
+	@Override
+	public String toString() {
+		return "classs [classNo=" + classNo + ", className=" + className + ", classType=" + classType
+				+ ", departmentNo=" + departmentNo + ", preatendingClassNo=" + preatendingClassNo + "]";
+	}
+	
+	
+}
