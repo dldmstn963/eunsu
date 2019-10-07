@@ -1,6 +1,6 @@
 package department.model.vo;
 
-public class department implements java.io.Serializable{
+public class Department implements java.io.Serializable{
 	private static final long serialVersionUID = 456789L;
 	
 	private String departmentNo;
@@ -8,10 +8,10 @@ public class department implements java.io.Serializable{
 	private String category;
 	private String openYN;
 	private int capacity;
-	public department() {
+	public Department() {
 		super();
 	}
-	public department(String departmentNo, String departmentName, String category, String openYN, int capacity) {
+	public Department(String departmentNo, String departmentName, String category, String openYN, int capacity) {
 		super();
 		this.departmentNo = departmentNo;
 		this.departmentName = departmentName;

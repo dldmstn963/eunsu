@@ -4,17 +4,17 @@ package classs.model.vo;
  * @author admin
  *
  */
-public class classs implements java.io.Serializable{
+public class Classs implements java.io.Serializable{
 	private static final long serialVersionUID = 4567L;
 	private String classNo;
 	private String className;
 	private String classType;
 	private String departmentNo;
 	private String preatendingClassNo;
-	public classs() {
+	public Classs() {
 		super();
 	}
-	public classs(String classNo, String className, String classType, String departmentNo, String preatendingClassNo) {
+	public Classs(String classNo, String className, String classType, String departmentNo, String preatendingClassNo) {
 		super();
 		this.classNo = classNo;
 		this.className = className;

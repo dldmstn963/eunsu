@@ -1,16 +1,16 @@
 package grade.model.vo;
 
-public class grade implements java.io.Serializable {
+public class Grade implements java.io.Serializable {
 	private static final long serialVersionUID = 222L;
 	
 	private String termNo;
 	private String studentNo;
 	private String classNo;
 	private int point;
-	public grade() {
+	public Grade() {
 		super();
 	}
-	public grade(String termNo, String studentNo, String classNo, int point) {
+	public Grade(String termNo, String studentNo, String classNo, int point) {
 		super();
 		this.termNo = termNo;
 		this.studentNo = studentNo;
