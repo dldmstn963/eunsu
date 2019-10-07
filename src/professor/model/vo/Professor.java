@@ -1,6 +1,6 @@
 package professor.model.vo;
 
-public class professor implements java.io.Serializable{
+public class Professor implements java.io.Serializable{
 	private static final long serialVersionUID = 234567L;
 	
 	private String professorNo;
@@ -13,13 +13,13 @@ public class professor implements java.io.Serializable{
 	
 	
 	
-	public professor() {
+	public Professor() {
 		super();
 	}
 
 
 
-	public professor(String professorNo, String professorName, String professorSSN, String professorAddress,
+	public Professor(String professorNo, String professorName, String professorSSN, String professorAddress,
 			String professorPassword, String professorImage, String departmentNo) {
 		super();
 		this.professorNo = professorNo;

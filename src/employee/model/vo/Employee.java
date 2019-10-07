@@ -1,6 +1,6 @@
 package employee.model.vo;
 
-public class employee implements java.io.Serializable {
+public class Employee implements java.io.Serializable {
 	private static final long serialVersionUID = 3456789L;
 	private String employeeNo;
 	private String employeeName;
@@ -9,10 +9,10 @@ public class employee implements java.io.Serializable {
 	private String employeePassword;
 	private String employeeimage;
 	private String empdepart_no;
-	public employee() {
+	public Employee() {
 		super();
 	}
-	public employee(String employeeNo, String employeeName, String employeeSSN, String employeeAddress,
+	public Employee(String employeeNo, String employeeName, String employeeSSN, String employeeAddress,
 			String employeePassword, String employeeimage, String empdepart_no) {
 		super();
 		this.employeeNo = employeeNo;
