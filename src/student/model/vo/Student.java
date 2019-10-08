@@ -15,12 +15,14 @@ public class Student implements java.io.Serializable {
 	private String departmentNo;
 	private String studentPassword;
 	private String studentImage;
+	private String departmentname;
+	private String category;
 
-	public Student() {
-	}
+	
 
 	public Student(String studentNo, String studentName, String studentSSN, String studentAddress, Date entranceDate,
-			String absenceYN, String coachprofessor, String departmentNo, String studentPassword, String studentImage) {
+			String absenceYN, String coachprofessor, String departmentNo, String studentPassword, String studentImage,
+			String departmentname, String category) {
 		super();
 		this.studentNo = studentNo;
 		this.studentName = studentName;
@@ -32,6 +34,27 @@ public class Student implements java.io.Serializable {
 		this.departmentNo = departmentNo;
 		this.studentPassword = studentPassword;
 		this.studentImage = studentImage;
+		this.departmentname = departmentname;
+		this.category = category;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getDepartmentname() {
+		return departmentname;
+	}
+
+	public void setDepartmentname(String departmentname) {
+		this.departmentname = departmentname;
+	}
+
+	public Student() {
 	}
 
 	public String getCoachprofessor() {

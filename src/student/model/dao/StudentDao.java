@@ -16,18 +16,18 @@ public class StudentDao {
 		Student student = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from TB_STUDENT where STUDENT_NO = ? and STUDENT_PASSWORD = ?";
-		
+		String query = "select * from TB_STUDENT NATURAL join tb_department where STUDENT_NO = ? and STUDENT_PASSWORD = ?";
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, no);
 			pstmt.setString(2, pass);
-			
+
 			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
+
+			if (rset.next()) {
 				student = new Student();
-				
+
 				student.setStudentNo(rset.getString("STUDENT_NO"));
 				student.setDepartmentNo(rset.getString("DEPARTMENT_NO"));
 				student.setStudentName(rset.getString("STUDENT_NAME"));
@@ -38,15 +38,16 @@ public class StudentDao {
 				student.setCoachprofessor(rset.getString("COACH_PROFESSOR_NO"));
 				student.setStudentPassword(rset.getString("STUDENT_PASSWORD"));
 				student.setStudentImage(rset.getString("STUDENT_IMAGE"));
+				student.setDepartmentname(rset.getString("DEPARTMENT_NAME"));
+				student.setCategory(rset.getString("CATEGORY"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
-		
+
 		return student;
 	}
 

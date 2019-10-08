@@ -10,7 +10,8 @@ public class Professor implements java.io.Serializable{
 	private String professorPassword;
 	private String professorImage;
 	private String departmentNo;
-	
+	private String departmentName;
+	private String category;
 	
 	
 	public Professor() {
@@ -19,8 +20,11 @@ public class Professor implements java.io.Serializable{
 
 
 
+
+
 	public Professor(String professorNo, String professorName, String professorSSN, String professorAddress,
-			String professorPassword, String professorImage, String departmentNo) {
+			String professorPassword, String professorImage, String departmentNo, String departmentName,
+			String category) {
 		super();
 		this.professorNo = professorNo;
 		this.professorName = professorName;
@@ -29,7 +33,43 @@ public class Professor implements java.io.Serializable{
 		this.professorPassword = professorPassword;
 		this.professorImage = professorImage;
 		this.departmentNo = departmentNo;
+		this.departmentName = departmentName;
+		this.category = category;
 	}
+
+
+
+
+
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+
+
+
+
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+
+
+
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+
+
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+
 
 
 

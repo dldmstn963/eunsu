@@ -9,11 +9,13 @@ public class Employee implements java.io.Serializable {
 	private String employeePassword;
 	private String employeeimage;
 	private String empdepart_no;
+	private String empDepartment;
 	public Employee() {
 		super();
 	}
+	
 	public Employee(String employeeNo, String employeeName, String employeeSSN, String employeeAddress,
-			String employeePassword, String employeeimage, String empdepart_no) {
+			String employeePassword, String employeeimage, String empdepart_no, String empDepartment) {
 		super();
 		this.employeeNo = employeeNo;
 		this.employeeName = employeeName;
@@ -22,7 +24,17 @@ public class Employee implements java.io.Serializable {
 		this.employeePassword = employeePassword;
 		this.employeeimage = employeeimage;
 		this.empdepart_no = empdepart_no;
+		this.empDepartment = empDepartment;
 	}
+
+	public String getEmpDepartment() {
+		return empDepartment;
+	}
+
+	public void setEmpDepartment(String empDepartment) {
+		this.empDepartment = empDepartment;
+	}
+
 	public String getEmployeeNo() {
 		return employeeNo;
 	}
