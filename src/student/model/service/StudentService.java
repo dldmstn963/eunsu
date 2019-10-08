@@ -1,7 +1,11 @@
 package student.model.service;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+
 import student.model.dao.StudentDao;
 import student.model.vo.Student;
+import static common.JDBCTemplate.*;
 
 public class StudentService {
 	private StudentDao sdao = new StudentDao();
@@ -9,7 +13,11 @@ public class StudentService {
 	public StudentService() {
 	}
 
-	public Student loginCheck(String userId, String userPwd) {
+	public Student loginCheck(String no, String pass) {
+		Connection conn = getConnection();
+		Student student = sdao.loginCheck(conn, no, pass);
+		close(conn);
+		return student;
 	}
 
 	public Student selectStudent(String userId) {

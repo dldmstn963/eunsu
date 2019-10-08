@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="student.model.vo.Student" %><%--스튜던트 뒤에 쉼표쓰고 임포트할거 계속쓰면됨 --%>
+<%
+	Student loginStudent = (Student)session.getAttribute("loginStudent");
+%>
 <!DOCTYPE html>
 <html>
 <title>메인 페이지</title>
@@ -14,7 +18,7 @@
 <div class="w3-top">
  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
   <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Logo</a>
+  <a href="/eunsu/views/main.jsp" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>수은 대학교</a>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
@@ -44,8 +48,9 @@
          <h4 class="w3-center">내 정보 <i class="fa fa-pencil"></i></h4>
          <p class="w3-center"><img src="/eunsu/resources/images/avatar.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
          <hr>
-         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> 이은수</p>
-         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> 국어 국문 학과</p>
+         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> <%= loginStudent.getStudentName() %></p>
+         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> <%= loginStudent.getDepartmentNo() %></p><br>
+         <a href="/eunsu/logout">로그아웃</a>
         </div>
       </div>
       <br>
