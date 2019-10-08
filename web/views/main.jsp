@@ -295,8 +295,20 @@
 
 				<!-- End Left Column -->
 			</div>
-
-
+			<div>
+			<h1>공지사항</h1>
+			<table style="border:solid 1px black;">
+			<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>작성 날짜</th>
+			</tr>
+			<tr><td>asdf</td><td>adsf</td></tr>
+			<tr><td>asdf</td><td>adsf</td></tr>
+			<tr><td>asdf</td><td>adsf</td></tr>
+			</table>
+			</div>
 			<!-- End Grid -->
 		</div>
 
