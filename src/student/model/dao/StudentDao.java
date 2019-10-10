@@ -58,6 +58,29 @@ public class StudentDao {
 	}
 
 	public int insertStudent(Connection conn, Student student) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "insert into tb_student values(?, ?, ?, ?, ?, ?,'N',?,?,?)";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, student.getStudentNo());
+			pstmt.setString(2, student.getDepartmentNo());
+			pstmt.setString(3, student.getStudentName());
+			pstmt.setString(4, student.getStudentSSN());
+			pstmt.setString(5, student.getStudentAddress());
+			pstmt.setDate(6, student.getEntranceDate());
+			pstmt.setString(7, student.getCoachprofessor());
+			pstmt.setString(8, student.getStudentPassword());
+			pstmt.setString(9, student.getStudentImage());
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 	public int updateStudent(Connection conn, Student student) {

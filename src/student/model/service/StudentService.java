@@ -27,6 +27,17 @@ public class StudentService {
 	}
 
 	public int insertStudent(Student student) {
+		Connection conn = getConnection();
+		int result = sdao.insertStudent(conn, student);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+		
+		
 	}
 
 	public int updateStudent(Student student) {

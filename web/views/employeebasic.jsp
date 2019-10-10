@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="student.model.vo.Student"%>
-<%@ page import="professor.model.vo.Professor"%>
 <%@ page import="employee.model.vo.Employee"%>
 <%
-	Student loginStudent = (Student) session.getAttribute("loginStudent");
-	Professor loginProfessor = (Professor) session.getAttribute("loginProfessor");
 	Employee loginEmployee = (Employee) session.getAttribute("loginEmployee");
 %>
 <!DOCTYPE html>
 <html>
-<title>수은대학교 학사관리</title>
+<title>메인 페이지</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/eunsu/resources/css/w3.css">
@@ -60,33 +56,6 @@
 			<div class="w3-col m3">
 				<!-- Profile -->
 				<div class="w3-card w3-round w3-white">
-					<%
-						if (loginProfessor != null) {
-					%>
-					<div class="w3-container">
-						<h4 class="w3-center">
-							내 정보 <i class="fa fa-pencil"></i>
-						</h4>
-						<p class="w3-center">
-							<img src="<%=loginProfessor.getProfessorImage()%>"
-								class="w3-circle" style="height: 106px; width: 106px"
-								alt="Avatar">
-						</p>
-						<hr>
-						<p>
-							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
-							<%=loginProfessor.getProfessorName()%></p>
-						<p>
-							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
-							<%=loginProfessor.getCategory()%></p>
-						<p>
-							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
-							<%=loginProfessor.getDepartmentName()%></p>
-						<br> <a href="/eunsu/logout" style="text-decoration:none;">로그아웃</a>
-					</div>
-					<%
-						} else if (loginEmployee != null) {
-					%>
 					<div class="w3-container">
 						<h4 class="w3-center">
 							내 정보 <i class="fa fa-pencil"></i>
@@ -105,89 +74,12 @@
 							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
 							<%=loginEmployee.getEmpDepartment()%>
 						</p>
-						<br> <a href="/eunsu/logout" style="text-decoration:none;">로그아웃</a>
+						<br> <a href="/eunsu/logout" style="text-decoration: none;">로그아웃</a>
 					</div>
-					<%
-						} else {
-					%>
-					<div class="w3-container">
-						<h4 class="w3-center">
-							내 정보 <i class="fa fa-pencil"></i>
-						</h4>
-						<p class="w3-center">
-							<img src="<%= loginStudent.getStudentImage() %>" class="w3-circle"
-								style="height: 106px; width: 106px" alt="Avatar">
-						</p>
-						<hr>
-						<p>
-							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
-							<%=loginStudent.getStudentName()%></p>
-						<p>
-							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
-							<%=loginStudent.getCategory()%></p>
-						<p>
-							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
-							<%=loginStudent.getDepartmentname()%></p>
-						<br> <a href="/eunsu/logout" style="text-decoration:none;">로그아웃</a>
-					</div>
-					<%
-						}
-					%>
 				</div>
 				<br>
 
 				<!-- Accordion -->
-				<%
-					if (loginProfessor != null) {
-				%>
-				<div class="w3-card w3-round">
-					<div class="w3-white">
-						<button onclick="myFunction('Demo1')"
-							class="w3-button w3-block w3-theme-l1 w3-left-align">
-							<i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> 강의 과목 보기
-						</button>
-						<div id="Demo1" class="w3-hide w3-container">
-							<p><a href="/eunsu/views/professorbasic.jsp">강의 과목 보기</a></p>
-						</div>
-						<button onclick="myFunction('Demo2')"
-							class="w3-button w3-block w3-theme-l1 w3-left-align">
-							<i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> 성적 입력
-						</button>
-						<div id="Demo2" class="w3-hide w3-container">
-							<p>성적 입력</p>
-						</div>
-						<button onclick="myFunction('Demo3')"
-							class="w3-button w3-block w3-theme-l1 w3-left-align">
-							<i class="fa fa-users fa-fw w3-margin-right"></i>증명서
-						</button>
-						<div id="Demo3" class="w3-hide w3-container">
-							<br>
-							<div class="w3-half">
-								<p>재학 증명서</p>
-							</div>
-							<div class="w3-half">
-								<p>졸업 증명서</p>
-							</div>
-							<div class="w3-half">
-								<p>성적 증명서</p>
-							</div>
-							<div class="w3-half">
-								<p>휴학 증명서</p>
-							</div>
-							<div class="w3-half">
-								<p>
-									졸업 예정 <br>증명서
-								</p>
-							</div>
-							<div class="w3-half">
-								<p>수료 증명서</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<%
-					} else if (loginEmployee != null) {
-				%>
 				<div class="w3-card w3-round">
 					<div class="w3-white">
 						<button onclick="myFunction('Demo1')"
@@ -237,76 +129,10 @@
 						</div>
 					</div>
 				</div>
-				<%
-					} else {
-				%>
-				<div class="w3-card w3-round">
-					<div class="w3-white">
-						<button onclick="myFunction('Demo1')"
-							class="w3-button w3-block w3-theme-l1 w3-left-align">
-							<i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> 수강 신청
-						</button>
-						<div id="Demo1" class="w3-hide w3-container">
-							<p><a href="/eunsu/views/studentbasic.jsp">신청하기</a></p>
-						</div>
-						<button onclick="myFunction('Demo2')"
-							class="w3-button w3-block w3-theme-l1 w3-left-align">
-							<i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> 수강
-							과목 확인
-						</button>
-						<div id="Demo2" class="w3-hide w3-container">
-							<p>성적 조회</p>
-						</div>
-						<button onclick="myFunction('Demo3')"
-							class="w3-button w3-block w3-theme-l1 w3-left-align">
-							<i class="fa fa-users fa-fw w3-margin-right"></i>증명서
-						</button>
-						<div id="Demo3" class="w3-hide w3-container">
-							<br>
-							<div class="w3-half">
-								<p>재학 증명서</p>
-							</div>
-							<div class="w3-half">
-								<p>졸업 증명서</p>
-							</div>
-							<div class="w3-half">
-								<p>성적 증명서</p>
-							</div>
-							<div class="w3-half">
-								<p>휴학 증명서</p>
-							</div>
-							<div class="w3-half">
-								<p>
-									졸업 예정 <br>증명서
-								</p>
-							</div>
-							<div class="w3-half">
-								<p>수료 증명서</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<%
-					}
-				%>
 				<br>
 
 
 				<!-- End Left Column -->
-			</div>
-			<div>
-			<h1>공지사항</h1>
-			<table style="border:solid 1px black;">
-			<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성 날짜</th>
-			</tr>
-			<tr><td>asdf</td><td>adsf</td></tr>
-			<tr><td>asdf</td><td>adsf</td></tr>
-			<tr><td>asdf</td><td>adsf</td></tr>
-			</table>
 			</div>
 			<!-- End Grid -->
 		</div>

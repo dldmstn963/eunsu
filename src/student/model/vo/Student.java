@@ -37,6 +37,30 @@ public class Student implements java.io.Serializable {
 		this.departmentname = departmentname;
 		this.category = category;
 	}
+	
+	
+	
+
+
+
+	public Student(String studentNo, String studentName, String studentSSN,Date entranceDate, String studentAddress,
+			String coachprofessor, String departmentNo, String studentPassword, String studentImage) {
+		super();
+		this.studentNo = studentNo;
+		this.studentName = studentName;
+		this.studentSSN = studentSSN;
+		this.studentAddress = studentAddress;
+		this.entranceDate = entranceDate;
+		this.coachprofessor = coachprofessor;
+		this.departmentNo = departmentNo;
+		this.studentPassword = studentPassword;
+		this.studentImage = studentImage;
+	}
+
+
+
+
+
 
 	public String getCategory() {
 		return category;
