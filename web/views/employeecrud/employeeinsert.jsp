@@ -6,7 +6,24 @@
 %>
 <!DOCTYPE html>
 <html>
-<title>메인 페이지</title>
+<title>직원 추가 페이지</title>
+<script type="text/javascript" src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+$(function (){
+	$("#confirm").click(function(){
+		
+		$.ajax({
+			url:"/eunsu/empconfirm",	
+			type:"get",
+			data:{empno : $("#empno").val()},
+			success:function(data){
+				$("#result").html(data);
+			}
+		})//$.ajax()
+	});//confirm click
+});//document ready
+
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/eunsu/resources/css/w3.css">
@@ -135,18 +152,18 @@
 				<!-- End Left Column -->
 			</div>
 			<!-- End Grid -->
-		<h1 align="center">학생 추가</h1>
+		<h1 align="center">직원 추가</h1>
 		<table align="center" border="1" cellspacing="0" cellpadding="10">
-		<form action="/eunsu/studentinsert" method="post" enctype="multipart/form-data">
-		<tr><th>학번</th><td><input type="text" name="studentno"></td></tr>
-		<tr><th>학과 번호</th><td><input type="text" name="studentdepartno"></td></tr>
-		<tr><th>학생 이름</th><td><input type="text" name="studentname"></td></tr>
-		<tr><th>학생 주민 번호</th><td><input type="text" name="studentssn"></td></tr>
-		<tr><th>학생 주소</th><td><input type="text" name="studentaddress"></td></tr>
-		<tr><th>입학일</th><td><input type="date" name="studententrancedate"></td></tr>
-		<tr><th>담당 교수 번호</th><td><input type="text" name="studentcoach"></td></tr>
-		<tr><th>학생 비밀번호</th><td><input type="text" name="studentpassword"></td></tr>
-		<tr><th>학생 증명사진</th><td><input type="file" name="studentimage"></td></tr>
+		<form action="/eunsu/employeeinsert" method="post" enctype="multipart/form-data">
+		<tr><th>사번</th><td><input type="text" name="EMPLOYEE_NO" id="empno">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="confirm" value="중복확인"><br><p id="result"></p></td></tr>
+		<tr><th>소속 부서 번호</th><td><input type="text" name="EMPDEPART_NO"></td></tr>
+		<tr><th>사원 이름</th><td><input type="text" name="EMPLOYEE_NAME"></td></tr>
+		<tr><th>사원 주민 번호</th><td><input type="text" name="EMPLOYEE_SSN"></td></tr>
+		<tr><th>사원 주소</th><td><input type="text" name="EMPLOYEE_ADDRESS"></td></tr>
+		<tr><th>입사일</th><td><input type="date" name="HIRE_DATE"></td></tr>
+		<tr><th>월급</th><td><input type="number" name="SALARY"></td></tr>
+		<tr><th>사원 비밀번호</th><td><input type="text" name="EMPLOYEE_PASSWORD"></td></tr>
+		<tr><th>사원 증명사진</th><td><input type="file" name="EMPLOYEE_IMAGE"></td></tr>
 		<tr><th colspan="2">
 		<input type="submit" value="추가"> &nbsp;
 		<input type="reset" value="초기화">

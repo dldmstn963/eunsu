@@ -58,6 +58,30 @@ public class ProfessorDao {
 	}
 
 	public int insertProfessor(Connection conn, Professor professor) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "insert into tb_professor values(?,?,?,?,?,?,?)";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, professor.getProfessorNo());
+			pstmt.setString(2, professor.getProfessorName());
+			pstmt.setString(3, professor.getProfessorSSN());
+			pstmt.setString(4, professor.getProfessorAddress());
+			pstmt.setString(5, professor.getDepartmentNo());
+			pstmt.setString(6, professor.getProfessorPassword());
+			pstmt.setString(7, professor.getProfessorImage());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+
 	}
 
 	public int updateProfessor(Connection conn, Professor professor) {

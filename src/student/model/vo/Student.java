@@ -18,8 +18,6 @@ public class Student implements java.io.Serializable {
 	private String departmentname;
 	private String category;
 
-	
-
 	public Student(String studentNo, String studentName, String studentSSN, String studentAddress, Date entranceDate,
 			String absenceYN, String coachprofessor, String departmentNo, String studentPassword, String studentImage,
 			String departmentname, String category) {
@@ -37,13 +35,8 @@ public class Student implements java.io.Serializable {
 		this.departmentname = departmentname;
 		this.category = category;
 	}
-	
-	
-	
 
-
-
-	public Student(String studentNo, String studentName, String studentSSN,Date entranceDate, String studentAddress,
+	public Student(String studentNo, String studentName, String studentSSN, Date entranceDate, String studentAddress,
 			String coachprofessor, String departmentNo, String studentPassword, String studentImage) {
 		super();
 		this.studentNo = studentNo;
@@ -56,11 +49,6 @@ public class Student implements java.io.Serializable {
 		this.studentPassword = studentPassword;
 		this.studentImage = studentImage;
 	}
-
-
-
-
-
 
 	public String getCategory() {
 		return category;

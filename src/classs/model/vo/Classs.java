@@ -11,17 +11,30 @@ public class Classs implements java.io.Serializable{
 	private String classType;
 	private String departmentNo;
 	private String preatendingClassNo;
+	private String professorNo;
 	public Classs() {
 		super();
 	}
-	public Classs(String classNo, String className, String classType, String departmentNo, String preatendingClassNo) {
+
+	public Classs(String classNo, String className, String classType, String departmentNo, String preatendingClassNo,
+			String professorNo) {
 		super();
 		this.classNo = classNo;
 		this.className = className;
 		this.classType = classType;
 		this.departmentNo = departmentNo;
 		this.preatendingClassNo = preatendingClassNo;
+		this.professorNo = professorNo;
 	}
+
+	public String getProfessorNo() {
+		return professorNo;
+	}
+
+	public void setProfessorNo(String professorNo) {
+		this.professorNo = professorNo;
+	}
+
 	public String getClassNo() {
 		return classNo;
 	}

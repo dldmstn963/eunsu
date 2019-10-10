@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import employee.model.vo.Employee;
 import professor.model.vo.Professor;
 
-
 public class EmployeeDao {
 	public EmployeeDao() {
 	};
@@ -31,7 +30,7 @@ public class EmployeeDao {
 
 			if (rset.next()) {
 				employee = new Employee();
-				
+
 				employee.setEmployeeNo(rset.getString("EMPLOYEE_NO"));
 				employee.setEmployeeName(rset.getString("EMPLOYEE_NAME"));
 				employee.setEmployeeSSN(rset.getString("EMPLOYEE_SSN"));
@@ -40,7 +39,7 @@ public class EmployeeDao {
 				employee.setEmployeePassword(rset.getString("EMPLOYEE_PASSWORD"));
 				employee.setEmployeeimage(rset.getString("EMPLOYEE_IMAGE"));
 				employee.setEmpDepartment(rset.getString("EMPDEPART_NAME"));
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -49,7 +48,6 @@ public class EmployeeDao {
 			close(pstmt);
 		}
 
-		
 		return employee;
 	}
 
@@ -60,11 +58,51 @@ public class EmployeeDao {
 	}
 
 	public int insertEmployee(Connection conn, Employee employee) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "insert into TB_EMPLOYEE values(?,?,?,?,?,?,?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, employee.getEmployeeNo());
+			pstmt.setString(2, employee.getEmployeeName());
+			pstmt.setString(3, employee.getEmployeeSSN());
+			pstmt.setString(4, employee.getEmployeeAddress());
+			pstmt.setString(5, employee.getEmpdepart_no());
+			pstmt.setString(6, employee.getEmployeePassword());
+			pstmt.setString(7, employee.getEmployeeimage());
+			pstmt.setDate(8, employee.getHire_date());
+			pstmt.setInt(9, employee.getSalary());
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 	public int updateEmployee(Connection conn, Employee employee) {
 	}
 
 	public int deleteEmployee(Connection conn, String userId) {
+	}
+
+	public int confirmEmployee(Connection conn, String empno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "select EMPLOYEE_NO from tb_employee where EMPLOYEE_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, empno);
+
+			result = pstmt.executeUpdate();
+			System.out.println(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }

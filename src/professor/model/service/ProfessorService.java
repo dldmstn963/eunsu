@@ -18,7 +18,7 @@ public class ProfessorService {
 		Professor professor = pdao.loginCheck(conn, no, pass);
 		close(conn);
 		return professor;
-		
+
 	}
 
 	public Professor selectProfessor(String userId) {
@@ -28,6 +28,16 @@ public class ProfessorService {
 	}
 
 	public int insertProfessor(Professor professor) {
+		Connection conn = getConnection();
+		int result = pdao.insertProfessor(conn, professor);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+
 	}
 
 	public int updateProfessor(Professor professor) {

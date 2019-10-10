@@ -135,18 +135,16 @@
 				<!-- End Left Column -->
 			</div>
 			<!-- End Grid -->
-		<h1 align="center">학생 추가</h1>
+		<h1 align="center">교수 추가</h1>
 		<table align="center" border="1" cellspacing="0" cellpadding="10">
-		<form action="/eunsu/studentinsert" method="post" enctype="multipart/form-data">
-		<tr><th>학번</th><td><input type="text" name="studentno"></td></tr>
-		<tr><th>학과 번호</th><td><input type="text" name="studentdepartno"></td></tr>
-		<tr><th>학생 이름</th><td><input type="text" name="studentname"></td></tr>
-		<tr><th>학생 주민 번호</th><td><input type="text" name="studentssn"></td></tr>
-		<tr><th>학생 주소</th><td><input type="text" name="studentaddress"></td></tr>
-		<tr><th>입학일</th><td><input type="date" name="studententrancedate"></td></tr>
-		<tr><th>담당 교수 번호</th><td><input type="text" name="studentcoach"></td></tr>
-		<tr><th>학생 비밀번호</th><td><input type="text" name="studentpassword"></td></tr>
-		<tr><th>학생 증명사진</th><td><input type="file" name="studentimage"></td></tr>
+		<form action="/eunsu/professorInsert" method="post" enctype="multipart/form-data">
+		<tr><th>교수 번호</th><td><input type="text" name="PROFESSOR_NO"></td></tr>
+		<tr><th>교수 이름</th><td><input type="text" name="PROFESSOR_NAME"></td></tr>
+		<tr><th>교수 주민 번호</th><td><input type="text" name="PROFESSOR_SSN"></td></tr>
+		<tr><th>교수 주소</th><td><input type="text" name="PROFESSOR_ADDRESS"></td></tr>
+		<tr><th>교수 학과 번호</th><td><input type="text" name="DEPARTMENT_NO"></td></tr>
+		<tr><th>교수 비밀번호</th><td><input type="text" name="PROFESSOR_PASSWORD"></td></tr>
+		<tr><th>교수 증명사진</th><td><input type="file" name="PROFESSOR_IMAGE"></td></tr>
 		<tr><th colspan="2">
 		<input type="submit" value="추가"> &nbsp;
 		<input type="reset" value="초기화">

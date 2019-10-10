@@ -196,44 +196,41 @@
 						</button>
 						<div id="Demo1" class="w3-hide w3-container">
 							<p>
-								<a href="#">과목 관리</a>
+								<a href="/eunsu/views/classcrud/classinsert.jsp">과목 추가</a>
 							</p>
 						</div>
 						<button onclick="myFunction('Demo2')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
-							<i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> 학생
+							<i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> 학과
 							관리
 						</button>
 						<div id="Demo2" class="w3-hide w3-container">
-							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 추가</a></p>
+							<p><a href="/eunsu/views/departmentcrud/departmentinsert.jsp">학과 추가</a></p>
 							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 수정</a></p>
 						</div>
 						<button onclick="myFunction('Demo3')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
-							<i class="fa fa-users fa-fw w3-margin-right"></i>학교 관리
+							<i class="fa fa-users fa-fw w3-margin-right"></i>학생 관리
 						</button>
 						<div id="Demo3" class="w3-hide w3-container">
-							<br>
-							<div class="w3-half">
-								<p>교수 관리</p>
-							</div>
-							<div class="w3-half">
-								<p>직원 관리</p>
-							</div>
-							<div class="w3-half">
-								<p>증명서 관리</p>
-							</div>
-							<div class="w3-half">
-								<p>휴학 증명서</p>
-							</div>
-							<div class="w3-half">
-								<p>
-									졸업 예정 <br>증명서
-								</p>
-							</div>
-							<div class="w3-half">
-								<p>수료 증명서</p>
-							</div>
+							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 추가</a></p>
+							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 수정</a></p>
+						</div>
+						<button onclick="myFunction('Demo4')"
+							class="w3-button w3-block w3-theme-l1 w3-left-align">
+							<i class="fa fa-users fa-fw w3-margin-right"></i>교수 관리
+						</button>
+						<div id="Demo4" class="w3-hide w3-container">
+							<p><a href="/eunsu/views/professorcrud/professorinsert.jsp">교수 추가</a></p>
+							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">교수 수정</a></p>
+						</div>
+						<button onclick="myFunction('Demo5')"
+							class="w3-button w3-block w3-theme-l1 w3-left-align">
+							<i class="fa fa-users fa-fw w3-margin-right"></i>직원 관리
+						</button>
+						<div id="Demo5" class="w3-hide w3-container">
+							<p><a href="/eunsu/views/employeecrud/employeeinsert.jsp">직원 추가</a></p>
+							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">직원 수정</a></p>
 						</div>
 					</div>
 				</div>
