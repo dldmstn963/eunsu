@@ -7,6 +7,81 @@
 <!DOCTYPE html>
 <html>
 <title>메인 페이지</title>
+<script type="text/javascript"
+	src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#confirm").click(function() {
+
+			$.ajax({
+				url : "/eunsu/classsconfirm",
+				type : "get",
+				data : {
+					classno : $("#classno").val()
+				},
+				success : function(data) {
+					$("#result").html(data);
+				}
+			})//$.ajax()
+		});//confirm click
+	});//document ready
+
+	function validate() {
+		var classnore = /^[C0-9]{8}$/
+		var departre = /^[0-9]{3}$/
+		
+		var classno = document.getElementById("classno");
+		var depart = document.getElementById("classdepartno");
+		if (join.classno.value == "") {
+			alert("과목 번호를 적어주세요");
+			join.classno.focus();
+			return false;
+		}
+
+		if (!check(classnore, classno, "과목번호는 'C0000000' 구성으로 작성해주세요")) {
+			return false;
+		}
+
+		if (join.classdepartno.value == "") {
+			alert("소속학과 번호를 적어주세요");
+			join.classdepartno.focus();
+			return false;
+		}
+		
+		if (!check(departre, depart, "학과번호는 숫자 세자리로 작성해주세요")) {
+			return false;
+		}
+		
+		if (join.classname.value == "") {
+			alert("과목명을 적어주세요");
+			join.classname.focus();
+			return false;
+		}
+
+		if (join.classtype.value == "") {
+			alert("과목 분류를 선택해주세요");
+			join.classtype.focus();
+			return false;
+		}
+
+		if (join.classprofessor.value == "") {
+			alert("담당 교수 번호를 적어주세요");
+			join.classprofessor.focus();
+			return false;
+		}
+
+	}
+
+	function check(re, what, message) {
+		if (re.test(what.value)) {
+			return true;
+		}
+		alert(message);
+		what.value = "";
+		what.focus();
+		//return false;
+	}
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/eunsu/resources/css/w3.css">
@@ -32,19 +107,19 @@
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
 				title="Messages"><i class="fa fa-envelope"></i></a> <a href="#"
 				class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
-				title="My Account">
-			</a>
+				title="My Account"> </a>
 		</div>
 	</div>
 
 	<!-- Navbar on small screens -->
 	<div id="navDemo"
 		class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-		<a href="/eunsu/views/studentcrud/studentinsert.jsp" class="w3-bar-item w3-button w3-padding-large">학생 추가</a>
-		<a href="/eunsu/views/studentcrud/studentinsert.jsp" class="w3-bar-item w3-button w3-padding-large">학생 추가</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding-large">ㅇㅇ 3</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding-large">My
-			Profile</a>
+		<a href="/eunsu/views/studentcrud/studentinsert.jsp"
+			class="w3-bar-item w3-button w3-padding-large">학생 추가</a> <a
+			href="/eunsu/views/studentcrud/studentinsert.jsp"
+			class="w3-bar-item w3-button w3-padding-large">학생 추가</a> <a href="#"
+			class="w3-bar-item w3-button w3-padding-large">ㅇㅇ 3</a> <a href="#"
+			class="w3-bar-item w3-button w3-padding-large">My Profile</a>
 	</div>
 
 	<!-- Page Container -->
@@ -97,8 +172,12 @@
 							관리
 						</button>
 						<div id="Demo2" class="w3-hide w3-container">
-							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 추가</a></p>
-							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 수정</a></p>
+							<p>
+								<a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 추가</a>
+							</p>
+							<p>
+								<a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 수정</a>
+							</p>
 						</div>
 						<button onclick="myFunction('Demo3')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
@@ -135,26 +214,50 @@
 				<!-- End Left Column -->
 			</div>
 			<!-- End Grid -->
-		<h1 align="center">과목 추가</h1>
-		<table align="center" border="1" cellspacing="0" cellpadding="10">
-		<form action="/eunsu/classsinsert" method="post">
-		<tr><th>과목 번호</th><td><input type="text" name="classno"></td></tr>
-		<tr><th>학과 번호</th><td><input type="text" name="classdepartno"></td></tr>
-		<tr><th>선행 과목 번호</th><td><input type="text" name="preatending"></td></tr>
-		<tr><th>과목 이름</th><td><input type="text" name="classname"></td></tr>
-		<tr><th>과목 분류</th><td><select name="classtype">
-		<option value="공통과목">공통과목</option> 
-		<option value="논문지도">논문지도</option> 
-		<option value="전공선택">전공선택</option> 
-		<option value="전공필수">전공필수</option> 
-		</select></td></tr>
-		<tr><th>담당 교수 번호</th><td><input type="text" name="classprofessor"></td></tr>
-		<tr><th colspan="2">
-		<input type="submit" value="추가"> &nbsp;
-		<input type="reset" value="초기화">
-		</th></tr>
-		</form>
-		</table>
+			<h1 align="center">과목 추가</h1>
+			<table align="center" border="1" cellspacing="0" cellpadding="10">
+				<form onsubmit="return validate();" name="join" action="/eunsu/classsinsert" method="post">
+					<tr>
+						<th>과목 번호</th>
+						<td><input type="text" name="classno" id="classno">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button"
+							id="confirm" value="중복확인">
+							<p id="result" style="display: none;"></p></td>
+					</tr>
+					<tr>
+						<th>학과 번호</th>
+						<td><input type="text" name="classdepartno"
+							id="classdepartno"></td>
+					</tr>
+					<tr>
+						<th>선행 과목 번호</th>
+						<td><input type="text" name="preatending" id="preatending"></td>
+					</tr>
+					<tr>
+						<th>과목 이름</th>
+						<td><input type="text" name="classname" id="classname"></td>
+					</tr>
+					<tr>
+						<th>과목 분류</th>
+						<td><select name="classtype" id="classtype">
+								<option value="">선택 해주세요</option>
+								<option value="공통과목">공통과목</option>
+								<option value="논문지도">논문지도</option>
+								<option value="전공선택">전공선택</option>
+								<option value="전공필수">전공필수</option>
+						</select></td>
+					</tr>
+					<tr>
+						<th>담당 교수 번호</th>
+						<td><input type="text" name="classprofessor"
+							id="classprofessor"></td>
+					</tr>
+					<tr>
+						<th colspan="2"><input type="submit" value="추가">
+							&nbsp; <input type="reset" value="초기화"></th>
+					</tr>
+				</form>
+			</table>
 		</div>
 		<!-- End Page Container -->
 	</div>

@@ -1,79 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="employee.model.vo.Employee"%>
+<%@ page
+	import="employee.model.vo.Employee,classs.model.vo.Classs, java.util.ArrayList"%>
 <%
 	Employee loginEmployee = (Employee) session.getAttribute("loginEmployee");
+	ArrayList<Classs> list = (ArrayList<Classs>) request.getAttribute("list");
+	int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
+	int beginPage = ((Integer) request.getAttribute("beginPage")).intValue();
+	int endPage = ((Integer) request.getAttribute("endPage")).intValue();
+	int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
 %>
 <!DOCTYPE html>
 <html>
-<title>메인 페이지</title>
-<script type="text/javascript" src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
+<title>과목 수정 삭제 페이지</title>
+<script type="text/javascript"
+	src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-$(function (){
-	$("#confirm").click(function(){
-		
-		$.ajax({
-			url:"/eunsu/departmentconfirm",	
-			type:"get",
-			data:{departno : $("#departno").val()},
-			success:function(data){
-				$("#result").html(data);
-			}
-		})//$.ajax()
-	});//confirm click
-});//document ready
+	$(function() {
+		$("#classNo").click(function() {
+			$.ajax({
+				url : "/eunsu/classsort",
+				type : "get",
+				success : function(data) {
+					$("#classTable").html('<table  border="1" cellspacing="0" cellpadding="3"><tr><th>체크 박스</th><th id="classNo">과목 번호</th><th id="className">과목 이름</th><th id="classType">과목 분류</th><th id="departmentNo">학과 번호</th><th id="preatendingClassNo">선행 과목</th></tr>'+
+							'<%for (Classs c : list) {%><tr><td align="center"><input type="checkbox"></td><td><%=c.getClassNo()%></td><td><%=c.getClassName()%></td><td><%=c.getClassType()%></td><td><%=c.getDepartmentNo()%></td><%if (c.getPreatendingClassNo() == null) {%><td>없음</td><%} else {%><td><%=c.getPreatendingClassNo()%></td><%}%></tr><%}%></table>');
+				}
+			})//ajax
 
-function validate() {
-	var departnore = /^[0-9]{3}$/
-	var capacityre = /^[0-9]{2}$/
-	
-	var departno = document.getElementById("departno");
-	var capacity = document.getElementById("CAPACITY");
-	if (join.departno.value == "") {
-		alert("학과 번호를 적어주세요");
-		join.departno.focus();
-		return false;
-	}
-
-	if (!check(departnore, departno, "학과 번호는 숫자 세자리로 작성해주세요")) {
-		return false;
-	}
-
-	if (join.DEPARTMENT_NAME.value == "") {
-		alert("소속학과 이름을 적어주세요");
-		join.DEPARTMENT_NAME.focus();
-		return false;
-	}
-	
-	if (join.CATEGORY.value == "") {
-		alert("학과 분류를 선택해주세요");
-		join.CATEGORY.focus();
-		return false;
-	}
-
-	if (join.CAPACITY.value == "") {
-		alert("학과 정원 수를 적어주세요");
-		join.CAPACITY.focus();
-		return false;
-	}
-	
-	if (!check(capacityre, capacity, "학과 정원 수는 숫자 두자리로 작성해주세요")) {
-		return false;
-	}
-
-}
-
-function check(re, what, message) {
-	if (re.test(what.value)) {
-		return true;
-	}
-	alert(message);
-	what.value = "";
-	what.focus();
-	//return false;
-}
-
-
+		});//click
+	});//document
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -100,19 +55,19 @@ function check(re, what, message) {
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
 				title="Messages"><i class="fa fa-envelope"></i></a> <a href="#"
 				class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
-				title="My Account">
-			</a>
+				title="My Account"> </a>
 		</div>
 	</div>
 
 	<!-- Navbar on small screens -->
 	<div id="navDemo"
 		class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-		<a href="/eunsu/views/studentcrud/studentinsert.jsp" class="w3-bar-item w3-button w3-padding-large">학생 추가</a>
-		<a href="/eunsu/views/studentcrud/studentinsert.jsp" class="w3-bar-item w3-button w3-padding-large">학생 추가</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding-large">ㅇㅇ 3</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding-large">My
-			Profile</a>
+		<a href="/eunsu/views/studentcrud/studentinsert.jsp"
+			class="w3-bar-item w3-button w3-padding-large">학생 추가</a> <a
+			href="/eunsu/views/studentcrud/studentinsert.jsp"
+			class="w3-bar-item w3-button w3-padding-large">학생 추가</a> <a href="#"
+			class="w3-bar-item w3-button w3-padding-large">ㅇㅇ 3</a> <a href="#"
+			class="w3-bar-item w3-button w3-padding-large">My Profile</a>
 	</div>
 
 	<!-- Page Container -->
@@ -165,8 +120,12 @@ function check(re, what, message) {
 							관리
 						</button>
 						<div id="Demo2" class="w3-hide w3-container">
-							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 추가</a></p>
-							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 수정</a></p>
+							<p>
+								<a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 추가</a>
+							</p>
+							<p>
+								<a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 수정</a>
+							</p>
 						</div>
 						<button onclick="myFunction('Demo3')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
@@ -203,28 +162,87 @@ function check(re, what, message) {
 				<!-- End Left Column -->
 			</div>
 			<!-- End Grid -->
-		<h1 align="center">과목 추가</h1>
-		<table align="center" border="1" cellspacing="0" cellpadding="10">
-		<form name="join" onsubmit="return validate();" action="/eunsu/departmentinsert" method="post">
-		<tr><th>학과 번호</th><td><input type="text" name="DEPARTMENT_NO" id="departno">
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="confirm" value="중복확인">
-		<p id="result" style="display:none;"></p></td></tr>
-		<tr><th>학과 이름</th><td><input type="text" name="DEPARTMENT_NAME" id="DEPARTMENT_NAME"></td></tr>
-		<tr><th>학과 분류</th><td><select name="CATEGORY" id="CATEGORY">
-		<option value="">선택해주세요</option> 
-		<option value="공학">공학</option> 
-		<option value="예체능">예체능</option> 
-		<option value="의학">의학</option> 
-		<option value="인문사회">인문사회</option> 
-		<option value="자연과학">자연과학</option> 
-		</select></td></tr>
-		<tr><th>학과 정원</th><td><input type="number" name="CAPACITY" id="CAPACITY"></td></tr>
-		<tr><th colspan="2">
-		<input type="submit" value="추가"> &nbsp;
-		<input type="reset" value="초기화">
-		</th></tr>
-		</form>
-		</table>
+			<h1 align="center">과목 수정</h1>
+			<div id="classTable">
+			<table align="center" border="1" cellspacing="0" cellpadding="3">
+				<tr>
+					<th>체크 박스</th>
+					<th id="classNo">과목 번호</th>
+					<th id="className">과목 이름</th>
+					<th id="classType">과목 분류</th>
+					<th id="departmentNo">학과 번호</th>
+					<th id="preatendingClassNo">선행 과목</th>
+				</tr>
+				<%
+					for (Classs c : list) {
+				%>
+				<tr>
+					<td align="center"><input type="checkbox"></td>
+					<td><%=c.getClassNo()%></td>
+					<td><%=c.getClassName()%></td>
+					<td><%=c.getClassType()%></td>
+					<td><%=c.getDepartmentNo()%></td>
+					<%
+						if (c.getPreatendingClassNo() == null) {
+					%>
+					<td>없음</td>
+					<%
+						} else {
+					%>
+					<td><%=c.getPreatendingClassNo()%></td>
+					<%
+						}
+					%>
+				</tr>
+				<%
+					}
+				%>
+			</table>
+			</div>
+			<br>
+			<div id="pagebox" align="center">
+				<a href="/eunsu/classslist?page=1">|◁</a> &nbsp;
+				<%
+					if ((beginPage - 10) < 1) {
+				%>
+				<a href="/eunsu/classslist?page=1">◀◀</a>
+				<%
+					} else {
+				%>
+				<a href="/eunsu/classslist?page=<%=beginPage - 10%>">◀◀</a>
+				<%
+					}
+				%>
+				&nbsp;
+				<%
+					for (int p = beginPage; p <= endPage; p++) {
+						if (p == currentPage) {
+				%>
+				<a href="/eunsu/classslist?page=<%=p%>"><font color="red"><b>[<%=p%>]
+					</b></font></a>
+				<%
+					} else {
+				%>
+				<a href="/eunsu/classslist?page=<%=p%>"><%=p%></a>
+				<%
+					}
+					}
+				%>
+				&nbsp;
+				<%
+					if ((endPage + 10) > maxPage) {
+				%>
+				<a href="/eunsu/classslist?page=<%=maxPage%>">▶▶</a>
+				<%
+					} else {
+				%>
+				<a href="/eunsu/classslist?page=<%=endPage + 10%>">▶▶</a>
+				<%
+					}
+				%>
+				&nbsp; <a href="/eunsu/classslist?page=<%=maxPage%>">▷|</a>
+			</div>
+
 		</div>
 		<!-- End Page Container -->
 	</div>

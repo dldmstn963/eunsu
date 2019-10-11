@@ -88,4 +88,21 @@ public class StudentDao {
 
 	public int deleteStudent(Connection conn, String userId) {
 	}
+
+	public int confirmStudent(Connection conn, String studentno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "select STUDENT_NO from TB_STUDENT where STUDENT_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, studentno);
+			result = pstmt.executeUpdate();
+			System.out.println(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

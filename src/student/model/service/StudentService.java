@@ -45,4 +45,10 @@ public class StudentService {
 	public int deleteStudent(String userId) {
 	}
 
+	public int confirmStudent(String studentno) {
+		Connection conn = getConnection();
+		int result = sdao.confirmStudent(conn, studentno);
+		return result;
+	}
+
 }

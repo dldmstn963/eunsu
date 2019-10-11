@@ -89,4 +89,22 @@ public class ProfessorDao {
 
 	public int deleteProfessor(Connection conn, String userId) {
 	}
+
+	public int confirmProfessor(Connection conn, String professorno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "select PROFESSOR_NO from TB_PROFESSOR where PROFESSOR_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, professorno);
+
+			result = pstmt.executeUpdate();
+			System.out.println(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

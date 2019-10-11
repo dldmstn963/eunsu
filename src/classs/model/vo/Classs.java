@@ -12,9 +12,12 @@ public class Classs implements java.io.Serializable{
 	private String departmentNo;
 	private String preatendingClassNo;
 	private String professorNo;
+	private String professorName;
 	public Classs() {
 		super();
 	}
+
+
 
 	public Classs(String classNo, String className, String classType, String departmentNo, String preatendingClassNo,
 			String professorNo) {
@@ -26,6 +29,34 @@ public class Classs implements java.io.Serializable{
 		this.preatendingClassNo = preatendingClassNo;
 		this.professorNo = professorNo;
 	}
+
+
+
+	public Classs(String classNo, String className, String classType, String departmentNo, String preatendingClassNo,
+			String professorNo, String professorName) {
+		super();
+		this.classNo = classNo;
+		this.className = className;
+		this.classType = classType;
+		this.departmentNo = departmentNo;
+		this.preatendingClassNo = preatendingClassNo;
+		this.professorNo = professorNo;
+		this.professorName = professorName;
+	}
+
+
+
+	public String getProfessorName() {
+		return professorName;
+	}
+
+
+
+	public void setProfessorName(String professorName) {
+		this.professorName = professorName;
+	}
+
+
 
 	public String getProfessorNo() {
 		return professorNo;

@@ -24,4 +24,10 @@ public class DepartmentService {
 		return result;
 	}
 
+	public int confirmDepartment(String departno) {
+		Connection conn = getConnection();
+		int result = ddao.confirmDepartment(conn, departno);
+		return result;
+	}
+
 }

@@ -4,7 +4,10 @@ import static common.JDBCTemplate.close;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import classs.model.vo.Classs;
 
@@ -35,6 +38,118 @@ public class ClasssDao {
 		}
 
 		return result;
+	}
+
+	public int confirmClasss(Connection conn, String classno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "select CLASS_NO from TB_CLASS where CLASS_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, classno);
+
+			result = pstmt.executeUpdate();
+			System.out.println(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int getListCount(Connection conn) {
+		int listCount = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+
+		String query = "select count(*) from TB_CLASS";
+
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		return listCount;
+	}
+
+	public ArrayList<Classs> selectList(Connection conn, int startRow, int endRow) {
+		System.out.println("dao 실행");
+		ArrayList<Classs> list = new ArrayList<Classs>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY CLASS_NO ASC)) WHERE RNUM >= ?  AND RNUM <= ?";
+				//"SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO,PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE,PROFESSOR_NO,PROFESSOR_NAME FROM (SELECT CLASS_NO, DEPARTMENT_NO,PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE,PROFESSOR_NO,PROFESSOR_NAME FROM TB_CLASS NATURAL JOIN TB_CLASS_PROFESSOR NATURAL JOIN TB_PROFESSOR ORDER BY CLASS_NO ASC))WHERE RNUM >= ?  AND RNUM <= ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				Classs classs = new Classs();
+
+				classs.setClassNo(rset.getString("CLASS_NO"));
+				classs.setDepartmentNo(rset.getString("DEPARTMENT_NO"));
+				classs.setClassName(rset.getString("CLASS_NAME"));
+				classs.setClassType(rset.getString("CLASS_TYPE"));
+				classs.setPreatendingClassNo(rset.getString("PREATTENDING_CLASS_NO"));
+				list.add(classs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public ArrayList<Classs> selectList2(Connection conn, int startRow, int endRow) {
+		System.out.println("dao 실행2");
+		ArrayList<Classs> list = new ArrayList<Classs>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY CLASS_NO DESC)) WHERE RNUM >= ?  AND RNUM <= ?";
+				//"SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO,PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE,PROFESSOR_NO,PROFESSOR_NAME FROM (SELECT CLASS_NO, DEPARTMENT_NO,PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE,PROFESSOR_NO,PROFESSOR_NAME FROM TB_CLASS NATURAL JOIN TB_CLASS_PROFESSOR NATURAL JOIN TB_PROFESSOR ORDER BY CLASS_NO ASC))WHERE RNUM >= ?  AND RNUM <= ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				Classs classs = new Classs();
+
+				classs.setClassNo(rset.getString("CLASS_NO"));
+				classs.setDepartmentNo(rset.getString("DEPARTMENT_NO"));
+				classs.setClassName(rset.getString("CLASS_NAME"));
+				classs.setClassType(rset.getString("CLASS_TYPE"));
+				classs.setPreatendingClassNo(rset.getString("PREATTENDING_CLASS_NO"));
+				list.add(classs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("정렬 list 실행");
+		return list;
 	}
 
 }

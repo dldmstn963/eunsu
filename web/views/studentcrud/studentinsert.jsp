@@ -7,6 +7,117 @@
 <!DOCTYPE html>
 <html>
 <title>메인 페이지</title>
+<script type="text/javascript"
+	src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#confirm").click(function() {
+
+			$.ajax({
+				url : "/eunsu/studentconfirm",
+				type : "get",
+				data : {
+					studentno : $("#studentno").val()
+				},
+				success : function(data) {
+					$("#result").html(data);
+				}
+			})//$.ajax()
+		});//confirm click
+	});//document ready
+
+	function validate() {
+		var pwre = /^[a-zA-Z0-9]{4,12}$/
+		var stunore = /^[A0-9]{7}$/
+		var ssnre = /^[0-9]{6}-[0-9]{7}$/
+		var departnore = /^[0-9]{3}$/
+		var prore = /^[P0-9]{4}$/
+
+		var studentno = document.getElementById("studentno");
+		var ssn = document.getElementById("studentssn");
+		var pw = document.getElementById("studentpassword");
+		var depart = document.getElementById("studentdepartno");
+		var pro = document.getElementById("studentcoach");
+
+		if (join.studentno.value == "") {
+			alert("학번을 적어주세요");
+			join.studentno.focus();
+			return false;
+		}
+
+		if (!check(stunore, studentno, "학번은 'A000000' 구성으로 작성해주세요")) {
+			return false;
+		}
+		if (join.studentdepartno.value == "") {
+			alert("소속 학과를 적어주세요");
+			join.studentdepartno.focus();
+			return false;
+		}
+		if (!check(departnore, depart, "학과 번호는 숫자 세자리로 작성해주세요")) {
+			return false;
+		}
+		if (join.studentname.value == "") {
+			alert("이름을 적어주세요");
+			join.studentname.focus();
+			return false;
+		}
+
+		if (join.studentssn.value == "") {
+			alert("주민 등록 번호를 적어주세요");
+			join.studentssn.focus();
+			return false;
+		}
+		if (!check(ssnre, ssn, "주민 번호를 확인해주세요")) {
+			return false;
+		}
+		if (join.studentaddress.value == "") {
+			alert("주소를 적어주세요");
+			join.studentaddress.focus();
+			return false;
+		}
+
+		if (join.studententrancedate.value == "") {
+			alert("입학일 선택해 주세요");
+			join.studententrancedate.focus();
+			return false;
+		}
+
+		if (join.studentcoach.value == "") {
+			alert("담당교수 번호를 적어주세요");
+			join.studentcoach.focus();
+			return false;
+		}
+		if (!check(prore, pro, "교수 번호는 'P000' 구성으로 작성해 주세요")) {
+			return false;
+		}
+
+		if (join.studentpassword.value == "") {
+			alert("비밀번호를 적어주세요");
+			join.studentpassword.focus();
+			return false;
+		}
+		if (!check(pwre, pw, "패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")) {
+			return false;
+		}
+
+		if (join.studentimage.value == "") {
+			alert("파일을 첨부해주세요");
+			join.studentimage.focus();
+			return false;
+		}
+
+	}
+
+	function check(re, what, message) {
+		if (re.test(what.value)) {
+			return true;
+		}
+		alert(message);
+		what.value = "";
+		what.focus();
+		//return false;
+	}
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/eunsu/resources/css/w3.css">
@@ -32,19 +143,19 @@
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
 				title="Messages"><i class="fa fa-envelope"></i></a> <a href="#"
 				class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
-				title="My Account">
-			</a>
+				title="My Account"> </a>
 		</div>
 	</div>
 
 	<!-- Navbar on small screens -->
 	<div id="navDemo"
 		class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-		<a href="/eunsu/views/studentcrud/studentinsert.jsp" class="w3-bar-item w3-button w3-padding-large">학생 추가</a>
-		<a href="/eunsu/views/studentcrud/studentinsert.jsp" class="w3-bar-item w3-button w3-padding-large">학생 추가</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding-large">ㅇㅇ 3</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding-large">My
-			Profile</a>
+		<a href="/eunsu/views/studentcrud/studentinsert.jsp"
+			class="w3-bar-item w3-button w3-padding-large">학생 추가</a> <a
+			href="/eunsu/views/studentcrud/studentinsert.jsp"
+			class="w3-bar-item w3-button w3-padding-large">학생 추가</a> <a href="#"
+			class="w3-bar-item w3-button w3-padding-large">ㅇㅇ 3</a> <a href="#"
+			class="w3-bar-item w3-button w3-padding-large">My Profile</a>
 	</div>
 
 	<!-- Page Container -->
@@ -97,8 +208,12 @@
 							관리
 						</button>
 						<div id="Demo2" class="w3-hide w3-container">
-							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 추가</a></p>
-							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 수정</a></p>
+							<p>
+								<a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 추가</a>
+							</p>
+							<p>
+								<a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 수정</a>
+							</p>
 						</div>
 						<button onclick="myFunction('Demo3')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
@@ -135,24 +250,59 @@
 				<!-- End Left Column -->
 			</div>
 			<!-- End Grid -->
-		<h1 align="center">학생 추가</h1>
-		<table align="center" border="1" cellspacing="0" cellpadding="10">
-		<form action="/eunsu/studentinsert" method="post" enctype="multipart/form-data">
-		<tr><th>학번</th><td><input type="text" name="studentno"></td></tr>
-		<tr><th>학과 번호</th><td><input type="text" name="studentdepartno"></td></tr>
-		<tr><th>학생 이름</th><td><input type="text" name="studentname"></td></tr>
-		<tr><th>학생 주민 번호</th><td><input type="text" name="studentssn"></td></tr>
-		<tr><th>학생 주소</th><td><input type="text" name="studentaddress"></td></tr>
-		<tr><th>입학일</th><td><input type="date" name="studententrancedate"></td></tr>
-		<tr><th>담당 교수 번호</th><td><input type="text" name="studentcoach"></td></tr>
-		<tr><th>학생 비밀번호</th><td><input type="text" name="studentpassword"></td></tr>
-		<tr><th>학생 증명사진</th><td><input type="file" name="studentimage"></td></tr>
-		<tr><th colspan="2">
-		<input type="submit" value="추가"> &nbsp;
-		<input type="reset" value="초기화">
-		</th></tr>
-		</form>
-		</table>
+			<h1 align="center">학생 추가</h1>
+			<table align="center" border="1" cellspacing="0" cellpadding="10">
+				<form name="join" onsubmit="return validate();"
+					action="/eunsu/studentinsert" method="post"
+					enctype="multipart/form-data">
+					<tr>
+						<th>학번</th>
+						<td><input type="text" name="studentno" id="studentno">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+							type="button" id="confirm" value="중복확인">
+							<p id="result" style="display: none;"></p></td>
+					</tr>
+					<tr>
+						<th>학과 번호</th>
+						<td><input type="text" name="studentdepartno"
+							id="studentdepartno"></td>
+					</tr>
+					<tr>
+						<th>학생 이름</th>
+						<td><input type="text" name="studentname" id="studentname"></td>
+					</tr>
+					<tr>
+						<th>학생 주민 번호</th>
+						<td><input type="text" name="studentssn" id="studentssn"></td>
+					</tr>
+					<tr>
+						<th>학생 주소</th>
+						<td><input type="text" name="studentaddress"
+							id="studentaddress"></td>
+					</tr>
+					<tr>
+						<th>입학일</th>
+						<td><input type="date" name="studententrancedate"
+							id="studententrancedate"></td>
+					</tr>
+					<tr>
+						<th>담당 교수 번호</th>
+						<td><input type="text" name="studentcoach" id="studentcoach"></td>
+					</tr>
+					<tr>
+						<th>학생 비밀번호</th>
+						<td><input type="text" name="studentpassword"
+							id="studentpassword"></td>
+					</tr>
+					<tr>
+						<th>학생 증명사진</th>
+						<td><input type="file" name="studentimage" id="studentimage"></td>
+					</tr>
+					<tr>
+						<th colspan="2"><input type="submit" value="추가">
+							&nbsp; <input type="reset" value="초기화"></th>
+					</tr>
+				</form>
+			</table>
 		</div>
 		<!-- End Page Container -->
 	</div>

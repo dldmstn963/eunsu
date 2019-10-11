@@ -33,4 +33,22 @@ public class DepartmentDao {
 		return result;
 	}
 
+	public int confirmDepartment(Connection conn, String departno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "select DEPARTMENT_NO from TB_DEPARTMENT where DEPARTMENT_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, departno);
+
+			result = pstmt.executeUpdate();
+			System.out.println(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }

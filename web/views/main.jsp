@@ -196,7 +196,8 @@
 						</button>
 						<div id="Demo1" class="w3-hide w3-container">
 							<p>
-								<a href="/eunsu/views/classcrud/classinsert.jsp">과목 추가</a>
+								<p><a href="/eunsu/views/classcrud/classinsert.jsp">과목 추가</a></p>
+								<p><a href="/eunsu/classslist">과목 수정 및 삭제</a></p>
 							</p>
 						</div>
 						<button onclick="myFunction('Demo2')"
@@ -206,7 +207,7 @@
 						</button>
 						<div id="Demo2" class="w3-hide w3-container">
 							<p><a href="/eunsu/views/departmentcrud/departmentinsert.jsp">학과 추가</a></p>
-							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 수정</a></p>
+							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학과 수정</a></p>
 						</div>
 						<button onclick="myFunction('Demo3')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">

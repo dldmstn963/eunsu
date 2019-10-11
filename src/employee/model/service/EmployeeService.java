@@ -50,8 +50,6 @@ public class EmployeeService {
 	public int confirmEmployee(String empno) {
 		Connection conn = getConnection();
 		int result = edao.confirmEmployee(conn, empno);
-		
-		
 		return result;
 	}
 

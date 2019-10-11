@@ -46,4 +46,10 @@ public class ProfessorService {
 	public int deleteProfessor(String userId) {
 	}
 
+	public int confirmProfessor(String professorno) {
+		Connection conn = getConnection();
+		int result = pdao.confirmProfessor(conn, professorno);
+		return result;
+	}
+
 }

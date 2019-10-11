@@ -23,6 +23,88 @@ $(function (){
 	});//confirm click
 });//document ready
 
+function validate(){
+	var pwre = /^[a-zA-Z0-9]{4,12}$/
+	var empnore = /^[E0-9]{4}$/ 
+	var ssnre = /^[0-9]{6}-[0-9]{7}$/
+	
+	var empno = document.getElementById("empno");
+	var ssn = document.getElementById("EMPLOYEE_SSN");
+	var pw = document.getElementById("EMPLOYEE_PASSWORD");
+	
+	if(join.EMPLOYEE_NO.value == ""){
+		alert("사번을 적어주세요");
+		join.EMPLOYEE_NO.focus();
+		return false;
+	}
+	
+	if(!check(empnore,empno,"사번은 'E000' 구성으로 작성해주세요")){
+		return false;
+	}
+	
+	if(join.EMPLOYEE_NAME.value == ""){
+		alert("이름을 적어주세요");
+		join.EMPLOYEE_NAME.focus();
+		return false;
+	}
+	
+	if(join.EMPLOYEE_SSN.value == ""){
+		alert("주민 등록번호를 적어주세요");
+		join.EMPLOYEE_SSN.focus();
+		return false;
+	}
+	
+	if(!check(ssnre,ssn,"주민 번호를 확인해주세요")){
+		return false;
+	}
+	
+	if(join.EMPLOYEE_ADDRESS.value == ""){
+		alert("주소를 적어주세요");
+		join.EMPLOYEE_ADDRESS.focus();
+		return false;
+	}
+	
+
+	
+	if(join.HIRE_DATE.value == ""){
+		alert("입사일을 적어주세요");
+		join.HIRE_DATE.focus();
+		return false;
+	}
+	
+	if(join.SALARY.value == ""){
+		alert("월급을 적어주세요");
+		join.SALARY.focus();
+		return false;
+	}
+	
+	if(join.EMPLOYEE_PASSWORD.value == ""){
+		alert("비밀번호를 적어주세요");
+		join.EMPLOYEE_PASSWORD.focus();
+		return false;
+	}
+	
+	if(!check(pwre,pw,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")){
+		return false;
+	}
+	
+	if(join.EMPLOYEE_IMAGE.value == ""){
+		alert("파일을 첨부해주세요");
+		join.EMPLOYEE_IMAGE.focus();
+		return false;
+	}
+	
+}
+
+function check(re, what, message) {
+    if(re.test(what.value)) {
+        return true;
+    }
+    alert(message);
+    what.value = "";
+    what.focus();
+    //return false;
+}
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -154,16 +236,23 @@ $(function (){
 			<!-- End Grid -->
 		<h1 align="center">직원 추가</h1>
 		<table align="center" border="1" cellspacing="0" cellpadding="10">
-		<form action="/eunsu/employeeinsert" method="post" enctype="multipart/form-data">
-		<tr><th>사번</th><td><input type="text" name="EMPLOYEE_NO" id="empno">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="confirm" value="중복확인"><br><p id="result"></p></td></tr>
-		<tr><th>소속 부서 번호</th><td><input type="text" name="EMPDEPART_NO"></td></tr>
-		<tr><th>사원 이름</th><td><input type="text" name="EMPLOYEE_NAME"></td></tr>
-		<tr><th>사원 주민 번호</th><td><input type="text" name="EMPLOYEE_SSN"></td></tr>
-		<tr><th>사원 주소</th><td><input type="text" name="EMPLOYEE_ADDRESS"></td></tr>
-		<tr><th>입사일</th><td><input type="date" name="HIRE_DATE"></td></tr>
-		<tr><th>월급</th><td><input type="number" name="SALARY"></td></tr>
-		<tr><th>사원 비밀번호</th><td><input type="text" name="EMPLOYEE_PASSWORD"></td></tr>
-		<tr><th>사원 증명사진</th><td><input type="file" name="EMPLOYEE_IMAGE"></td></tr>
+		<form name="join" action="/eunsu/employeeinsert" method="post" enctype="multipart/form-data" onsubmit="return validate();">
+		<tr><th>사번</th><td><input type="text" name="EMPLOYEE_NO" id="empno">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="confirm" value="중복확인">
+		<p id="result" style="display:none;"></p></td></tr>
+		<tr><th>소속 부서 번호</th><td>
+		<select name="EMPDEPART_NO">
+		<option value="">선택 해주세요</option>
+		<option value="1">행정</option>
+		<option value="2">경영</option>
+		</select></td></tr>
+		<tr><th>사원 이름</th><td><input type="text" name="EMPLOYEE_NAME" id="EMPLOYEE_NAME"></td></tr>
+		<tr><th>사원 주민 번호</th><td><input type="text" name="EMPLOYEE_SSN" id="EMPLOYEE_SSN"></td></tr>
+		<tr><th>사원 주소</th><td><input type="text" name="EMPLOYEE_ADDRESS" id="EMPLOYEE_ADDRESS"></td></tr>
+		<tr><th>입사일</th><td><input type="date" name="HIRE_DATE" id="HIRE_DATE"></td></tr>
+		<tr><th>월급</th><td><input type="number" name="SALARY" id="SALARY"></td></tr>
+		<tr><th>사원 비밀번호</th><td><input type="text" name="EMPLOYEE_PASSWORD" id="EMPLOYEE_PASSWORD"></td></tr>
+		<tr><th>사원 증명사진</th><td><input type="file" name="EMPLOYEE_IMAGE" id="EMPLOYEE_IMAGE"></td></tr>
 		<tr><th colspan="2">
 		<input type="submit" value="추가"> &nbsp;
 		<input type="reset" value="초기화">
