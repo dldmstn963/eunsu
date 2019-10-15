@@ -191,4 +191,28 @@ public class ClasssDao {
 		return result;
 	}
 
+	public int deleteClasss(Connection conn, String classno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "DELETE FROM TB_CLASS WHERE CLASS_NO = ?";
+		try {
+			pstmt = conn.prepareStatement("ALTER TABLE TB_CLASS_PROFESSOR DROP CONSTRAINTS FK_CLASS_PROFESSOR_02");
+			result = pstmt.executeUpdate();
+			pstmt = conn.prepareStatement("ALTER TABLE TB_CLASS_PROFESSOR ADD CONSTRAINTS FK_CLASS_PROFESSOR_02 FOREIGN KEY(CLASS_NO) REFERENCES TB_CLASS ON DELETE CASCADE");
+			result = pstmt.executeUpdate();
+			pstmt = conn.prepareStatement("ALTER TABLE TB_GRADE DROP CONSTRAINTS FK_GRADE_02");
+			result = pstmt.executeUpdate();
+			pstmt = conn.prepareStatement("ALTER TABLE TB_GRADE ADD CONSTRAINTS FK_GRADE_02 FOREIGN KEY(CLASS_NO) REFERENCES TB_CLASS ON DELETE CASCADE");
+			result = pstmt.executeUpdate();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, classno);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }

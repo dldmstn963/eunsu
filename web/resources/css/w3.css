@@ -45,7 +45,8 @@ audio:not ([controls] ){
 }
 
 a {
-	background-color: transparent
+	background-color: transparent;
+	text-decoration: none !important
 }
 
 a:active, a:hover {

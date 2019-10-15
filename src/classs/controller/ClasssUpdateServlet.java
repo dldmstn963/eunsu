@@ -52,7 +52,6 @@ public class ClasssUpdateServlet extends HttpServlet {
 			classs.setPreatendingClassNo(preatendingClassNo[i]);
 			result = new ClasssService().updateClass(classs);
 		}
-		String[] value1 = request.getParameterValues("classNo");
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		if (result > 0) {

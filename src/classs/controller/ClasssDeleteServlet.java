@@ -1,11 +1,15 @@
 package classs.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import classs.model.service.ClasssService;
 
 /**
  * Servlet implementation class ClasssDeleteServlet
@@ -28,13 +32,23 @@ public class ClasssDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		String[] checkBox = request.getParameterValues("cehckbox");
-		String[] classNo = request.getParameterValues("classNo");
-		
-		System.out.println(checkBox[0]);
-		
-		
-		
+		String checkBox = request.getParameter("lists");
+		String check[] = checkBox.split(",");
+		int result = 0;
+		for(int i = 0; i < check.length; i++) {
+			result = new ClasssService().deleteClass(check[i]);
+		}
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if(result > 0) {
+			out.println("<script>");
+			out.println("alert('삭제 성공!');");
+			out.println("</script>");
+		}else {
+			out.println("<script>");
+			out.println("alert('삭제 실패!');");
+			out.println("</script>");
+		}
 		
 	}
 

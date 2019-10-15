@@ -66,4 +66,15 @@ public class ClasssService {
 		close(conn);
 		return result;
 	}
+
+	public int deleteClass(String classno) {
+		Connection conn = getConnection();
+		int result = cdao.deleteClasss(conn, classno);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		return result;
+	}
 }

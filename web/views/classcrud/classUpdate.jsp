@@ -32,17 +32,27 @@
 	});//document
 	
 	function dellist(){
+		var result = confirm('정말 삭제하시겠습니까?');
+		if(result){
+		var lists = [];
+		  $("#checkbox:checked").each(function(i){   //jQuery로 for문 돌면서 check 된값 배열에 담는다
+		   lists.push($(this).val());
+		  });
+		  console.log(lists);
+		 var list = lists.join(","); 
+		 console.log(list);
 		$.ajax({
 			url:"/eunsu/classsdelete",
 			type : "post",
 			data : {
-				checkbox : $("#checkbox").val(),
-				classNo : $("#classNo").val()
+				lists : list
 			},
-			success : alert('삭제완료')
+			success : function(data){
+				$("#alertbox").html(data);
+			}
 		})
 		return false;
-	}
+	}}
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -178,6 +188,7 @@
 				</div>
 				<!-- End Grid -->
 				<h1 align="center">과목 수정</h1>
+				<div style="display:none;" id="alertbox"></div>
 				<form action="/eunsu/classsupdate">
 					<table align="center" border="1" cellspacing="0" cellpadding="3"
 						id="myTable2">
@@ -193,7 +204,7 @@
 							for (Classs c : list) {
 						%>
 						<tr>
-							<td align="center"><input type="checkbox" name="checkbox"></td>
+							<td align="center"><input type="checkbox" id="checkbox" name="checkbox" value="<%=c.getClassNo()%>"></td>
 							<td style="display:none;"><input type="text" name="classNo"value="<%=c.getClassNo()%>"></td>
 							<td><%=c.getClassNo()%></td>
 							<td><input type="text" style="width: 170px;" name="className"

@@ -11,6 +11,11 @@
 <!DOCTYPE html>
 <html>
 <title>수은대학교 학사관리</title>
+<style type="text/css">
+a {
+	text-decoration: none !important
+}
+</style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/eunsu/resources/css/w3.css">
