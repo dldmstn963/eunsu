@@ -13,10 +13,9 @@ public class ClasssService {
 
 	private ClasssDao cdao = new ClasssDao();
 
-	public ClasssService() {
-	};
+	public ClasssService() {};
 
-	public int insertClass(Classs classs) {
+	public int insertClass(Classs classs) { //과목 추가
 		Connection conn = getConnection();
 		int result = cdao.insertClass(conn, classs);
 		if (result > 0) {
@@ -29,13 +28,13 @@ public class ClasssService {
 
 	}
 
-	public int confirmClasss(String classno) {
+	public int confirmClasss(String classno) { // 과목 중복확인
 		Connection conn = getConnection();
 		int result = cdao.confirmClasss(conn, classno);
 		return result;
 	}
 
-	public int getListCount() {
+	public int getListCount() { //과목 페이징 처리위한 갯수확인
 		Connection conn = getConnection();
 		int listCount = cdao.getListCount(conn);
 		close(conn);
@@ -56,4 +55,15 @@ public class ClasssService {
 		return list;
 	}
 
+	public int updateClass(Classs classs) {
+		Connection conn = getConnection();
+		int result = cdao.updateClasss(conn, classs);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }

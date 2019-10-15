@@ -26,8 +26,16 @@ public class ClasssDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		
+		String[] checkBox = request.getParameterValues("cehckbox");
+		String[] classNo = request.getParameterValues("classNo");
+		
+		System.out.println(checkBox[0]);
+		
+		
+		
+		
 	}
 
 	/**

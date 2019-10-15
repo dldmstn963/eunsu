@@ -18,9 +18,9 @@
 
 <script type="text/javascript">
 	$(function() {
-		$("#classNoSort").click(function() {
+		$("#classNo").click(function() {
 			$.ajax({
-				url : "/eunsu/classsort",
+				url : "/eunsu/classslist",
 				type : "get",
 				dataType : "html",
 				success : function(data) {
@@ -30,19 +30,6 @@
 
 		});//click
 	});//document
-	
-	function dellist(){
-		$.ajax({
-			url:"/eunsu/classsdelete",
-			type : "post",
-			data : {
-				checkbox : $("#checkbox").val(),
-				classNo : $("#classNo").val()
-			},
-			success : alert('삭제완료')
-		})
-		return false;
-	}
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -178,65 +165,57 @@
 				</div>
 				<!-- End Grid -->
 				<h1 align="center">과목 수정</h1>
-				<form action="/eunsu/classsupdate">
-					<table align="center" border="1" cellspacing="0" cellpadding="3"
-						id="myTable2">
-						<tr>
-							<th>체크 박스</th>
-							<th id="classNoSort">과목 번호</th>
-							<th>과목 이름</th>
-							<th>과목 분류</th>
-							<th>학과 번호</th>
-							<th>선행 과목</th>
-						</tr>
+				<table align="center" border="1" cellspacing="0" cellpadding="3"
+					id="myTable2">
+					<tr>
+						<th>체크 박스</th>
+						<th id="classNo">과목 번호</th>
+						<th id="className">과목 이름</th>
+						<th id="classType">과목 분류</th>
+						<th id="departmentNo">학과 번호</th>
+						<th id="preatendingClassNo">선행 과목</th>
+					</tr>
+					<%
+						for (Classs c : list) {
+					%>
+					<tr>
+						<td align="center"><input type="checkbox"></td>
+						<td><input type="text" style="width: 90px;"
+							value="<%=c.getClassNo()%>"></td>
+						<td><input type="text" style="width: 170px;"
+							value="<%=c.getClassName()%>"></td>
+						<td><input type="text" style="width: 70px;"
+							value="<%=c.getClassType()%>"></td>
+						<td><input type="text" style="width: 40px;"
+							value="<%=c.getDepartmentNo()%>"></td>
 						<%
-							for (Classs c : list) {
+							if (c.getPreatendingClassNo() == null) {
 						%>
-						<tr>
-							<td align="center"><input type="checkbox" name="checkbox"></td>
-							<td style="display:none;"><input type="text" name="classNo"value="<%=c.getClassNo()%>"></td>
-							<td><%=c.getClassNo()%></td>
-							<td><input type="text" style="width: 170px;" name="className"
-								value="<%=c.getClassName()%>"></td>
-							<td><input type="text" style="width: 70px;" name="classType"
-								value="<%=c.getClassType()%>"></td>
-							<td><input type="text" style="width: 35px;" name="departmentNo"
-								value="<%=c.getDepartmentNo()%>"></td>
-							<%
-								if (c.getPreatendingClassNo() == null) {
-							%>
-							<td><input type="text" value="없음" style="width: 90px;" name="preatendingClassNo"></td>
-							<%
-								} else {
-							%>
-							<td><input type="text" style="width: 90px;" name="preatendingClassNo"
-								value="<%=c.getPreatendingClassNo()%>"></td>
-							<%
-								}
-							%>
-						</tr>
+						<td><input type="text" value="없음" style="width: 90px;"></td>
+						<%
+							} else {
+						%>
+						<td><input type="text" style="width: 90px;"
+							value="<%=c.getPreatendingClassNo()%>"></td>
 						<%
 							}
 						%>
-					</table>
-					<br>
-					<center>
-						<input type="submit" value="수정" > &nbsp; <input
-							type="reset" value="초기화"> &nbsp; 
-							<input type="button" value="삭제" onclick="return dellist();">
-					</center>
-				</form>
+					</tr>
+					<%
+						}
+					%>
+				</table>
 				<br>
 				<div id="pagebox" align="center">
-					<a href="/eunsu/classslist?page=1">|◁</a> &nbsp;
+					<a href="/eunsu/classsort?page=1">|◁</a> &nbsp;
 					<%
 						if ((beginPage - 10) < 1) {
 					%>
-					<a href="/eunsu/classslist?page=1">◀◀</a>
+					<a href="/eunsu/classsort?page=1">◀◀</a>
 					<%
 						} else {
 					%>
-					<a href="/eunsu/classslist?page=<%=beginPage - 10%>">◀◀</a>
+					<a href="/eunsu/classsort?page=<%=beginPage - 10%>">◀◀</a>
 					<%
 						}
 					%>
@@ -245,12 +224,12 @@
 						for (int p = beginPage; p <= endPage; p++) {
 							if (p == currentPage) {
 					%>
-					<a href="/eunsu/classslist?page=<%=p%>"><font color="red"><b>[<%=p%>]
+					<a href="/eunsu/classsort?page=<%=p%>"><font color="red"><b>[<%=p%>]
 						</b></font></a>
 					<%
 						} else {
 					%>
-					<a href="/eunsu/classslist?page=<%=p%>"><%=p%></a>
+					<a href="/eunsu/classsort?page=<%=p%>"><%=p%></a>
 					<%
 						}
 						}
@@ -259,54 +238,56 @@
 					<%
 						if ((endPage + 10) > maxPage) {
 					%>
-					<a href="/eunsu/classslist?page=<%=maxPage%>">▶▶</a>
+					<a href="/eunsu/classsort?page=<%=maxPage%>">▶▶</a>
 					<%
 						} else {
 					%>
-					<a href="/eunsu/classslist?page=<%=endPage + 10%>">▶▶</a>
+					<a href="/eunsu/classsort?page=<%=endPage + 10%>">▶▶</a>
 					<%
 						}
 					%>
-					&nbsp; <a href="/eunsu/classslist?page=<%=maxPage%>">▷|</a>&nbsp;&nbsp;&nbsp;
+					&nbsp; <a href="/eunsu/classsort?page=<%=maxPage%>">▷|</a>&nbsp;&nbsp;&nbsp;
+					<input type="submit" value="수정"> &nbsp; <input
+						type="submit" value="삭제">
 				</div>
-			</div>
 
-			<!-- End Page Container -->
 		</div>
-		<br>
-
-		<!-- Footer -->
-		<footer class="w3-container w3-theme-d3 w3-padding-16">
-			<h5>서울특별시 강남구 테헤란로14길 6</h5>
-			<h6>수은대학교 | Tel. 02-880-5114 | Fax. 02-885-5272 Copyright 2019
-				Su Eun University All Rights Reserved.</h6>
-		</footer>
-
-		<script>
-			// Accordion
-			function myFunction(id) {
-				var x = document.getElementById(id);
-				if (x.className.indexOf("w3-show") == -1) {
-					x.className += " w3-show";
-					x.previousElementSibling.className += " w3-theme-d1";
-				} else {
-					x.className = x.className.replace("w3-show", "");
-					x.previousElementSibling.className = x.previousElementSibling.className
-							.replace(" w3-theme-d1", "");
-				}
-			}
-
-			// Used to toggle the menu on smaller screens when clicking on the menu button
-			function openNav() {
-				var x = document.getElementById("navDemo");
-				if (x.className.indexOf("w3-show") == -1) {
-					x.className += " w3-show";
-				} else {
-					x.className = x.className.replace(" w3-show", "");
-				}
-			}
-		</script>
+		<!-- End Page Container -->
 	</div>
+	<br>
+
+	<!-- Footer -->
+	<footer class="w3-container w3-theme-d3 w3-padding-16">
+		<h5>서울특별시 강남구 테헤란로14길 6</h5>
+		<h6>수은대학교 | Tel. 02-880-5114 | Fax. 02-885-5272 Copyright 2019 Su
+			Eun University All Rights Reserved.</h6>
+	</footer>
+
+	<script>
+		// Accordion
+		function myFunction(id) {
+			var x = document.getElementById(id);
+			if (x.className.indexOf("w3-show") == -1) {
+				x.className += " w3-show";
+				x.previousElementSibling.className += " w3-theme-d1";
+			} else {
+				x.className = x.className.replace("w3-show", "");
+				x.previousElementSibling.className = x.previousElementSibling.className
+						.replace(" w3-theme-d1", "");
+			}
+		}
+
+		// Used to toggle the menu on smaller screens when clicking on the menu button
+		function openNav() {
+			var x = document.getElementById("navDemo");
+			if (x.className.indexOf("w3-show") == -1) {
+				x.className += " w3-show";
+			} else {
+				x.className = x.className.replace(" w3-show", "");
+			}
+		}
+	</script>
+			</div>
 
 </body>
 </html>

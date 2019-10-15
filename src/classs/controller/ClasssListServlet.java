@@ -74,7 +74,6 @@ public class ClasssListServlet extends HttpServlet {
 			request.setAttribute("endPage", endPage);
 			view.forward(request, response);
 		}else {
-			System.out.println("과목 목록 조회 실패");
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");

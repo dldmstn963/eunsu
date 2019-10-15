@@ -81,14 +81,21 @@ public class ClasssDao {
 		return listCount;
 	}
 
+	public static int num = 0;
+
 	public ArrayList<Classs> selectList(Connection conn, int startRow, int endRow) {
-		System.out.println("dao 실행");
 		ArrayList<Classs> list = new ArrayList<Classs>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		String query = "";
 
-		String query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY CLASS_NO ASC)) WHERE RNUM >= ?  AND RNUM <= ?";
-				//"SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO,PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE,PROFESSOR_NO,PROFESSOR_NAME FROM (SELECT CLASS_NO, DEPARTMENT_NO,PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE,PROFESSOR_NO,PROFESSOR_NAME FROM TB_CLASS NATURAL JOIN TB_CLASS_PROFESSOR NATURAL JOIN TB_PROFESSOR ORDER BY CLASS_NO ASC))WHERE RNUM >= ?  AND RNUM <= ?";
+		query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY CLASS_NO ASC)) WHERE RNUM >= ?  AND RNUM <= ?";
+		// "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO,
+		// DEPARTMENT_NO,PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE,PROFESSOR_NO,PROFESSOR_NAME
+		// FROM (SELECT CLASS_NO,
+		// DEPARTMENT_NO,PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE,PROFESSOR_NO,PROFESSOR_NAME
+		// FROM TB_CLASS NATURAL JOIN TB_CLASS_PROFESSOR NATURAL JOIN TB_PROFESSOR ORDER
+		// BY CLASS_NO ASC))WHERE RNUM >= ? AND RNUM <= ?";
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -117,13 +124,18 @@ public class ClasssDao {
 	}
 
 	public ArrayList<Classs> selectList2(Connection conn, int startRow, int endRow) {
-		System.out.println("dao 실행2");
 		ArrayList<Classs> list = new ArrayList<Classs>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		String query = "";
 
-		String query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY CLASS_NO DESC)) WHERE RNUM >= ?  AND RNUM <= ?";
-				//"SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO,PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE,PROFESSOR_NO,PROFESSOR_NAME FROM (SELECT CLASS_NO, DEPARTMENT_NO,PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE,PROFESSOR_NO,PROFESSOR_NAME FROM TB_CLASS NATURAL JOIN TB_CLASS_PROFESSOR NATURAL JOIN TB_PROFESSOR ORDER BY CLASS_NO ASC))WHERE RNUM >= ?  AND RNUM <= ?";
+		query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY CLASS_NO DESC)) WHERE RNUM >= ?  AND RNUM <= ?";
+		// "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO,
+		// DEPARTMENT_NO,PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE,PROFESSOR_NO,PROFESSOR_NAME
+		// FROM (SELECT CLASS_NO,
+		// DEPARTMENT_NO,PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE,PROFESSOR_NO,PROFESSOR_NAME
+		// FROM TB_CLASS NATURAL JOIN TB_CLASS_PROFESSOR NATURAL JOIN TB_PROFESSOR ORDER
+		// BY CLASS_NO ASC))WHERE RNUM >= ? AND RNUM <= ?";
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -148,8 +160,35 @@ public class ClasssDao {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("정렬 list 실행");
 		return list;
+	}
+
+	public int updateClasss(Connection conn, Classs classs) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE TB_CLASS SET DEPARTMENT_NO=?,PREATTENDING_CLASS_NO= ?,CLASS_NAME = ?,CLASS_TYPE=? WHERE CLASS_NO=?";
+		try {
+			pstmt =conn.prepareStatement(query);
+			String pre = "";
+			if(classs.getPreatendingClassNo().equals("없음")) {
+				pre = null;
+			}else{
+				pre = classs.getPreatendingClassNo();
+			}
+			pstmt.setString(1, classs.getDepartmentNo());
+			pstmt.setString(2, pre);
+			pstmt.setString(3, classs.getClassName());
+			pstmt.setString(4, classs.getClassType());
+			pstmt.setString(5, classs.getClassNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }
