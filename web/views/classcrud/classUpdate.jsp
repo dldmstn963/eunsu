@@ -189,6 +189,24 @@
 				<!-- End Grid -->
 				<h1 align="center">과목 수정</h1>
 				<div style="display:none;" id="alertbox"></div>
+				<form action="/eunsu/classssearch" align="center">
+				과목 번호 : <input type="text" style="width: 90px;" name="searchno" value="">
+				&nbsp;&nbsp;과목 명 : <input type="text" style="width: 170px;"name="searchname" value=""><br><br>
+				
+				과목 분류 : <select name="searchtype">
+				<option value="">선택 해주세요</option>
+				<option value="공통과목">공통과목</option>
+				<option value="논문지도">논문지도</option>
+				<option value="전공선택">전공선택</option>
+				<option value="전공필수">전공필수</option>
+				</select>
+				
+				&nbsp;&nbsp;학과 번호 : <input type="text" style="width: 35px;" name="searchdepart" value="">
+				
+				<br>
+				<input type="submit" value="검색">
+				</form>
+				<br>
 				<form action="/eunsu/classsupdate">
 					<table align="center" border="1" cellspacing="0" cellpadding="3"
 						id="myTable2">

@@ -77,4 +77,11 @@ public class ClasssService {
 		}
 		return result;
 	}
+
+	public ArrayList<Classs> searchClasss(Classs classs) {
+		Connection conn = getConnection();
+		ArrayList<Classs> list = cdao.searchClasss(conn,classs);
+		close(conn);
+		return list;
+	}
 }

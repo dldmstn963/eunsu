@@ -215,4 +215,37 @@ public class ClasssDao {
 		return result;
 	}
 
+	public ArrayList<Classs> searchClasss(Connection conn, Classs classs) {
+		ArrayList<Classs> list = new ArrayList<Classs>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from tb_class where class_no like ? and DEPARTMENT_NO like ? and CLASS_NAME like ? and CLASS_TYPE like ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+classs.getClassNo()+"%");
+			pstmt.setString(2, "%"+classs.getDepartmentNo()+"%");
+			pstmt.setString(3, "%"+classs.getClassName()+"%");
+			pstmt.setString(4, "%"+classs.getClassType()+"%");
+			
+			rset = pstmt.executeQuery();
+			System.out.println(classs);
+			while(rset.next()) {
+				Classs classslist = new Classs();
+				classslist.setClassNo(rset.getString("class_no"));
+				classslist.setClassName(rset.getString("CLASS_NAME"));
+				classslist.setClassType(rset.getString("CLASS_TYPE"));
+				classslist.setDepartmentNo(rset.getString("DEPARTMENT_NO"));
+				System.out.println(classslist);
+				list.add(classslist);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
 }
