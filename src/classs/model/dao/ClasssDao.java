@@ -87,15 +87,8 @@ public class ClasssDao {
 		ArrayList<Classs> list = new ArrayList<Classs>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "";
 
-		query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY CLASS_NO ASC)) WHERE RNUM >= ?  AND RNUM <= ?";
-		// "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO,
-		// DEPARTMENT_NO,PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE,PROFESSOR_NO,PROFESSOR_NAME
-		// FROM (SELECT CLASS_NO,
-		// DEPARTMENT_NO,PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE,PROFESSOR_NO,PROFESSOR_NAME
-		// FROM TB_CLASS NATURAL JOIN TB_CLASS_PROFESSOR NATURAL JOIN TB_PROFESSOR ORDER
-		// BY CLASS_NO ASC))WHERE RNUM >= ? AND RNUM <= ?";
+		String query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY CLASS_NO ASC)) WHERE RNUM >= ?  AND RNUM <= ?";
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -130,12 +123,6 @@ public class ClasssDao {
 		String query = "";
 
 		query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY CLASS_NO DESC)) WHERE RNUM >= ?  AND RNUM <= ?";
-		// "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO,
-		// DEPARTMENT_NO,PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE,PROFESSOR_NO,PROFESSOR_NAME
-		// FROM (SELECT CLASS_NO,
-		// DEPARTMENT_NO,PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE,PROFESSOR_NO,PROFESSOR_NAME
-		// FROM TB_CLASS NATURAL JOIN TB_CLASS_PROFESSOR NATURAL JOIN TB_PROFESSOR ORDER
-		// BY CLASS_NO ASC))WHERE RNUM >= ? AND RNUM <= ?";
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -168,11 +155,11 @@ public class ClasssDao {
 		PreparedStatement pstmt = null;
 		String query = "UPDATE TB_CLASS SET DEPARTMENT_NO=?,PREATTENDING_CLASS_NO= ?,CLASS_NAME = ?,CLASS_TYPE=? WHERE CLASS_NO=?";
 		try {
-			pstmt =conn.prepareStatement(query);
+			pstmt = conn.prepareStatement(query);
 			String pre = "";
-			if(classs.getPreatendingClassNo().equals("없음")) {
+			if (classs.getPreatendingClassNo().equals("없음")) {
 				pre = null;
-			}else{
+			} else {
 				pre = classs.getPreatendingClassNo();
 			}
 			pstmt.setString(1, classs.getDepartmentNo());
@@ -180,9 +167,9 @@ public class ClasssDao {
 			pstmt.setString(3, classs.getClassName());
 			pstmt.setString(4, classs.getClassType());
 			pstmt.setString(5, classs.getClassNo());
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -198,54 +185,85 @@ public class ClasssDao {
 		try {
 			pstmt = conn.prepareStatement("ALTER TABLE TB_CLASS_PROFESSOR DROP CONSTRAINTS FK_CLASS_PROFESSOR_02");
 			result = pstmt.executeUpdate();
-			pstmt = conn.prepareStatement("ALTER TABLE TB_CLASS_PROFESSOR ADD CONSTRAINTS FK_CLASS_PROFESSOR_02 FOREIGN KEY(CLASS_NO) REFERENCES TB_CLASS ON DELETE CASCADE");
+			pstmt = conn.prepareStatement(
+					"ALTER TABLE TB_CLASS_PROFESSOR ADD CONSTRAINTS FK_CLASS_PROFESSOR_02 FOREIGN KEY(CLASS_NO) REFERENCES TB_CLASS ON DELETE CASCADE");
 			result = pstmt.executeUpdate();
 			pstmt = conn.prepareStatement("ALTER TABLE TB_GRADE DROP CONSTRAINTS FK_GRADE_02");
 			result = pstmt.executeUpdate();
-			pstmt = conn.prepareStatement("ALTER TABLE TB_GRADE ADD CONSTRAINTS FK_GRADE_02 FOREIGN KEY(CLASS_NO) REFERENCES TB_CLASS ON DELETE CASCADE");
+			pstmt = conn.prepareStatement(
+					"ALTER TABLE TB_GRADE ADD CONSTRAINTS FK_GRADE_02 FOREIGN KEY(CLASS_NO) REFERENCES TB_CLASS ON DELETE CASCADE");
 			result = pstmt.executeUpdate();
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, classno);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
 		}
 		return result;
 	}
 
-	public ArrayList<Classs> searchClasss(Connection conn, Classs classs) {
+	public ArrayList<Classs> searchClasss(Connection conn,int startRow,int endRow, Classs classs) {
 		ArrayList<Classs> list = new ArrayList<Classs>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from tb_class where class_no like ? and DEPARTMENT_NO like ? and CLASS_NAME like ? and CLASS_TYPE like ?";
+		String query = "select * from (select rownum rnum, CLASS_NO ,DEPARTMENT_NO ,PREATTENDING_CLASS_NO, CLASS_NAME ,CLASS_TYPE from (select * from tb_class where class_no like ? and DEPARTMENT_NO like ? and CLASS_NAME like ? and CLASS_TYPE like ?)) where rnum >= ? and rnum <= ?";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "%"+classs.getClassNo()+"%");
-			pstmt.setString(2, "%"+classs.getDepartmentNo()+"%");
-			pstmt.setString(3, "%"+classs.getClassName()+"%");
-			pstmt.setString(4, "%"+classs.getClassType()+"%");
+			pstmt.setString(1, "%" + classs.getClassNo() + "%");
+			pstmt.setString(2, "%" + classs.getDepartmentNo() + "%");
+			pstmt.setString(3, "%" + classs.getClassName() + "%");
+			pstmt.setString(4, "%" + classs.getClassType() + "%");
+			pstmt.setInt(5, startRow);
+			pstmt.setInt(6, endRow);
 			
 			rset = pstmt.executeQuery();
-			System.out.println(classs);
-			while(rset.next()) {
+			while (rset.next()) {
 				Classs classslist = new Classs();
-				classslist.setClassNo(rset.getString("class_no"));
+				classslist.setClassNo(rset.getString("CLASS_NO"));
+				classslist.setDepartmentNo(rset.getString("DEPARTMENT_NO"));
 				classslist.setClassName(rset.getString("CLASS_NAME"));
 				classslist.setClassType(rset.getString("CLASS_TYPE"));
-				classslist.setDepartmentNo(rset.getString("DEPARTMENT_NO"));
-				System.out.println(classslist);
+				classslist.setPreatendingClassNo(rset.getString("PREATTENDING_CLASS_NO"));
 				list.add(classslist);
+				System.out.println(classs);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public int getSearchCount(Connection conn, Classs classs) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select count(*) from tb_class where class_no like ? and DEPARTMENT_NO like ? and CLASS_NAME like ? and CLASS_TYPE like ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%" + classs.getClassNo() + "%");
+			pstmt.setString(2, "%" + classs.getDepartmentNo() + "%");
+			pstmt.setString(3, "%" + classs.getClassName() + "%");
+			pstmt.setString(4, "%" + classs.getClassType() + "%");
+
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			System.out.println("listCount : " + listCount);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return listCount;
 	}
 
 }
