@@ -50,7 +50,15 @@ public class ClasssSearchServlet extends HttpServlet {
 		classs.setDepartmentNo(request.getParameter("searchdepart"));
 
 		int listCount = cservice.getSearchCount(classs);
-		
+		if (listCount == 0) {
+			response.setContentType("text/html; charset=utf-8");
+
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('해당하는 결과가 없습니다');");
+			out.println("history.back();");
+			out.println("</script>");
+		}
 		int maxPage = listCount/limit;
 		if(listCount % limit > 0) {
 			maxPage++;

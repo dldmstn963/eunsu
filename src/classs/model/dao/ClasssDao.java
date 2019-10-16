@@ -208,7 +208,7 @@ public class ClasssDao {
 		ArrayList<Classs> list = new ArrayList<Classs>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select rownum rnum, CLASS_NO ,DEPARTMENT_NO ,PREATTENDING_CLASS_NO, CLASS_NAME ,CLASS_TYPE from (select * from tb_class where class_no like ? and DEPARTMENT_NO like ? and CLASS_NAME like ? and CLASS_TYPE like ?)) where rnum >= ? and rnum <= ?";
+		String query = "select * from (select rownum rnum, CLASS_NO ,DEPARTMENT_NO ,PREATTENDING_CLASS_NO, CLASS_NAME ,CLASS_TYPE from (select * from tb_class where class_no like ? and DEPARTMENT_NO like ? and CLASS_NAME like ? and CLASS_TYPE like ?)) where rnum >= ? and rnum <= ? order by class_no";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "%" + classs.getClassNo() + "%");
@@ -258,6 +258,9 @@ public class ClasssDao {
 			System.out.println("listCount : " + listCount);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch(IndexOutOfBoundsException e){
+			listCount = 0;
+			System.out.println("실행됨");
 		} finally {
 			close(rset);
 			close(pstmt);
