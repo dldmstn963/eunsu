@@ -203,7 +203,7 @@ function check(re, what, message) {
 				<!-- End Left Column -->
 			</div>
 			<!-- End Grid -->
-		<h1 align="center">과목 추가</h1>
+		<h1 align="center">학과 추가</h1>
 		<table align="center" border="1" cellspacing="0" cellpadding="10">
 		<form name="join" onsubmit="return validate();" action="/eunsu/departmentinsert" method="post">
 		<tr><th>학과 번호</th><td><input type="text" name="DEPARTMENT_NO" id="departno">

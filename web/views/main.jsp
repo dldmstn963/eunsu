@@ -212,7 +212,7 @@ a {
 						</button>
 						<div id="Demo2" class="w3-hide w3-container">
 							<p><a href="/eunsu/views/departmentcrud/departmentinsert.jsp">학과 추가</a></p>
-							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학과 수정</a></p>
+							<p><a href="/eunsu/departmentlist">학과 수정 및 삭제</a></p>
 						</div>
 						<button onclick="myFunction('Demo3')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">

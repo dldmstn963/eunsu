@@ -223,11 +223,36 @@ public class ClasssDao {
 		return result;
 	}
 
-	public ArrayList<Classs> searchClasss(Connection conn, int startRow, int endRow, Classs classs) {
+	public ArrayList<Classs> searchClasss(Connection conn, int startRow, int endRow, Classs classs, int sort) {
 		ArrayList<Classs> list = new ArrayList<Classs>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select rownum rnum, CLASS_NO ,DEPARTMENT_NO ,PREATTENDING_CLASS_NO, CLASS_NAME ,CLASS_TYPE from (select * from tb_class where class_no like ? and DEPARTMENT_NO like ? and CLASS_NAME like ? and CLASS_TYPE like ?)) where rnum >= ? and rnum <= ? order by class_no";
+		String query = "";
+		
+		if (sort == 0) {
+			query = "select * from (select rownum rnum, CLASS_NO ,DEPARTMENT_NO ,PREATTENDING_CLASS_NO, CLASS_NAME ,CLASS_TYPE from (select * from tb_class where class_no like ? and DEPARTMENT_NO like ? and CLASS_NAME like ? and CLASS_TYPE like ? ORDER BY CLASS_NO ASC)) where rnum >= ? and rnum <= ?";
+		} else if (sort == 1) {
+			query = "select * from (select rownum rnum, CLASS_NO ,DEPARTMENT_NO ,PREATTENDING_CLASS_NO, CLASS_NAME ,CLASS_TYPE from (select * from tb_class where class_no like ? and DEPARTMENT_NO like ? and CLASS_NAME like ? and CLASS_TYPE like ? ORDER BY CLASS_NO DESC)) where rnum >= ? and rnum <= ?";
+		} else if (sort == 2) {
+			query = "select * from (select rownum rnum, CLASS_NO ,DEPARTMENT_NO ,PREATTENDING_CLASS_NO, CLASS_NAME ,CLASS_TYPE from (select * from tb_class where class_no like ? and DEPARTMENT_NO like ? and CLASS_NAME like ? and CLASS_TYPE like ? order by CLASS_NAME DESC)) where rnum >= ? and rnum <= ?";
+		} else if (sort == 3) {
+			query = "select * from (select rownum rnum, CLASS_NO ,DEPARTMENT_NO ,PREATTENDING_CLASS_NO, CLASS_NAME ,CLASS_TYPE from (select * from tb_class where class_no like ? and DEPARTMENT_NO like ? and CLASS_NAME like ? and CLASS_TYPE like ? order by CLASS_NAME ASC)) where rnum >= ? and rnum <= ?";
+		}else if (sort == 4) {
+			query = "select * from (select rownum rnum, CLASS_NO ,DEPARTMENT_NO ,PREATTENDING_CLASS_NO, CLASS_NAME ,CLASS_TYPE from (select * from tb_class where class_no like ? and DEPARTMENT_NO like ? and CLASS_NAME like ? and CLASS_TYPE like ? order by CLASS_TYPE DESC)) where rnum >= ? and rnum <= ?";
+		}else if (sort == 5) {
+			query = "select * from (select rownum rnum, CLASS_NO ,DEPARTMENT_NO ,PREATTENDING_CLASS_NO, CLASS_NAME ,CLASS_TYPE from (select * from tb_class where class_no like ? and DEPARTMENT_NO like ? and CLASS_NAME like ? and CLASS_TYPE like ? order by CLASS_TYPE ASC)) where rnum >= ? and rnum <= ?";
+		}else if (sort == 6) {
+			query = "select * from (select rownum rnum, CLASS_NO ,DEPARTMENT_NO ,PREATTENDING_CLASS_NO, CLASS_NAME ,CLASS_TYPE from (select * from tb_class where class_no like ? and DEPARTMENT_NO like ? and CLASS_NAME like ? and CLASS_TYPE like ? order by DEPARTMENT_NO DESC)) where rnum >= ? and rnum <= ?";
+		}else if (sort == 7) {
+			query = "select * from (select rownum rnum, CLASS_NO ,DEPARTMENT_NO ,PREATTENDING_CLASS_NO, CLASS_NAME ,CLASS_TYPE from (select * from tb_class where class_no like ? and DEPARTMENT_NO like ? and CLASS_NAME like ? and CLASS_TYPE like ? order by DEPARTMENT_NO ASC)) where rnum >= ? and rnum <= ?";
+		}else if (sort == 8) {
+			query = "select * from (select rownum rnum, CLASS_NO ,DEPARTMENT_NO ,PREATTENDING_CLASS_NO, CLASS_NAME ,CLASS_TYPE from (select * from tb_class where class_no like ? and DEPARTMENT_NO like ? and CLASS_NAME like ? and CLASS_TYPE like ? order by PREATTENDING_CLASS_NO DESC)) where rnum >= ? and rnum <= ?";
+		}else if (sort == 9) {
+			query = "select * from (select rownum rnum, CLASS_NO ,DEPARTMENT_NO ,PREATTENDING_CLASS_NO, CLASS_NAME ,CLASS_TYPE from (select * from tb_class where class_no like ? and DEPARTMENT_NO like ? and CLASS_NAME like ? and CLASS_TYPE like ? order by PREATTENDING_CLASS_NO ASC)) where rnum >= ? and rnum <= ?";
+		}
+		
+		
+		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "%" + classs.getClassNo() + "%");
@@ -246,7 +271,6 @@ public class ClasssDao {
 				classslist.setClassType(rset.getString("CLASS_TYPE"));
 				classslist.setPreatendingClassNo(rset.getString("PREATTENDING_CLASS_NO"));
 				list.add(classslist);
-				System.out.println(classs);
 			}
 
 		} catch (SQLException e) {
@@ -274,12 +298,10 @@ public class ClasssDao {
 			if (rset.next()) {
 				listCount = rset.getInt(1);
 			}
-			System.out.println("listCount : " + listCount);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IndexOutOfBoundsException e) {
 			listCount = 0;
-			System.out.println("실행됨");
 		} finally {
 			close(rset);
 			close(pstmt);

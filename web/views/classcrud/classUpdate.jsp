@@ -28,6 +28,7 @@
 					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
 				}
 			})//ajax
+			return false;
 		});//click
 
 		$("#classNoSortA").click(function() {
@@ -39,6 +40,7 @@
 					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
 				}
 			})//ajax
+			return false;
 		});//click
 		
 		$("#classNameSortD").click(function(){
@@ -50,6 +52,7 @@
 					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
 				}
 			})
+			return false;
 		});//click
 		
 		$("#classNameSortA").click(function(){
@@ -61,6 +64,7 @@
 					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
 				}
 			})
+			return false;
 		});//click
 		
 		$("#classTypeSortD").click(function(){
@@ -72,6 +76,7 @@
 					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
 				}
 			})
+			return false;
 		});//click
 		
 		$("#classTypeSortA").click(function(){
@@ -83,6 +88,7 @@
 					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
 				}
 			})
+			return false;
 		});//click
 		
 		$("#classDepartSortD").click(function(){
@@ -94,6 +100,7 @@
 					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
 				}
 			})
+			return false;
 		});//click
 		
 		$("#classDepartSortA").click(function(){
@@ -105,6 +112,7 @@
 					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
 				}
 			})
+			return false;
 		});//click
 		$("#classPreSortD").click(function(){
 			sort = 8;
@@ -127,6 +135,7 @@
 				}
 			})
 			return false;
+
 		});//click
 	});//document
 	
@@ -137,9 +146,7 @@
 		  $("#checkbox:checked").each(function(i){   //jQuery로 for문 돌면서 check 된값 배열에 담는다
 		   lists.push($(this).val());
 		  });
-		  console.log(lists);
 		 var list = lists.join(","); 
-		 console.log(list);
 		$.ajax({
 			url:"/eunsu/classsdelete",
 			type : "post",
@@ -287,7 +294,7 @@
 					<!-- End Left Column -->
 				</div>
 				<!-- End Grid -->
-				<h1 align="center">과목 수정</h1>
+				<h1 align="center">과목 수정 및 삭제</h1>
 				<div style="display:none;" id="alertbox"></div>
 				<form action="/eunsu/classssearch" align="center">
 				과목 번호 : <input type="text" style="width: 90px;" name="searchno" value="">
@@ -396,7 +403,7 @@
 					<%
 						}
 					%>
-					&nbsp; <a href="/eunsu/classslist?page=<%=maxPage%>">▷|</a>&nbsp;&nbsp;&nbsp;
+					&nbsp; <a href="/eunsu/classslist?page=<%=maxPage%>">▷|</a>
 				</div>
 			</div>
 

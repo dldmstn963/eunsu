@@ -21,19 +21,126 @@
 	src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
 
 <script type="text/javascript">
-	$(function() {
-		$("#classNoSort").click(function() {
-			$.ajax({
-				url : "/eunsu/classsort",
-				type : "get",
-				dataType : "html",
-				success : function(data) {
-					$("#classTable").html(data);
-				}
-			})//ajax
+$(function() {
+	var sort = 0;
+$("#classNoSortD").click(function() {
+	sort = 1;
+	$.ajax({
+		url : "/eunsu/classssearch",
+		data : {sort : sort},
+		success : function(data) {
+			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+		}
+	})//ajax
+	return false;
+});//click
 
-		});//click
-	});//document
+$("#classNoSortA").click(function() {
+	sort = 0;
+	$.ajax({
+		url : "/eunsu/classssearch",
+		data : {sort : sort},
+		success : function(data) {
+			location.href ="http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+		}
+	})//ajax
+	return false;
+});//click
+
+$("#classNameSortD").click(function(){
+	sort = 2;
+	$.ajax({
+		url:"/eunsu/classssearch",
+		data : {sort : sort},
+		success : function(data) {
+			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+		}
+	})
+	return false;
+});//click
+
+$("#classNameSortA").click(function(){
+	sort = 3;
+	$.ajax({
+		url:"/eunsu/classssearch",
+		data : {sort : sort},
+		success : function(data) {
+			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+		}
+	})
+	return false;
+});//click
+
+$("#classTypeSortD").click(function(){
+	sort = 4;
+	$.ajax({
+		url:"/eunsu/classssearch",
+		data : {sort : sort},
+		success : function(data) {
+			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+		}
+	})
+	return false;
+});//click
+
+$("#classTypeSortA").click(function(){
+	sort = 5;
+	$.ajax({
+		url:"/eunsu/classssearch",
+		data : {sort : sort},
+		success : function(data) {
+			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+		}
+	})
+	return false;
+});//click
+
+$("#classDepartSortD").click(function(){
+	sort = 6;
+	$.ajax({
+		url:"/eunsu/classssearch",
+		data : {sort : sort},
+		success : function(data) {
+			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+		}
+	})
+	return false;
+});//click
+
+$("#classDepartSortA").click(function(){
+	sort = 7;
+	$.ajax({
+		url:"/eunsu/classssearch",
+		data : {sort : sort},
+		success : function(data) {
+			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+		}
+	})
+	return false;
+});//click
+$("#classPreSortD").click(function(){
+	sort = 8;
+	$.ajax({
+		url:"/eunsu/classssearch",
+		data : {sort : sort},
+		success : function(data) {
+			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+		}
+	})
+	return false;
+});//click
+$("#classPreSortA").click(function(){
+	sort = 9;
+	$.ajax({
+		url:"/eunsu/classssearch",
+		data : {sort : sort},
+		success : function(data) {
+			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+		}
+	})
+	return false;
+});//click
+});//document
 	
 	function dellist(){
 		var result = confirm('정말 삭제하시겠습니까?');
@@ -52,6 +159,7 @@
 				lists : list
 			},
 			success : function(data){
+				location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
 				$("#alertbox").html(data);
 			}
 		})
@@ -216,11 +324,11 @@
 						id="myTable2">
 						<tr>
 							<th>체크 박스</th>
-							<th id="classNoSort">과목 번호</th>
-							<th>과목 이름</th>
-							<th>과목 분류</th>
-							<th>학과 번호</th>
-							<th>선행 과목</th>
+							<th>과목 번호<button id="classNoSortD">↓</button><button id="classNoSortA">↑</button></th>
+							<th>과목 이름<button id="classNameSortD">↓</button><button id="classNameSortA">↑</button></th>
+							<th>과목 분류<button id="classTypeSortD">↓</button><button id="classTypeSortA">↑</button></th>
+							<th>학과 번호<button id="classDepartSortD">↓</button><button id="classDepartSortA">↑</button></th>
+							<th>선행 과목<button id="classPreSortD">↓</button><button id="classPreSortA">↑</button></th>
 						</tr>
 						<%
 							for (Classs c : list) {

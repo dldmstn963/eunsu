@@ -1,11 +1,18 @@
 package department.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import department.model.service.DepartmentService;
+import department.model.vo.Department;
 
 /**
  * Servlet implementation class DepartmentListServlet
@@ -13,27 +20,82 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/departmentlist")
 public class DepartmentListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DepartmentListServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public DepartmentListServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	static int sort = 0;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int currentPage = 1;
+		if (request.getParameter("page") != null) {
+			currentPage = Integer.parseInt(request.getParameter("page"));
+		}
+
+		int limit = 10;
+		DepartmentService dservice = new DepartmentService();
+
+		int listCount = dservice.getListCount();
+
+		int maxPage = listCount / limit;
+		if (listCount % limit > 0) {
+			maxPage++;
+		}
+
+		int beginPage = 0;
+		if (currentPage % limit == 0) {
+			beginPage = currentPage - 9;
+		} else {
+			beginPage = (currentPage / limit) * limit + 1;
+		}
+
+		int endPage = beginPage + 9;
+		if (endPage > maxPage) {
+			endPage = maxPage;
+		}
+
+		int startRow = (currentPage * limit) - 9;
+		int endRow = currentPage * limit;
+		if (request.getParameter("sort") != null) {
+			sort = Integer.parseInt(request.getParameter("sort"));
+		}
+		ArrayList<Department> list = dservice.selectList(startRow, endRow, sort);
+
+		RequestDispatcher view = null;
+		if (list.size() > 0) {
+			view = request.getRequestDispatcher("views/departmentcrud/departmentUpdate.jsp");
+			request.setAttribute("list", list);
+			request.setAttribute("maxPage", maxPage);
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("beginPage", beginPage);
+			request.setAttribute("endPage", endPage);
+			view.forward(request, response);
+		} else {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('학과 조회 실패');");
+			out.println("history.back();");
+			out.println("</script>");
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

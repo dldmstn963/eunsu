@@ -81,14 +81,10 @@ public class ClasssService {
 		return result;
 	}
 
-	public ArrayList<Classs> searchClasss(int startRow, int endRow, Classs classs) {
+	public ArrayList<Classs> searchClasss(int startRow, int endRow, Classs classs, int sort) {
 		Connection conn = getConnection();
-		ArrayList<Classs> list = cdao.searchClasss(conn, startRow, endRow, classs);
+		ArrayList<Classs> list = cdao.searchClasss(conn, startRow, endRow, classs, sort);
 		close(conn);
-		System.out.println("서비스 : " + list.get(0));
-		System.out.println("서비스 : " + list.toString());
-		System.out.println("서비스 : " + list.size());
-		
 		return list;
 	}
 
