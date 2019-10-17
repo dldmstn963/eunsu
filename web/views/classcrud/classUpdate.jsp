@@ -18,16 +18,115 @@
 
 <script type="text/javascript">
 	$(function() {
-		$("#classNoSort").click(function() {
+			var sort = 0;
+		$("#classNoSortD").click(function() {
+			sort = 1;
 			$.ajax({
-				url : "/eunsu/classsort",
-				type : "get",
-				dataType : "html",
+				url : "/eunsu/classslist",
+				data : {sort : sort},
 				success : function(data) {
-					$("#classTable").html(data);
+					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
 				}
 			})//ajax
+		});//click
 
+		$("#classNoSortA").click(function() {
+			sort = 0;
+			$.ajax({
+				url : "/eunsu/classslist",
+				data : {sort : sort},
+				success : function(data) {
+					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+				}
+			})//ajax
+		});//click
+		
+		$("#classNameSortD").click(function(){
+			sort = 2;
+			$.ajax({
+				url:"/eunsu/classslist",
+				data : {sort : sort},
+				success : function(data) {
+					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+				}
+			})
+		});//click
+		
+		$("#classNameSortA").click(function(){
+			sort = 3;
+			$.ajax({
+				url:"/eunsu/classslist",
+				data : {sort : sort},
+				success : function(data) {
+					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+				}
+			})
+		});//click
+		
+		$("#classTypeSortD").click(function(){
+			sort = 4;
+			$.ajax({
+				url:"/eunsu/classslist",
+				data : {sort : sort},
+				success : function(data) {
+					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+				}
+			})
+		});//click
+		
+		$("#classTypeSortA").click(function(){
+			sort = 5;
+			$.ajax({
+				url:"/eunsu/classslist",
+				data : {sort : sort},
+				success : function(data) {
+					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+				}
+			})
+		});//click
+		
+		$("#classDepartSortD").click(function(){
+			sort = 6;
+			$.ajax({
+				url:"/eunsu/classslist",
+				data : {sort : sort},
+				success : function(data) {
+					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+				}
+			})
+		});//click
+		
+		$("#classDepartSortA").click(function(){
+			sort = 7;
+			$.ajax({
+				url:"/eunsu/classslist",
+				data : {sort : sort},
+				success : function(data) {
+					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+				}
+			})
+		});//click
+		$("#classPreSortD").click(function(){
+			sort = 8;
+			$.ajax({
+				url:"/eunsu/classslist",
+				data : {sort : sort},
+				success : function(data) {
+					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+				}
+			})
+			return false;
+		});//click
+		$("#classPreSortA").click(function(){
+			sort = 9;
+			$.ajax({
+				url:"/eunsu/classslist",
+				data : {sort : sort},
+				success : function(data) {
+					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+				}
+			})
+			return false;
 		});//click
 	});//document
 	
@@ -48,6 +147,7 @@
 				lists : list
 			},
 			success : function(data){
+				location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
 				$("#alertbox").html(data);
 			}
 		})
@@ -207,16 +307,16 @@
 				<input type="submit" value="검색">
 				</form>
 				<br>
+				
 				<form action="/eunsu/classsupdate">
-					<table align="center" border="1" cellspacing="0" cellpadding="3"
-						id="myTable2">
+					<table align="center" border="1" cellspacing="0" cellpadding="3">
 						<tr>
 							<th>체크 박스</th>
-							<th id="classNoSort">과목 번호</th>
-							<th>과목 이름</th>
-							<th>과목 분류</th>
-							<th>학과 번호</th>
-							<th>선행 과목</th>
+							<th>과목 번호<button id="classNoSortD">↓</button><button id="classNoSortA">↑</button></th>
+							<th>과목 이름<button id="classNameSortD">↓</button><button id="classNameSortA">↑</button></th>
+							<th>과목 분류<button id="classTypeSortD">↓</button><button id="classTypeSortA">↑</button></th>
+							<th>학과 번호<button id="classDepartSortD">↓</button><button id="classDepartSortA">↑</button></th>
+							<th>선행 과목<button id="classPreSortD">↓</button><button id="classPreSortA">↑</button></th>
 						</tr>
 						<%
 							for (Classs c : list) {

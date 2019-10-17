@@ -44,9 +44,9 @@ public class ClasssService {
 		return listCount;
 	}
 
-	public ArrayList<Classs> selectList(int startRow, int endRow) {
+	public ArrayList<Classs> selectList(int startRow, int endRow, int sort) {
 		Connection conn = getConnection();
-		ArrayList<Classs> list = cdao.selectList(conn, startRow, endRow);
+		ArrayList<Classs> list = cdao.selectList(conn, startRow, endRow, sort);
 		close(conn);
 		return list;
 	}

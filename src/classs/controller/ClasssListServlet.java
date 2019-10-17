@@ -33,6 +33,7 @@ public class ClasssListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	static int  sort = 0;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int currentPage = 1;
@@ -64,8 +65,11 @@ public class ClasssListServlet extends HttpServlet {
 		// currentPage 에 출력할 목록의 조회할 행 번호 계산
 		int startRow = (currentPage * limit) - 9;
 		int endRow = currentPage * limit;
-
-		ArrayList<Classs> list = cservice.selectList(startRow, endRow);
+		if(request.getParameter("sort") != null) {
+				sort=Integer.parseInt(request.getParameter("sort"));
+		}
+		ArrayList<Classs> list = cservice.selectList(startRow, endRow, sort);
+		
 		RequestDispatcher view = null;
 
 		if (list.size() > 0) {

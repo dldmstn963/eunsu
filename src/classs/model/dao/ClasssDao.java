@@ -83,13 +83,32 @@ public class ClasssDao {
 
 	public static int num = 0;
 
-	public ArrayList<Classs> selectList(Connection conn, int startRow, int endRow) {
+	public ArrayList<Classs> selectList(Connection conn, int startRow, int endRow, int sort) {
 		ArrayList<Classs> list = new ArrayList<Classs>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-
-		String query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY CLASS_NO ASC)) WHERE RNUM >= ?  AND RNUM <= ?";
-
+		String query = "";
+		if (sort == 0) {
+			query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY CLASS_NO ASC)) WHERE RNUM >= ?  AND RNUM <= ?";
+		} else if (sort == 1) {
+			query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY CLASS_NO DESC)) WHERE RNUM >= ?  AND RNUM <= ?";
+		} else if (sort == 2) {
+			query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY CLASS_NAME DESC)) WHERE RNUM >= ?  AND RNUM <= ?";
+		} else if (sort == 3) {
+			query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY CLASS_NAME ASC)) WHERE RNUM >= ?  AND RNUM <= ?";
+		}else if (sort == 4) {
+			query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY CLASS_TYPE DESC)) WHERE RNUM >= ?  AND RNUM <= ?";
+		}else if (sort == 5) {
+			query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY CLASS_TYPE ASC)) WHERE RNUM >= ?  AND RNUM <= ?";
+		}else if (sort == 6) {
+			query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY DEPARTMENT_NO DESC)) WHERE RNUM >= ?  AND RNUM <= ?";
+		}else if (sort == 7) {
+			query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY DEPARTMENT_NO ASC)) WHERE RNUM >= ?  AND RNUM <= ?";
+		}else if (sort == 8) {
+			query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY PREATTENDING_CLASS_NO DESC)) WHERE RNUM >= ?  AND RNUM <= ?";
+		}else if (sort == 9) {
+			query = "SELECT * FROM (SELECT ROWNUM RNUM, CLASS_NO, DEPARTMENT_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE FROM (SELECT * FROM tb_class ORDER BY PREATTENDING_CLASS_NO ASC)) WHERE RNUM >= ?  AND RNUM <= ?";
+		}
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, startRow);
@@ -204,7 +223,7 @@ public class ClasssDao {
 		return result;
 	}
 
-	public ArrayList<Classs> searchClasss(Connection conn,int startRow,int endRow, Classs classs) {
+	public ArrayList<Classs> searchClasss(Connection conn, int startRow, int endRow, Classs classs) {
 		ArrayList<Classs> list = new ArrayList<Classs>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -217,7 +236,7 @@ public class ClasssDao {
 			pstmt.setString(4, "%" + classs.getClassType() + "%");
 			pstmt.setInt(5, startRow);
 			pstmt.setInt(6, endRow);
-			
+
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				Classs classslist = new Classs();
@@ -258,7 +277,7 @@ public class ClasssDao {
 			System.out.println("listCount : " + listCount);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch(IndexOutOfBoundsException e){
+		} catch (IndexOutOfBoundsException e) {
 			listCount = 0;
 			System.out.println("실행됨");
 		} finally {
