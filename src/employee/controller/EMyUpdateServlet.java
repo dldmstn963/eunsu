@@ -1,27 +1,23 @@
 package employee.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import employee.model.service.EmployeeService;
-import employee.model.vo.Employee;
-
 /**
- * Servlet implementation class EMyInfoServlet
+ * Servlet implementation class EMyUpdateServlet
  */
-@WebServlet("/emyinfo")
-public class EMyInfoServlet extends HttpServlet {
+@WebServlet("/emyupdate")
+public class EMyUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EMyInfoServlet() {
+    public EMyUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +26,8 @@ public class EMyInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		
-		String no = request.getParameter("empno");
-		String pass= request.getParameter("emppass");
-		Employee employee = new EmployeeService().loginCheck(no, pass);
-		
-		if(employee!=null) {
-			System.out.println(employee);
-			response.sendRedirect("/eunsu/views/employeecrud/employeeInfo.jsp");
-		}
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

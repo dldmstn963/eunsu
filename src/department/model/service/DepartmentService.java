@@ -48,9 +48,9 @@ public class DepartmentService {
 		return list;
 	}
 
-	public int updateClass(Department department) {
+	public int updateDepart(Department department) {
 		Connection conn = getConnection();
-		int result = ddao.updateClasss(conn, department);
+		int result = ddao.updateDepart(conn, department);
 		if (result > 0) {
 			commit(conn);
 		} else {
@@ -80,7 +80,7 @@ public class DepartmentService {
 
 	public ArrayList<Department> searchDepartment(int startRow, int endRow, Department department, int sort) {
 		Connection conn = getConnection();
-		ArrayList<Department> list = ddao.searchClasss(conn, startRow, endRow, department, sort);
+		ArrayList<Department> list = ddao.searchDepartment(conn, startRow, endRow, department, sort);
 		close(conn);
 		return list;
 	}

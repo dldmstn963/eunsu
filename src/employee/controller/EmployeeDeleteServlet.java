@@ -1,11 +1,15 @@
 package employee.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import employee.model.service.EmployeeService;
 
 /**
  * Servlet implementation class EmployeeDeleteServlet
@@ -13,27 +17,48 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/employeedelete")
 public class EmployeeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EmployeeDeleteServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public EmployeeDeleteServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+
+		String checkBox = request.getParameter("lists");
+		String check[] = checkBox.split(",");
+		int result = 0;
+		for (int i = 0; i < check.length; i++) {
+			result = new EmployeeService().deleteEmployee(check[i]);
+		}
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if (result > 0) {
+			out.println("<script>");
+			out.println("alert('삭제 성공!');");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('삭제 실패!');");
+			out.println("</script>");
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

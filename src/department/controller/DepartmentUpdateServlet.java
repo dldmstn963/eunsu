@@ -47,7 +47,7 @@ public class DepartmentUpdateServlet extends HttpServlet {
 			department.setCategory(deprtCategory[i]);
 			department.setOpenYN(departOpen[i]);
 			department.setCapacity(Integer.parseInt(departCapacity[i]));
-			result = new DepartmentService().updateClass(department);
+			result = new DepartmentService().updateDepart(department);
 		}
 		
 		response.setContentType("text/html; charset=utf-8");

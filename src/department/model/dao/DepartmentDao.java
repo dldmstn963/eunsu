@@ -128,7 +128,7 @@ public class DepartmentDao {
 		return list;
 	}
 
-	public int updateClasss(Connection conn, Department department) {
+	public int updateDepart(Connection conn, Department department) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = "UPDATE tb_department SET DEPARTMENT_NAME= ?,CATEGORY = ?,OPEN_YN=?,CAPACITY=? WHERE DEPARTMENT_NO=?";
@@ -213,7 +213,7 @@ public class DepartmentDao {
 		return listCount;
 	}
 
-	public ArrayList<Department> searchClasss(Connection conn, int startRow, int endRow, Department department,
+	public ArrayList<Department> searchDepartment(Connection conn, int startRow, int endRow, Department department,
 			int sort) {
 		ArrayList<Department> list = new ArrayList<Department>();
 		PreparedStatement pstmt = null;

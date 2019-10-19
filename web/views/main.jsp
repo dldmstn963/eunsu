@@ -70,7 +70,7 @@ a {
 					%>
 					<div class="w3-container">
 						<h4 class="w3-center">
-							내 정보 <i class="fa fa-pencil"></i>
+							내 정보<a href="#"><i class="fa fa-pencil"></i></a>
 						</h4>
 						<p class="w3-center">
 							<img src="<%=loginProfessor.getProfessorImage()%>"
@@ -94,7 +94,12 @@ a {
 					%>
 					<div class="w3-container">
 						<h4 class="w3-center">
-							내 정보 <i class="fa fa-pencil"></i>
+							내 정보 &nbsp;
+							<form action="/eunsu/emyinfo" method="post">
+							<input type="hidden" value="<%=loginEmployee.getEmployeeNo()%>" name="empno">
+							<input type="hidden" value="<%=loginEmployee.getEmployeePassword()%>" name="emppass">
+							<input type="submit" value="수정">
+							</form>
 						</h4>
 						<p class="w3-center">
 							<img src="<%=loginEmployee.getEmployeeimage()%>"
@@ -103,14 +108,12 @@ a {
 						</p>
 						<hr>
 						<p>
-							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
-							<%=loginEmployee.getEmployeeName()%>
+							이름 : <%=loginEmployee.getEmployeeName()%>
 						</p>
 						<p>
-							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
-							<%=loginEmployee.getEmpDepartment()%>
+							소속 부서 : <%=loginEmployee.getEmpDepartment()%>
 						</p>
-						<br> <a href="/eunsu/logout" style="text-decoration:none;">로그아웃</a>
+						 <a href="/eunsu/logout" style="text-decoration:none;">로그아웃</a>
 					</div>
 					<%
 						} else {
@@ -220,7 +223,7 @@ a {
 						</button>
 						<div id="Demo3" class="w3-hide w3-container">
 							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 추가</a></p>
-							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 수정</a></p>
+							<p><a href="/eunsu/slist">학생 수정 및 삭제</a></p>
 						</div>
 						<button onclick="myFunction('Demo4')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
@@ -228,7 +231,7 @@ a {
 						</button>
 						<div id="Demo4" class="w3-hide w3-container">
 							<p><a href="/eunsu/views/professorcrud/professorinsert.jsp">교수 추가</a></p>
-							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">교수 수정</a></p>
+							<p><a href="/eunsu/professorlist">교수 수정 및 삭제</a></p>
 						</div>
 						<button onclick="myFunction('Demo5')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
@@ -236,7 +239,7 @@ a {
 						</button>
 						<div id="Demo5" class="w3-hide w3-container">
 							<p><a href="/eunsu/views/employeecrud/employeeinsert.jsp">직원 추가</a></p>
-							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">직원 수정</a></p>
+							<p><a href="/eunsu/employeelist">직원 수정 및 삭제</a></p>
 						</div>
 					</div>
 				</div>

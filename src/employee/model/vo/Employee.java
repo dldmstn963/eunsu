@@ -123,11 +123,17 @@ public class Employee implements java.io.Serializable {
 		this.empdepart_no = empdepart_no;
 	}
 
+
+
+
 	@Override
 	public String toString() {
-		return "employee [employeeNo=" + employeeNo + ", employeeName=" + employeeName + ", employeeSSN=" + employeeSSN
+		return "Employee [employeeNo=" + employeeNo + ", employeeName=" + employeeName + ", employeeSSN=" + employeeSSN
 				+ ", employeeAddress=" + employeeAddress + ", employeePassword=" + employeePassword + ", employeeimage="
-				+ employeeimage + ", empdepart_no=" + empdepart_no + "]";
+				+ employeeimage + ", empdepart_no=" + empdepart_no + ", empDepartment=" + empDepartment + ", hire_date="
+				+ hire_date + ", salary=" + salary + "]";
 	}
+
+	
 
 }
