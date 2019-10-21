@@ -70,7 +70,11 @@ a {
 					%>
 					<div class="w3-container">
 						<h4 class="w3-center">
-							내 정보<a href="#"><i class="fa fa-pencil"></i></a>
+							내 정보<form action="/eunsu/pmyinfo" method="post">
+							<input type="hidden" value="<%=loginProfessor.getProfessorNo()%>" name="empno">
+							<input type="hidden" value="<%=loginProfessor.getProfessorPassword()%>" name="emppass">
+							<input type="submit" value="수정">
+							</form>
 						</h4>
 						<p class="w3-center">
 							<img src="<%=loginProfessor.getProfessorImage()%>"
@@ -116,11 +120,15 @@ a {
 						 <a href="/eunsu/logout" style="text-decoration:none;">로그아웃</a>
 					</div>
 					<%
-						} else {
+						} else if(loginStudent != null) {
 					%>
 					<div class="w3-container">
 						<h4 class="w3-center">
-							내 정보 <i class="fa fa-pencil"></i>
+							내 정보 <form action="/eunsu/smyinfo" method="post">
+							<input type="hidden" value="<%=loginStudent.getStudentNo()%>" name="empno">
+							<input type="hidden" value="<%=loginStudent.getStudentPassword()%>" name="emppass">
+							<input type="submit" value="수정">
+							</form>
 						</h4>
 						<p class="w3-center">
 							<img src="<%= loginStudent.getStudentImage() %>" class="w3-circle"

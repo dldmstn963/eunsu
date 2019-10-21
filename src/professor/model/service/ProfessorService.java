@@ -94,4 +94,16 @@ public class ProfessorService {
 		return list;
 	}
 
+	public int PMyUpdateProfessor(Professor professor) {
+		Connection conn = getConnection();
+		int result = pdao.PMyUpdateEmployee(conn, professor);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 }

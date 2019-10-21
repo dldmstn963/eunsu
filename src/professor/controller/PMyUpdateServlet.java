@@ -1,4 +1,4 @@
-package employee.controller;
+package professor.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,20 +14,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
 
-import employee.model.service.EmployeeService;
-import employee.model.vo.Employee;
+import professor.model.service.ProfessorService;
+import professor.model.vo.Professor;
 
 /**
- * Servlet implementation class EMyUpdateServlet
+ * Servlet implementation class PMyUpdateServlet
  */
-@WebServlet("/emyupdate")
-public class EMyUpdateServlet extends HttpServlet {
+@WebServlet("/PMyUpdateServlet")
+public class PMyUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EMyUpdateServlet() {
+    public PMyUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,21 +36,20 @@ public class EMyUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		int maxSize = 1024 * 1024 * 10;
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/images/user");
 
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", null);
-		Employee employee = new Employee();
-		employee.setEmployeeNo(mrequest.getParameter("EMPLOYEE_NO"));
-		employee.setEmployeeName(mrequest.getParameter("EMPLOYEE_NAME"));
-		employee.setEmployeeSSN(mrequest.getParameter("EMPLOYEE_SSN"));
-		employee.setEmployeeAddress(mrequest.getParameter("EMPLOYEE_ADDRESS"));
-		employee.setEmployeePassword(mrequest.getParameter("EMPLOYEE_PASSWORD"));
-		if(mrequest.getFilesystemName("EMPLOYEE_IMAGE") != null) {
-		String originalFileName = mrequest.getFilesystemName("EMPLOYEE_IMAGE");
+		Professor professor = new Professor();
+		professor.setProfessorNo(mrequest.getParameter("PROFESSOR_NO"));
+		professor.setProfessorName(mrequest.getParameter("PROFESSOR_NAME"));
+		professor.setProfessorSSN(mrequest.getParameter("PROFESSOR_SSN"));
+		professor.setProfessorAddress(mrequest.getParameter("PROFESSOR_ADDRESS"));
+		professor.setProfessorPassword(mrequest.getParameter("PROFESSOR_PASSWORD"));
+		if(mrequest.getFilesystemName("PROFESSOR_IMAGE") != null) {
+		String originalFileName = mrequest.getFilesystemName("PROFESSOR_IMAGE");
 		if (originalFileName != null) {
-			String renameFileName = mrequest.getParameter("EMPLOYEE_NO") + "."
+			String renameFileName = mrequest.getParameter("PROFESSOR_NO") + "."
 					+ originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
 
 			File originFile = new File(savePath + "\\" + originalFileName);
@@ -68,9 +67,9 @@ public class EMyUpdateServlet extends HttpServlet {
 				fout.close();
 				originFile.delete();
 			}
-			employee.setEmployeeimage("/eunsu/resources/images/user/" + renameFileName);
+			professor.setProfessorImage("/eunsu/resources/images/user/" + renameFileName);
 		}}
-		int result = new EmployeeService().EMyUpdateEmployee(employee);
+		int result = new ProfessorService().PMyUpdateProfessor(professor);
 		if (result > 0) {
 			response.setContentType("text/html; charset=utf-8");
 			

@@ -91,5 +91,17 @@ public class StudentService {
 		return list;
 	}
 
+	public int SMyUpdateStudent(Student student) {
+		Connection conn = getConnection();
+		int result = sdao.SMyUpdateEmployee(conn, student);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 
 }

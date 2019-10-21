@@ -1,21 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="employee.model.vo.Employee, employee.model.vo.Employee, java.util.ArrayList"%>
+<%@ page import="professor.model.vo.Professor"%>
 <%
-	Employee loginEmployee = (Employee) session.getAttribute("loginEmployee");
+Professor loginProfessor = (Professor) session.getAttribute("loginProfessor");
 %>
 <!DOCTYPE html>
 <html>
 <title>메인 페이지</title>
-<script type="text/javascript" src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript"
+	src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-	function checkIt(){
-		if($("#EMPLOYEE_PASSWORD").val() != $("#EMPLOYEE_PASSWORD2").val()){
-			alert("입력하신 암호와 다릅니다.\n다시 입력하십시오.");
-			$("#EMPLOYEE_PASSWORD2").select();
-			return false
-		}
+function checkIt(){
+	if($("#PROFESSOR_PASSWORD").val() != $("#PROFESSOR_PASSWORD2").val()){
+		alert("입력하신 암호와 다릅니다.\n다시 입력하십시오.");
+		$("#PROFESSOR_PASSWORD2").select();
+		return false
 	}
+}
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,19 +43,19 @@
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
 				title="Messages"><i class="fa fa-envelope"></i></a> <a href="#"
 				class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
-				title="My Account">
-			</a>
+				title="My Account"> </a>
 		</div>
 	</div>
 
 	<!-- Navbar on small screens -->
 	<div id="navDemo"
 		class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-		<a href="/eunsu/views/studentcrud/studentinsert.jsp" class="w3-bar-item w3-button w3-padding-large">학생 추가</a>
-		<a href="/eunsu/views/studentcrud/studentinsert.jsp" class="w3-bar-item w3-button w3-padding-large">학생 추가</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding-large">ㅇㅇ 3</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding-large">My
-			Profile</a>
+		<a href="/eunsu/views/studentcrud/studentinsert.jsp"
+			class="w3-bar-item w3-button w3-padding-large">학생 추가</a> <a
+			href="/eunsu/views/studentcrud/studentinsert.jsp"
+			class="w3-bar-item w3-button w3-padding-large">학생 추가</a> <a href="#"
+			class="w3-bar-item w3-button w3-padding-large">ㅇㅇ 3</a> <a href="#"
+			class="w3-bar-item w3-button w3-padding-large">My Profile</a>
 	</div>
 
 	<!-- Page Container -->
@@ -68,23 +69,28 @@
 				<div class="w3-card w3-round w3-white">
 					<div class="w3-container">
 						<h4 class="w3-center">
-							내 정보 <i class="fa fa-pencil"></i>
+							내 정보<form action="/eunsu/pmyinfo" method="post">
+							<input type="hidden" value="<%=loginProfessor.getProfessorNo()%>" name="empno">
+							<input type="hidden" value="<%=loginProfessor.getProfessorPassword()%>" name="emppass">
+							<input type="submit" value="수정">
+							</form>
 						</h4>
 						<p class="w3-center">
-							<img src="<%=loginEmployee.getEmployeeimage()%>"
+							<img src="<%=loginProfessor.getProfessorImage()%>"
 								class="w3-circle" style="height: 106px; width: 106px"
 								alt="Avatar">
 						</p>
 						<hr>
 						<p>
 							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
-							<%=loginEmployee.getEmployeeName()%>
-						</p>
+							<%=loginProfessor.getProfessorName()%></p>
 						<p>
 							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
-							<%=loginEmployee.getEmpDepartment()%>
-						</p>
-						<br> <a href="/eunsu/logout" style="text-decoration: none;">로그아웃</a>
+							<%=loginProfessor.getCategory()%></p>
+						<p>
+							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
+							<%=loginProfessor.getDepartmentName()%></p>
+						<br> <a href="/eunsu/logout" style="text-decoration:none;">로그아웃</a>
 					</div>
 				</div>
 				<br>
@@ -94,36 +100,32 @@
 					<div class="w3-white">
 						<button onclick="myFunction('Demo1')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
-							<i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> 과목 관리
+							<i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> 강의 과목 보기
 						</button>
 						<div id="Demo1" class="w3-hide w3-container">
-							<p>
-								<a href="#">과목 관리</a>
-							</p>
+							<p><a href="/eunsu/views/professorbasic.jsp">강의 과목 보기</a></p>
 						</div>
 						<button onclick="myFunction('Demo2')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
-							<i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> 학생
-							관리
+							<i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> 성적 입력
 						</button>
 						<div id="Demo2" class="w3-hide w3-container">
-							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 추가</a></p>
-							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 수정</a></p>
+							<p>성적 입력</p>
 						</div>
 						<button onclick="myFunction('Demo3')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
-							<i class="fa fa-users fa-fw w3-margin-right"></i>학교 관리
+							<i class="fa fa-users fa-fw w3-margin-right"></i>증명서
 						</button>
 						<div id="Demo3" class="w3-hide w3-container">
 							<br>
 							<div class="w3-half">
-								<p>교수 관리</p>
+								<p>재학 증명서</p>
 							</div>
 							<div class="w3-half">
-								<p>직원 관리</p>
+								<p>졸업 증명서</p>
 							</div>
 							<div class="w3-half">
-								<p>증명서 관리</p>
+								<p>성적 증명서</p>
 							</div>
 							<div class="w3-half">
 								<p>휴학 증명서</p>
@@ -145,20 +147,18 @@
 				<!-- End Left Column -->
 			</div>
 			<!-- End Grid -->
-		<h1 align="center">내 정보 수정</h1>
+			<h1 align="center">내 정보 수정</h1>
 		<table align="center" border="1" cellspacing="0" cellpadding="10">
-		<form name="join" onsubmit="return checkIt()" action="/eunsu/emyupdate" method="post" enctype="multipart/form-data"">
-		<tr style="display:none;"><th>사번</th><td><input type="text" name="EMPLOYEE_NO" id="empno" value="<%=loginEmployee.getEmployeeNo()%>">
-		<tr><th>사번</th><td><%=loginEmployee.getEmployeeNo()%></td>
-		<tr><th>소속 부서 번호</th><td><%=loginEmployee.getEmpdepart_no() %></td></tr>
-		<tr><th>사원 이름</th><td><input type="text" name="EMPLOYEE_NAME" id="EMPLOYEE_NAME" value="<%=loginEmployee.getEmployeeName()%>"></td></tr>
-		<tr><th>사원 주민 번호</th><td><input type="text" name="EMPLOYEE_SSN" id="EMPLOYEE_SSN" value="<%=loginEmployee.getEmployeeSSN()%>"></td></tr>
-		<tr><th>사원 주소</th><td><input type="text" name="EMPLOYEE_ADDRESS" id="EMPLOYEE_ADDRESS" value="<%=loginEmployee.getEmployeeAddress()%>"></td></tr>
-		<tr><th>입사일</th><td><%=loginEmployee.getHire_date() %></td></tr>
-		<tr><th>월급</th><td><%=loginEmployee.getSalary() %></td></tr>
-		<tr><th>사원 비밀번호</th><td><input type="password" name="EMPLOYEE_PASSWORD" id="EMPLOYEE_PASSWORD" value="<%=loginEmployee.getEmployeePassword()%>"></td></tr>
-		<tr><th>사원 비밀번호 확인</th><td><input type="password" id="EMPLOYEE_PASSWORD2" ></td></tr>
-		<tr><th>사원 증명사진</th><td><input type="file" name="EMPLOYEE_IMAGE" id="EMPLOYEE_IMAGE" value="<%=loginEmployee.getEmployeeimage()%>"></td></tr>
+		<form name="join" onsubmit="return checkIt()" action="/eunsu/PMyUpdateServlet" method="post" enctype="multipart/form-data"">
+		<tr style="display:none;"><th>사번</th><td><input type="text" name="PROFESSOR_NO" value="<%=loginProfessor.getProfessorNo()%>">
+		<tr><th>교수 번호</th><td><%=loginProfessor.getProfessorNo()%></td>
+		<tr><th>소속 학과 번호</th><td><%=loginProfessor.getDepartmentNo() %></td></tr>
+		<tr><th>이름</th><td><input type="text" name="PROFESSOR_NAME" value="<%=loginProfessor.getProfessorName()%>"></td></tr>
+		<tr><th>주민 번호</th><td><input type="text" name="PROFESSOR_SSN" value="<%=loginProfessor.getProfessorSSN()%>"></td></tr>
+		<tr><th>주소</th><td><input type="text" name="PROFESSOR_ADDRESS" value="<%=loginProfessor.getProfessorAddress()%>"></td></tr>
+		<tr><th>비밀번호</th><td><input type="password" name="PROFESSOR_PASSWORD" id="PROFESSOR_PASSWORD"  value="<%=loginProfessor.getProfessorPassword()%>"></td></tr>
+		<tr><th>비밀번호 확인</th><td><input type="password" id="PROFESSOR_PASSWORD2" ></td></tr>
+		<tr><th>증명사진</th><td><input type="file" name="PROFESSOR_IMAGE" value="<%=loginProfessor.getProfessorImage()%>"></td></tr>
 		<tr><th colspan="2">
 		<input type="submit" value="수정"> &nbsp;
 		<input type="reset" value="초기화">

@@ -306,4 +306,34 @@ public class StudentDao {
 		}
 		return list;
 	}
+
+	public int SMyUpdateEmployee(Connection conn, Student student) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE TB_STUDENT SET STUDENT_NAME= ?, STUDENT_SSN = ?,STUDENT_ADDRESS= ?, STUDENT_PASSWORD = ?,STUDENT_IMAGE = ? WHERE STUDENT_NO=?";
+		if (student.getStudentImage() == null) {
+			query = "UPDATE TB_STUDENT SET STUDENT_NAME= ?, STUDENT_SSN = ?,STUDENT_ADDRESS= ?, STUDENT_PASSWORD = ? WHERE STUDENT_NO=?";
+		}
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, student.getStudentName());
+			pstmt.setString(2, student.getStudentSSN());
+			pstmt.setString(3, student.getStudentAddress());
+			pstmt.setString(4, student.getStudentPassword());
+
+			if (student.getStudentImage() == null) {
+				pstmt.setString(5, student.getStudentNo());
+			}else {
+				pstmt.setString(5, student.getStudentImage());
+				pstmt.setString(6, student.getStudentNo());
+			}
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

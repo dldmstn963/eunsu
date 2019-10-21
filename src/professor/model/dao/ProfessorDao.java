@@ -280,4 +280,34 @@ public class ProfessorDao {
 		}
 		return list;
 	}
+
+	public int PMyUpdateEmployee(Connection conn, Professor professor) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE TB_PROFESSOR SET PROFESSOR_NAME= ?, PROFESSOR_SSN = ?,PROFESSOR_ADDRESS= ?, PROFESSOR_PASSWORD = ?,PROFESSOR_IMAGE = ? WHERE PROFESSOR_NO=?";
+		if (professor.getProfessorImage() == null) {
+			query = "UPDATE TB_PROFESSOR SET PROFESSOR_NAME= ?, PROFESSOR_SSN = ?,PROFESSOR_ADDRESS= ?, PROFESSOR_PASSWORD = ? WHERE PROFESSOR_NO=?";
+		}
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, professor.getProfessorName());
+			pstmt.setString(2, professor.getProfessorSSN());
+			pstmt.setString(3, professor.getProfessorAddress());
+			pstmt.setString(4, professor.getProfessorPassword());
+
+			if (professor.getProfessorImage() == null) {
+				pstmt.setString(5, professor.getProfessorNo());
+			}else {
+				pstmt.setString(5, professor.getProfessorImage());
+				pstmt.setString(6, professor.getProfessorNo());
+			}
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

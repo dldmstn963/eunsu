@@ -37,7 +37,6 @@ public class EMyInfoServlet extends HttpServlet {
 		Employee employee = new EmployeeService().loginCheck(no, pass);
 		
 		if(employee!=null) {
-			System.out.println(employee);
 			response.sendRedirect("/eunsu/views/employeecrud/employeeInfo.jsp");
 		}
 	}

@@ -92,4 +92,16 @@ public class EmployeeService {
 		return list;
 	}
 
+	public int EMyUpdateEmployee(Employee employee) {
+		Connection conn = getConnection();
+		int result = edao.EMyUpdateEmployee(conn, employee);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 }

@@ -43,7 +43,7 @@ public class EmployeeDao {
 				employee.setEmpDepartment(rset.getString("EMPDEPART_NAME"));
 				employee.setSalary(rset.getInt("SALARY"));
 				employee.setHire_date(rset.getDate("HIRE_DATE"));
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -289,6 +289,35 @@ public class EmployeeDao {
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public int EMyUpdateEmployee(Connection conn, Employee employee) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE TB_EMPLOYEE SET EMPLOYEE_NAME= ?, EMPLOYEE_SSN = ?,EMPLOYEE_ADDRESS= ?, EMPLOYEE_PASSWORD = ?,EMPLOYEE_IMAGE = ? WHERE EMPLOYEE_NO=?";
+		if (employee.getEmployeeimage() == null) {
+			query = "UPDATE TB_EMPLOYEE SET EMPLOYEE_NAME= ?, EMPLOYEE_SSN = ?,EMPLOYEE_ADDRESS= ?, EMPLOYEE_PASSWORD = ? WHERE EMPLOYEE_NO=?";
+		}
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, employee.getEmployeeName());
+			pstmt.setString(2, employee.getEmployeeSSN());
+			pstmt.setString(3, employee.getEmployeeAddress());
+			pstmt.setString(4, employee.getEmployeePassword());
+			if (employee.getEmployeeimage() == null) {
+				pstmt.setString(5, employee.getEmployeeNo());
+			}else {
+				pstmt.setString(5, employee.getEmployeeimage());
+				pstmt.setString(6, employee.getEmployeeNo());
+			}
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }
