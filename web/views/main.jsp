@@ -20,6 +20,12 @@
 		f.method = "post"
 		f.submit();
 	}
+	function gradeCheck() {
+		var f = document.classEnroll2;
+		f.action = "/eunsu/GradeCheckServlet";
+		f.method = "post"
+		f.submit();
+	}
 </script>
 <style type="text/css">
 a {
@@ -325,7 +331,9 @@ a {
 							과목 확인
 						</button>
 						<div id="Demo2" class="w3-hide w3-container">
-							<p>성적 조회</p>
+							<p>
+								<a href="#" onclick="gradeCheck();">성적 조회</a>
+							</p>
 						</div>
 						<button onclick="myFunction('Demo3')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
