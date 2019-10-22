@@ -51,12 +51,6 @@ public class ClasssService {
 		return list;
 	}
 
-	public ArrayList<Classs> selectList2(int startRow, int endRow) {
-		Connection conn = getConnection();
-		ArrayList<Classs> list = cdao.selectList2(conn, startRow, endRow);
-		close(conn);
-		return list;
-	}
 
 	public int updateClass(Classs classs) {
 		Connection conn = getConnection();
@@ -95,4 +89,42 @@ public class ClasssService {
 		return listCount;
 
 	}
+
+	public int classOpen(String term) {
+		Connection conn = getConnection();
+		int result = cdao.classOpen(conn, term);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+
+	public int getEnrollListCount(String studentNo) {
+		Connection conn = getConnection();
+		int listCount = cdao.getEnrollListCount(conn,studentNo);
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<Classs> selectEnrollList(int startRow, int endRow, String studentNo) {
+		Connection conn = getConnection();
+		ArrayList<Classs> list = cdao.EnrollClasss(conn, startRow, endRow, studentNo);
+		close(conn);
+		return list;
+
+	}
+
+	public int enrollClass(String classNo, String studentNo,String termNo) {
+		Connection conn = getConnection();
+		int result = cdao.enrollClasss(conn, classNo, studentNo, termNo);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+
 }
