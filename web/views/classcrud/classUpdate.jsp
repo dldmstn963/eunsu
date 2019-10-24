@@ -25,7 +25,7 @@
 				url : "/eunsu/classslist",
 				data : {sort : sort},
 				success : function(data) {
-					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+					location.reload();
 				}
 			})//ajax
 			return false;
@@ -37,7 +37,7 @@
 				url : "/eunsu/classslist",
 				data : {sort : sort},
 				success : function(data) {
-					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+					location.reload();
 				}
 			})//ajax
 			return false;
@@ -49,7 +49,7 @@
 				url:"/eunsu/classslist",
 				data : {sort : sort},
 				success : function(data) {
-					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+					location.reload();
 				}
 			})
 			return false;
@@ -61,7 +61,7 @@
 				url:"/eunsu/classslist",
 				data : {sort : sort},
 				success : function(data) {
-					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+					location.reload();
 				}
 			})
 			return false;
@@ -73,7 +73,7 @@
 				url:"/eunsu/classslist",
 				data : {sort : sort},
 				success : function(data) {
-					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+					location.reload();
 				}
 			})
 			return false;
@@ -85,7 +85,7 @@
 				url:"/eunsu/classslist",
 				data : {sort : sort},
 				success : function(data) {
-					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+					location.reload();
 				}
 			})
 			return false;
@@ -97,7 +97,7 @@
 				url:"/eunsu/classslist",
 				data : {sort : sort},
 				success : function(data) {
-					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+					location.reload();
 				}
 			})
 			return false;
@@ -109,7 +109,7 @@
 				url:"/eunsu/classslist",
 				data : {sort : sort},
 				success : function(data) {
-					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+					location.reload();
 				}
 			})
 			return false;
@@ -120,7 +120,7 @@
 				url:"/eunsu/classslist",
 				data : {sort : sort},
 				success : function(data) {
-					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+					location.reload();
 				}
 			})
 			return false;
@@ -131,7 +131,7 @@
 				url:"/eunsu/classslist",
 				data : {sort : sort},
 				success : function(data) {
-					location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+					location.reload();
 				}
 			})
 			return false;

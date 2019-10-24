@@ -12,6 +12,7 @@ public class Grade implements java.io.Serializable {
 	private double yearavgpoint;
 	private String classType;
 	private String departmentName;
+	private String studentName;
 	public Grade() {
 		super();
 	}
@@ -21,6 +22,13 @@ public class Grade implements java.io.Serializable {
 		this.studentNo = studentNo;
 		this.classNo = classNo;
 		this.point = point;
+	}
+	
+	public String getStudentName() {
+		return studentName;
+	}
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
 	}
 	public String getClassType() {
 		return classType;
@@ -76,12 +84,21 @@ public class Grade implements java.io.Serializable {
 	public void setPoint(double point) {
 		this.point = point;
 	}
-	@Override
-	public String toString() {
-		return "Grade [termNo=" + termNo + ", studentNo=" + studentNo + ", classNo=" + classNo + ", point=" + point
-				+ ", className=" + className + ", allavgpoint=" + allavgpoint + ", yearavgpoint=" + yearavgpoint
-				+ ", classType=" + classType + ", departmentName=" + departmentName + "]";
+	public Grade(String termNo, String studentNo, String classNo, double point, String className, double allavgpoint,
+			double yearavgpoint, String classType, String departmentName, String studentName) {
+		super();
+		this.termNo = termNo;
+		this.studentNo = studentNo;
+		this.classNo = classNo;
+		this.point = point;
+		this.className = className;
+		this.allavgpoint = allavgpoint;
+		this.yearavgpoint = yearavgpoint;
+		this.classType = classType;
+		this.departmentName = departmentName;
+		this.studentName = studentName;
 	}
+	
 
 	
 	

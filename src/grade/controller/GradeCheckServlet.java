@@ -38,14 +38,14 @@ public class GradeCheckServlet extends HttpServlet {
 		if (request.getParameter("page") != null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
-		int limit = 10; // 한 페이지에 출력할 목록 갯수
+		int limit = 10; 
 		GradeService gservice = new GradeService();
 		if (studentNo == "" ||(!(request.getParameter("studentNo") == null) && !studentNo.equals(request.getParameter("studentNo")))
 				) {
 			studentNo = request.getParameter("studentNo");
 		}
 
-		int listCount = gservice.getGradeListCount(studentNo); // 테이블의 전체 목록 갯수 조회
+		int listCount = gservice.getGradeListCount(studentNo); 
 		if (listCount == 0) {
 			response.setContentType("text/html; charset=utf-8");
 
@@ -55,13 +55,10 @@ public class GradeCheckServlet extends HttpServlet {
 			out.println("history.back();");
 			out.println("</script>");
 		}
-		// 총 페이지 수 계산
 		int maxPage = listCount / limit;
 		if (listCount % limit > 0) {
 			maxPage++;
 		}
-		// currentPage 가 속한 페이지그룹의 시작 페이지숫자와 끝숫자 계산
-		// 예, 현재 34페이지이면 31~40 이 됨. (페이지그룹의 수를 10개로 한 경우)
 		int beginPage = 0;
 		if (currentPage % limit == 0) {
 			beginPage = currentPage - 9;
@@ -72,7 +69,6 @@ public class GradeCheckServlet extends HttpServlet {
 		if (endPage > maxPage) {
 			endPage = maxPage;
 		}
-		// currentPage 에 출력할 목록의 조회할 행 번호 계산
 		int startRow = (currentPage * limit) - 9;
 		int endRow = 0;
 
@@ -94,7 +90,7 @@ public class GradeCheckServlet extends HttpServlet {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('과목 목록 조회 실패');");
+			out.println("alert('성적 목록 조회 실패');");
 			out.println("history.back();");
 			out.println("</script>");
 		}

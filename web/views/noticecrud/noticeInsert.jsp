@@ -1,166 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="employee.model.vo.Employee, employee.model.vo.Employee, java.util.ArrayList"%>
+<%@ page import="employee.model.vo.Employee,notice.model.vo.Notice,java.util.ArrayList"%>
 <%
 	Employee loginEmployee = (Employee) session.getAttribute("loginEmployee");
-	ArrayList<Employee> list = (ArrayList<Employee>) request.getAttribute("list");
-	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
-	int beginPage = ((Integer)request.getAttribute("beginPage")).intValue();
-	int endPage = ((Integer)request.getAttribute("endPage")).intValue();
-	int maxPage = ((Integer)request.getAttribute("maxPage")).intValue();		
 %>
 <!DOCTYPE html>
 <html>
 <title>메인 페이지</title>
 <script type="text/javascript" src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-$(function (){
-	var sort = 0;
-	
-	$("#STUDENT_NOD").click(function() {
-		sort = 1;
-		$.ajax({
-			url : "/eunsu/employeelist",
-			data : {sort : sort},
-			success : function(data) {
-				location.reload();
-			}
-		})//ajax
-		return false;
-	});//click
-
-	$("#STUDENT_NOA").click(function() {
-		sort = 0;
-		$.ajax({
-			url : "/eunsu/employeelist",
-			data : {sort : sort},
-			success : function(data) {
-				location.reload();
-			}
-		})//ajax
-		return false;
-	});//click
-	
-	$("#DEPARTMENT_NOD").click(function(){
-		sort = 2;
-		$.ajax({
-			url:"/eunsu/employeelist",
-			data : {sort : sort},
-			success : function(data) {
-				location.reload();
-			}
-		})
-		return false;
-	});//click
-	
-	$("#DEPARTMENT_NOA").click(function(){
-		sort = 3;
-		$.ajax({
-			url:"/eunsu/employeelist",
-			data : {sort : sort},
-			success : function(data) {
-				location.reload();
-			}
-		})
-		return false;
-	});//click
-	
-	$("#STUDENT_NAMED").click(function(){
-		sort = 4;
-		$.ajax({
-			url:"/eunsu/employeelist",
-			data : {sort : sort},
-			success : function(data) {
-				location.reload();
-			}
-		})
-		return false;
-	});//click
-	
-	$("#STUDENT_NAMEA").click(function(){
-		sort = 5;
-		$.ajax({
-			url:"/eunsu/employeelist",
-			data : {sort : sort},
-			success : function(data) {
-				location.reload();
-			}
-		})
-		return false;
-	});//click
-	
-	$("#ABSENCE_YND").click(function(){
-		sort = 6;
-		$.ajax({
-			url:"/eunsu/employeelist",
-			data : {sort : sort},
-			success : function(data) {
-				location.reload();
-			}
-		})
-		return false;
-	});//click
-	
-	$("#ABSENCE_YNA").click(function(){
-		sort = 7;
-		$.ajax({
-			url:"/eunsu/employeelist",
-			data : {sort : sort},
-			success : function(data) {
-				location.reload();
-			}
-		})
-		return false;
-	});//click
-	$("#COACH_PROFESSOR_NOD").click(function(){
-		sort = 8;
-		$.ajax({
-			url:"/eunsu/employeelist",
-			data : {sort : sort},
-			success : function(data) {
-				location.reload();
-			}
-		})
-		return false;
-	});//click
-	$("#COACH_PROFESSOR_NOA").click(function(){
-		sort = 9;
-		$.ajax({
-			url:"/eunsu/employeelist",
-			data : {sort : sort},
-			success : function(data) {
-				location.reload();
-			}
-		})
-		return false;
-
-	});//click
-	
-});//document ready
-
-
-function dellist(){
-	var result = confirm('정말 삭제하시겠습니까?');
-	if(result){
-	var lists = [];
-	  $("#checkbox:checked").each(function(i){   //jQuery로 for문 돌면서 check 된값 배열에 담는다
-	   lists.push($(this).val());
-	  });
-	 var list = lists.join(","); 
-	$.ajax({
-		url:"/eunsu/employeedelete",
-		type : "post",
-		data : {
-			lists : list
-		},
-		success : function(data){
-			location.reload();s
-			$("#alertbox").html(data);
-		}
-	})
-	return false;
-}}
-
+function movelist(){
+	location.href = "/eunsu/noticelist";
+	return false; 
+	}
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -290,72 +142,33 @@ function dellist(){
 				<!-- End Left Column -->
 			</div>
 			<!-- End Grid -->
-		<h1 align="center">직원 수정 및 삭제</h1>
-		<div style="display:none;" id="alertbox"></div>
-		<form action="/eunsu/employeesearch" align="center">
-			직원 번호 : <input type="text" style="width: 90px;" name="searchno" value="">
-			&nbsp;&nbsp;
-			이름 : <input type="text" style="width: 170px;"name="searchname" value=""><br><br>
-			부서 번호 : <input type="text" style="width: 170px;"name="searchdepart" value="">
-			<br>
-			<input type="submit" value="검색">
-			<br>
-			</form>
-		<form action="/eunsu/employeeupdate">
+		<h1 align="center">공지사항</h1>
+		<form action="/eunsu/NoticeInsertServlet" method="post" enctype="multipart/form-data">
 		<table align="center" border="1" cellspacing="0" cellpadding="3">
+			<input type="hidden" value="<%=loginEmployee.getEmployeeNo()%>" name="writer">
 			<tr>
-			<th>체크 박스</th>
-			<th>직원 번호<button id="STUDENT_NOD">↓</button><button id="STUDENT_NOA">↑</button></th>
-			<th>이름<button id="DEPARTMENT_NOD">↓</button><button id="DEPARTMENT_NOA">↑</button></th>
-			<th>부서<button id="STUDENT_NAMED">↓</button><button id="STUDENT_NAMEA">↑</button></th>
-			<th>입사일<button id="ABSENCE_YND">↓</button><button id="ABSENCE_YNA">↑</button></th>
-			<th>월급<button id="COACH_PROFESSOR_NOD">↓</button><button id="COACH_PROFESSOR_NOA">↑</button></th>
+			<th>제목</th>
+			<td><input type="text" name="title"></td>
 			</tr>
-			<% for(Employee d : list){ %>	
+
 			<tr>
-			<td align="center"><input type="checkbox" id="checkbox" name="checkbox" value="<%=d.getEmployeeNo()%>"></td>
-			<td style="display:none;"><input type="text" name="EMPLOYEE_NO" value="<%= d.getEmployeeNo()%>"></td>
-			<td><%= d.getEmployeeNo() %></td>
-			<td style="display:none;"><input type="text" style="width: 50px;" value="<%= d.getEmployeeName()%>" name="EMPLOYEE_NAME"></td>
-			<td><%= d.getEmployeeName() %></td>
-			<td><input type="text" style="width: 35px;" value="<%= d.getEmpdepart_no()%>" name="EMPDEPART_NO"></td>
-			<td style="display:none;"><input type="text" style="width: 100px;" value="<%= d.getHire_date()%>" name="HIRE_DATE"></td>
-			<td ><%= d.getHire_date()%></td>
-			<td><input type="text" style="width: 100px;" value="<%= d.getSalary()%>" name="SALARY"></td>
+			<th>내용</th>
+			<td><textarea rows="5" cols="70" name="content"></textarea></td>
 			</tr>
-			<%} %>	
+			
+			<tr>
+			<th>파일 첨부</th>
+			<td><input type="file" name="nofile"></td>
+			</tr>
 		</table>
 		<br>
 		<center>
-		<input type="submit" value="수정">&nbsp;
+		<input type="submit" value="등록">&nbsp;
 		<input type="reset" value="초기화">&nbsp;
-		<input type="button" value="삭제" onclick="return dellist();">
+		<input type="button" value="목록" onclick="return movelist();">
 		</center>
 		</form>
 		<br>
-		<div id="pagebox" align="center">
-			<a href="/eunsu/employeelist?page=1">|◁</a>&nbsp;
-			<% if((beginPage - 10) < 1){ %>
-			<a href="/eunsu/employeelist?page=1">◀◀</a>&nbsp;
-			<%}else{ %>
-			<a href="/eunsu/employeelist?page=<%= beginPage - 10%>">◀◀</a>&nbsp;
-			<%} %>
-			<% for(int p = beginPage; p <= endPage; p++){
-				if(p == currentPage){%>
-				<a href="/eunsu/employeelist?page=<%= p%>"><font color="red"><b>[<%=p %>]</b></font></a>&nbsp;			
-				<%}else{ %>
-				<a href="/eunsu/employeelist?page=<%= p%>"><%=p %></a>&nbsp;
-				<%}} %>
-			
-			<% if((endPage + 10)>maxPage){%>
-				<a href="/eunsu/employeelist?page=<%= maxPage%>">▶▶</a>&nbsp;
-			<%}else{ %>
-				<a href="/eunsu/employeelist?page=<%= endPage + 10%>">▶▶</a>&nbsp;
-			<%} %>
-				<a href="/eunsu/employeelist?page=<%= maxPage%>">▷|</a>&nbsp;
-			
-			
-		</div>
 		</div>
 		<!-- End Page Container -->
 	</div>

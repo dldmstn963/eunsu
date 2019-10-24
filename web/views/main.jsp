@@ -26,6 +26,14 @@
 		f.method = "post"
 		f.submit();
 	}
+	function classUpdate() {
+		console.log('실행됨');
+		var f = document.classUpdate2;
+		f.action = "/eunsu/gradeupdate";
+		f.method = "post"
+		f.submit();
+	}
+	
 </script>
 <style type="text/css">
 a {
@@ -198,7 +206,14 @@ a {
 							입력
 						</button>
 						<div id="Demo2" class="w3-hide w3-container">
-							<p>성적 입력</p>
+							<p>
+								<a href="#" onclick="classUpdate();">성적 수정</a>
+							</p>
+
+							<form name="classUpdate2">
+								<input type="hidden" name="professorNo"
+									value="<%=loginProfessor.getProfessorNo()%>" />
+							</form>
 						</div>
 						<button onclick="myFunction('Demo3')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
@@ -300,6 +315,9 @@ a {
 							</p>
 							<p>
 								<a href="/eunsu/employeelist">직원 수정 및 삭제</a>
+							</p>
+							<p>
+								<a href="/eunsu/noticelist">공지사항</a>
 							</p>
 						</div>
 					</div>

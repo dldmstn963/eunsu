@@ -26,4 +26,18 @@ public class GradeService {
 		return list;
 	}
 
+	public int getProGradeListCount(String professorNo) {
+		Connection conn = getConnection();
+		int listCount = gdao.getProGradeListCount(conn, professorNo);
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<Grade> gradeUpdateList(int startRow, int endRow, String professorNo) {
+		Connection conn = getConnection();
+		ArrayList<Grade> list = gdao.gradeUpdateList(conn, startRow, endRow, professorNo);
+		close(conn);
+		return list;
+	}
+
 }

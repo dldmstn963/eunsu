@@ -23,7 +23,7 @@ $(function (){
 			url : "/eunsu/professorlist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/professorlist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})//ajax
 	});//click
@@ -34,7 +34,7 @@ $(function (){
 			url : "/eunsu/professorlist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/professorlist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})//ajax
 	});//click
@@ -45,7 +45,7 @@ $(function (){
 			url:"/eunsu/professorlist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/professorlist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 	});//click
@@ -56,7 +56,7 @@ $(function (){
 			url:"/eunsu/professorlist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/professorlist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 	});//click
@@ -67,7 +67,7 @@ $(function (){
 			url:"/eunsu/professorlist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/professorlist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 	});//click
@@ -78,7 +78,7 @@ $(function (){
 			url:"/eunsu/professorlist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/professorlist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 	});//click
@@ -101,7 +101,7 @@ function dellist(){
 			lists : list
 		},
 		success : function(data){
-			location.href = "http://127.0.0.1:9595/eunsu/professorlist?page="+<%=currentPage%>;
+			location.reload();
 			$("#alertbox").html(data);
 		}
 	})

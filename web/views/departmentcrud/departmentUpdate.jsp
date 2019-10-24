@@ -23,7 +23,7 @@ $(function (){
 			url : "/eunsu/departmentlist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/departmentlist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})//ajax
 	});//click
@@ -34,7 +34,7 @@ $(function (){
 			url : "/eunsu/departmentlist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/departmentlist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})//ajax
 	});//click
@@ -45,7 +45,7 @@ $(function (){
 			url:"/eunsu/departmentlist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/departmentlist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 	});//click
@@ -56,7 +56,7 @@ $(function (){
 			url:"/eunsu/departmentlist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/departmentlist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 	});//click
@@ -67,7 +67,7 @@ $(function (){
 			url:"/eunsu/departmentlist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/departmentlist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 	});//click
@@ -78,7 +78,7 @@ $(function (){
 			url:"/eunsu/departmentlist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/departmentlist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 	});//click
@@ -89,7 +89,7 @@ $(function (){
 			url:"/eunsu/departmentlist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/departmentlist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 	});//click
@@ -100,7 +100,7 @@ $(function (){
 			url:"/eunsu/departmentlist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/departmentlist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 	});//click
@@ -110,7 +110,7 @@ $(function (){
 			url:"/eunsu/departmentlist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/departmentlist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 		return false;
@@ -121,7 +121,7 @@ $(function (){
 			url:"/eunsu/departmentlist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/departmentlist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 		return false;
@@ -146,7 +146,7 @@ function dellist(){
 			lists : list
 		},
 		success : function(data){
-			location.href = "http://127.0.0.1:9595/eunsu/departmentlist?page="+<%=currentPage%>;
+			location.reload();
 			$("#alertbox").html(data);
 		}
 	})

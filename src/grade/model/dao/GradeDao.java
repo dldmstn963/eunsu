@@ -79,4 +79,73 @@ public class GradeDao {
 		return list;
 	}
 
+	public int getProGradeListCount(Connection conn, String professorNo) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "SELECT COUNT(*)" + 
+				" FROM TB_GRADE" + 
+				" NATURAL JOIN TB_CLASS_PROFESSOR" + 
+				" WHERE PROFESSOR_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, professorNo);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IndexOutOfBoundsException e) {
+			listCount = 0;
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return listCount;
+	}
+
+	public ArrayList<Grade> gradeUpdateList(Connection conn, int startRow, int endRow, String professorNo) {
+		ArrayList<Grade> list = new ArrayList<Grade>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "SELECT* FROM(SELECT ROWNUM RNUM,CLASS_NO,CLASS_NAME, TERM_NO, STUDENT_NAME, STUDENT_NO, POINT,CLASS_TYPE FROM(SELECT CLASS_NO,CLASS_NAME, TERM_NO, STUDENT_NAME, STUDENT_NO, POINT,CLASS_TYPE" + 
+				" FROM TB_GRADE" + 
+				" NATURAL JOIN TB_CLASS_PROFESSOR" + 
+				" NATURAL JOIN TB_STUDENT" + 
+				" NATURAL JOIN TB_CLASS" + 
+				" WHERE PROFESSOR_NO = ?))" + 
+				" WHERE RNUM >= ? AND RNUM <= ?";
+
+		try {
+
+			pstmt = conn.prepareStatement(query);
+
+			pstmt.setString(1, professorNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Grade grade = new Grade();
+
+				grade.setClassNo(rset.getString("CLASS_NO"));
+				grade.setClassName(rset.getString("CLASS_NAME"));
+				grade.setTermNo(rset.getString("TERM_NO"));
+				grade.setStudentName(rset.getString("STUDENT_NAME"));
+				grade.setStudentNo(rset.getString("STUDENT_NO"));
+				grade.setPoint(rset.getDouble("POINT"));
+				grade.setClassType(rset.getString("CLASS_TYPE"));
+				list.add(grade);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
 }

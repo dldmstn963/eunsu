@@ -23,7 +23,7 @@ $(function (){
 			url : "/eunsu/slist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/slist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})//ajax
 		return false;
@@ -35,7 +35,7 @@ $(function (){
 			url : "/eunsu/slist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/slist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})//ajax
 		return false;
@@ -47,7 +47,7 @@ $(function (){
 			url:"/eunsu/slist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/slist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 		return false;
@@ -59,7 +59,7 @@ $(function (){
 			url:"/eunsu/slist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/slist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 		return false;
@@ -71,7 +71,7 @@ $(function (){
 			url:"/eunsu/slist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/slist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 		return false;
@@ -83,7 +83,7 @@ $(function (){
 			url:"/eunsu/slist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/slist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 		return false;
@@ -95,7 +95,7 @@ $(function (){
 			url:"/eunsu/slist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/slist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 		return false;
@@ -107,7 +107,7 @@ $(function (){
 			url:"/eunsu/slist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/slist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 		return false;
@@ -118,7 +118,7 @@ $(function (){
 			url:"/eunsu/slist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/slist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 		return false;
@@ -129,7 +129,7 @@ $(function (){
 			url:"/eunsu/slist",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/slist?page="+<%=currentPage%>;
+				location.reload();
 			}
 		})
 		return false;
@@ -154,7 +154,7 @@ function dellist(){
 			lists : list
 		},
 		success : function(data){
-			location.href = "http://127.0.0.1:9595/eunsu/slist?page="+<%=currentPage%>;
+			location.reload();
 			$("#alertbox").html(data);
 		}
 	})
