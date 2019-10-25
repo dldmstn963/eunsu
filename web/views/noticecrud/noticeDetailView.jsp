@@ -26,12 +26,15 @@ $(function (){
 });
 
 function commentUpdate(commentNo,commentContent){
-	console.log(commentNo);
-	console.log(commentContent);
 	$("#commentupdate").css("display","block");
 	$("#comments").val(commentContent);
 	$("#coNo").val(commentNo);
 	
+}
+
+function commentReply(commentNo){
+	$("#commentsreply").css("display","block");
+	$("#coNo2").val(commentNo);
 }
 </script>
 <meta charset="UTF-8">
@@ -164,40 +167,32 @@ function commentUpdate(commentNo,commentContent){
 			<!-- End Grid -->
 		<h1 align="center">공지사항</h1>
 		<form>
-		<table align="center" border="1" cellspacing="0" cellpadding="3">
+		<table style="width:800px; background:white;"align="center" border="1" cellspacing="0" cellpadding="3">
 			<tr>
 			<th>번호</th>
 			<td><%=notice.getNoticeNo() %></td>
-			</tr>
-			
-			<tr>
-			<th>제목</th>
-			<td><%=notice.getNoticeTitle() %></td>
-			</tr>
-			
-			<tr>
 			<th>글쓴이</th>
 			<td>관리자</td>
-			</tr>
-			
-			<tr>
 			<th>날짜</th>
 			<td><%=notice.getNoticeDate() %></td>
-			</tr>
-			
-			<tr>
 			<th>조회수</th>
 			<td><%=notice.getViews() %></td>
 			</tr>
 			
 			<tr>
-			<th>내용</th>
-			<td><%=notice.getNoticecontent() %></td>
+			<th>제목</th>
+			<td colspan="7"><%=notice.getNoticeTitle() %></td>
 			</tr>
 			
 			<tr>
-			<th>첨부파일</th>
-			<td>
+			
+			<th>내용</th>
+			<td colspan="7" style="height:300px;"><%=notice.getNoticecontent() %></td>
+			</tr>
+			
+			<tr>
+			<th >첨부파일</th>
+			<td colspan="7">
 			<%if(notice.getOriFile() != null) {%>
 				<a href="/eunsu/noticedown?ofile=<%=notice.getOriFile()%>&rfile=<%=notice.getReFile()%>"><%=notice.getOriFile() %></a>
 			<%}else{ %>
@@ -220,7 +215,7 @@ function commentUpdate(commentNo,commentContent){
 		 
 		 
 		<center>
-		 <table>
+		 <table style="background:white;">
 		<thead>
 		<tr>
 			<th>글쓴이</th>
@@ -235,14 +230,25 @@ function commentUpdate(commentNo,commentContent){
 		%>
 		<tr>
 			<input type="hidden" name="commentNo" value=<%=c.getCommentsNo() %>>
+			<%if(c.getCommentLev() == 1){ %>
 			<td><%=c.getUserId()%></td>
+			<%}else if(c.getCommentLev() == 2){ %>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;ㄴ<%=c.getUserId()%></td>
+			<%} %>
 			<td><%=c.getCommentscontent()%></td>
 			<td><%=c.getCommentsdate()%></td>
 			<%if(c.getUserId().equals(loginEmployee.getEmployeeNo())){ %>
 			<td>
+			<%if(c.getCommentLev()==1){ %>
 			<input type="button" onclick="location.href='/eunsu/commentsdelete?commentNo=<%=c.getCommentsNo() %>'" value="삭제" />
+			<%}else if(c.getCommentLev() == 2) {%>
+			<input type="button" onclick="location.href='/eunsu/replydelete?commentNo=<%=c.getCommentsNo() %>'" value="삭제" />
+			<%} %>
 			<input type="button" onclick="commentUpdate('<%=c.getCommentsNo() %>','<%=c.getCommentscontent() %>');" value="수정" />
 			</td>
+			<%}%>
+			<% if(c.getCommentLev() != 2){ %>
+			<td><input type="button" value="답변하기" onclick="commentReply('<%=c.getCommentsNo()%>')"></td>
 			<%} %>
 		</tr>
 		<%
@@ -253,6 +259,16 @@ function commentUpdate(commentNo,commentContent){
 	<input type="hidden" id="coNo" name="coNo">
 		수정할 내용을 입력하세요 : <textarea name="comments" id="comments"></textarea>
 		<input type="submit" value="수정">
+	</form>
+</div></td></tr>
+		<tr><td colspan="3">	<div id="commentsreply" style="display:none;">
+	<form action="/eunsu/commentsreply">
+	<input type="hidden" id="coNo2" name="coNo">
+	<input type="hidden" name="userid" value="<%= loginEmployee.getEmployeeNo()%>">
+	<input type="hidden" name="noticeNo" value="<%=notice.getNoticeNo() %>">
+	<input type="hidden" name="commentlev" value="2">
+		답변할 내용을 입력하세요 : <textarea name="comments"></textarea>
+		<input type="submit" value="답변">
 	</form>
 </div></td></tr>
 		</tbody>
@@ -267,7 +283,6 @@ function commentUpdate(commentNo,commentContent){
 		<input type="hidden" name="userid" value="<%= loginEmployee.getEmployeeNo()%>">
 		<input type="hidden" name="noticeNo" value="<%=notice.getNoticeNo() %>">
 		<input type="hidden" name="commentlev" value="1">
-		<input type="hidden" name="commentReplyRef" value="1">
 		<tr><td>댓글을 입력하세요 : <textarea name="commentcontent"></textarea></td></tr>
 		</table>
 		<input align="center" type="submit" value="댓글 등록">

@@ -13,16 +13,16 @@ import comments.model.service.CommentsService;
 import comments.model.vo.Comments;
 
 /**
- * Servlet implementation class CommentsInsertServelt
+ * Servlet implementation class CommentsReplyServlet
  */
-@WebServlet("/commentsinsert")
-public class CommentsInsertServelt extends HttpServlet {
+@WebServlet("/commentsreply")
+public class CommentsReplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommentsInsertServelt() {
+    public CommentsReplyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,26 +36,22 @@ public class CommentsInsertServelt extends HttpServlet {
 		comments.setUserId(request.getParameter("userid"));
 		comments.setCommentRef(Integer.parseInt(request.getParameter("noticeNo")));
 		comments.setCommentLev(Integer.parseInt(request.getParameter("commentlev")));
-		comments.setCommentscontent(request.getParameter("commentcontent"));
+		comments.setCommentscontent(request.getParameter("comments"));
+		comments.setCommentReplyRef(Integer.parseInt(request.getParameter("coNo")));
+		int result = new CommentsService().CommentsReply(comments);
 		
-		int result = new CommentsService().insertComments(comments);
-		if(result > 0) {
+		if (result > 0) {
 			response.setContentType("text/html; charset=utf-8");
-
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			//out.println("window.location.reload();");
 			out.println("history.back();");
+			//out.println("opener.window.location.reload(true);");
 			out.println("</script>");
-		}else {
-			response.setContentType("text/html; charset=utf-8");
-
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('댓글 등록 실패!');");
-			out.println("history.back();");
-			out.println("</script>");
+		} else {
+			
 		}
+		
+		
 	}
 
 	/**

@@ -27,7 +27,6 @@ public class CommentsDao {
 			pstmt.setString(1, comments.getUserId());
 			pstmt.setString(2, comments.getCommentscontent());
 			pstmt.setInt(3, comments.getCommentRef());
-			//pstmt.setInt(4, comments.getCommentReplyRef());
 			pstmt.setInt(4, comments.getCommentLev());
 			
 			result = pstmt.executeUpdate();
@@ -43,7 +42,7 @@ public class CommentsDao {
 		ArrayList<Comments> list = new ArrayList<Comments>();
 		PreparedStatement stmt = null;
 		ResultSet rset = null;
-		String query = "select * from TB_COMMENTS where CM_REF = ? order by CM_NO asc";
+		String query = "select * from TB_COMMENTS where CM_REF = ? order by CM_REF asc, CM_REPLY_REF asc, CM_REPLY_LEV asc, CM_NO asc";
 		try {
 			stmt = conn.prepareStatement(query);
 			stmt.setInt(1, noticeNo);
@@ -55,6 +54,9 @@ public class CommentsDao {
 				comments.setCommentscontent(rset.getString("CM_CONTENT"));
 				comments.setUserId(rset.getString("USER_ID"));
 				comments.setCommentsdate(rset.getDate("CM_DATE"));
+				comments.setCommentLev(rset.getInt("CM_REPLY_LEV"));
+				comments.setCommentRef(rset.getInt("CM_REF"));
+				comments.setCommentReplyRef(rset.getInt("CM_REPLY_REF"));
 				list.add(comments);
 			}
 		} catch (SQLException e) {
@@ -70,7 +72,7 @@ public class CommentsDao {
 	public int deleteComment(Connection conn, int commentNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "delete from TB_COMMENTS where CM_NO = ?";
+		String query = "delete from TB_COMMENTS where CM_REPLY_REF = ?";
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -88,12 +90,52 @@ public class CommentsDao {
 	public int UpdateComent(Connection conn, String coNo, String comments) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "update TB_COMMENTS set CM_CONTENT = ? where CM_NO = ?";
+		String query = "update TB_COMMENTS set CM_CONTENT = ? , CM_DATE = sysdate where CM_NO = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, comments);
 			pstmt.setString(2, coNo);
 
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+	public int CommentsReply(Connection conn, Comments comments) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query="insert into TB_COMMENTS values(COMMENTS_NO.nextval,?,?,SYSDATE,?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, comments.getUserId());
+			pstmt.setString(2, comments.getCommentscontent());
+			pstmt.setInt(3, comments.getCommentRef());
+			pstmt.setInt(4, comments.getCommentReplyRef());
+			pstmt.setInt(5, comments.getCommentLev());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteReply(Connection conn, int commentNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "delete from TB_COMMENTS where CM_NO = ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, commentNo);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

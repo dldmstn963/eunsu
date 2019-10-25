@@ -57,7 +57,7 @@ a {
 				href="javascript:void(0);" onclick="openNav()"><i
 				class="fa fa-bars"></i></a> <a href="/eunsu/views/main.jsp"
 				class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i
-				class="fa fa-home w3-margin-right"></i>수은 대학교</a> <a href="#"
+				class="fa fa-home w3-margin-right"></i>수은 대학교</a> <a href="/eunsu/noticelist"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
 				title="News"><i class="fa fa-globe"></i></a> <a href="#"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
@@ -316,9 +316,7 @@ a {
 							<p>
 								<a href="/eunsu/employeelist">직원 수정 및 삭제</a>
 							</p>
-							<p>
-								<a href="/eunsu/noticelist">공지사항</a>
-							</p>
+							
 						</div>
 					</div>
 				</div>
@@ -391,27 +389,26 @@ a {
 				<!-- End Left Column -->
 			</div>
 			<div>
-				<h1>공지사항</h1>
-				<table style="border: solid 1px black;">
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성 날짜</th>
-					</tr>
-					<tr>
-						<td>asdf</td>
-						<td>adsf</td>
-					</tr>
-					<tr>
-						<td>asdf</td>
-						<td>adsf</td>
-					</tr>
-					<tr>
-						<td>asdf</td>
-						<td>adsf</td>
-					</tr>
-				</table>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 			</div>
 			<!-- End Grid -->
 		</div>

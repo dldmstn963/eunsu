@@ -14,6 +14,8 @@ import comments.model.vo.Comments;
 public class CommentsService {
 	public CommentsService() {}
 	CommentsDao cdao = new CommentsDao();
+	
+	
 	public int insertComments(Comments comments) {
 		Connection conn = getConnection();
 		int result = cdao.insertComments(conn, comments);
@@ -45,6 +47,28 @@ public class CommentsService {
 	public int UpdateComent(String coNo, String comments) {
 		Connection conn = getConnection();
 		int result = cdao.UpdateComent(conn, coNo, comments);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public int CommentsReply(Comments comments) {
+		Connection conn = getConnection();
+		int result = cdao.CommentsReply(conn, comments);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public int deleteReply(int commentNo) {
+		Connection conn = getConnection();
+		int result = cdao.deleteReply(conn, commentNo);
 		if (result > 0) {
 			commit(conn);
 		} else {
