@@ -25,11 +25,33 @@ public class CommentsService {
 		close(conn);
 		return result;
 	}
-	public ArrayList<Comments> selectAll(String noticeNo) {
+	public ArrayList<Comments> selectAll(int noticeNo) {
 		Connection conn = getConnection();
 		ArrayList<Comments> list = cdao.selectAll(conn, noticeNo);
 		close(conn);
 		return list;
+	}
+	public int deleteComment(int commentNo) {
+		Connection conn = getConnection();
+		int result = cdao.deleteComment(conn, commentNo);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public int UpdateComent(String coNo, String comments) {
+		Connection conn = getConnection();
+		int result = cdao.UpdateComent(conn, coNo, comments);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 	
 }

@@ -1,6 +1,7 @@
 package notice.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import comments.model.service.CommentsService;
+import comments.model.vo.Comments;
 import notice.model.service.NoticeService;
 import notice.model.vo.Notice;
 
@@ -33,7 +36,7 @@ public class NoticeDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int noticeNo = Integer.parseInt(request.getParameter("nno"));
 		int currentPage = Integer.parseInt(request.getParameter("page"));
-		
+		ArrayList<Comments> list = new CommentsService().selectAll(noticeNo);
 		NoticeService nservice = new NoticeService();
 		nservice.updateViews(noticeNo);
 		Notice notice = nservice.selectOne(noticeNo);
@@ -41,6 +44,7 @@ public class NoticeDetailServlet extends HttpServlet {
 		RequestDispatcher view = null;
 		if(notice != null) {
 			view = request.getRequestDispatcher("views/noticecrud/noticeDetailView.jsp");
+			request.setAttribute("list", list);
 			request.setAttribute("notice", notice);
 			request.setAttribute("currentPage", currentPage);
 		}else {

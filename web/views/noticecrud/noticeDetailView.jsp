@@ -12,31 +12,27 @@
 <title>메인 페이지</title>
 <script type="text/javascript" src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-$(function(){
-	$.ajax({
-		url: "/eunsu/commentslist",
-		type: "get",
-		dataType: "json",
-		data : {noticeno : <%= notice.getNoticeNo()%>},
-		success : function(data){
-			console.log(data);
-			var jsonStr = JSON.stringify(data);
-			var json = JSON.parse(jsonStr);
-			var values = "";
-			
-			for(var i in json.list){
-				values += "<tr><td>" + json.list[i].user + "</td><td>" + 
-				decodeURIComponent(json.list[i].content).replace(/\+/gi," ")+"</td><td>"+
-				json.list[i].date + "</td></tr>";
+$(function (){
+	$("#STUDENT_NOD").click(function() {
+		$.ajax({
+			url : "/eunsu/employeelist",
+			data : {sort : sort},
+			success : function(data) {
+				location.reload();
 			}
-			$("#toplist").html($("#toplist").html() + values);
-			
-		},
-		error:function(jqXHR,textStatus,errorThrown){
-			console.log("error : " + jqXHR + " , " + textStatus + ", " + errorThrown);
-		}
-	});
-})
+		})//ajax
+		return false;
+	});//click
+});
+
+function commentUpdate(commentNo,commentContent){
+	console.log(commentNo);
+	console.log(commentContent);
+	$("#commentupdate").css("display","block");
+	$("#comments").val(commentContent);
+	$("#coNo").val(commentNo);
+	
+}
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -220,10 +216,51 @@ $(function(){
 		</form>
 		 </center>
 		 <br>
+		 
+		 
+		 
 		<center>
-		<table id="toplist" border="1" cellspacint="0">
-		<tr><th>글쓴이</th><th>내용</th><th>작성 날짜</th></tr>
-		 </table>
+		 <table>
+		<thead>
+		<tr>
+			<th>글쓴이</th>
+			<th>댓글 내용</th>
+			<th>작성 날짜</th>
+			<th>기타</th>
+		</tr>
+		</thead>
+		<tbody>
+		<%
+			for (Comments c : list) {
+		%>
+		<tr>
+			<input type="hidden" name="commentNo" value=<%=c.getCommentsNo() %>>
+			<td><%=c.getUserId()%></td>
+			<td><%=c.getCommentscontent()%></td>
+			<td><%=c.getCommentsdate()%></td>
+			<%if(c.getUserId().equals(loginEmployee.getEmployeeNo())){ %>
+			<td>
+			<input type="button" onclick="location.href='/eunsu/commentsdelete?commentNo=<%=c.getCommentsNo() %>'" value="삭제" />
+			<input type="button" onclick="commentUpdate('<%=c.getCommentsNo() %>','<%=c.getCommentscontent() %>');" value="수정" />
+			</td>
+			<%} %>
+		</tr>
+		<%
+			}
+		%>
+		<tr><td colspan="3">	<div id="commentupdate" style="display:none;">
+	<form action="/eunsu/commentsupdate">
+	<input type="hidden" id="coNo" name="coNo">
+		수정할 내용을 입력하세요 : <textarea name="comments" id="comments"></textarea>
+		<input type="submit" value="수정">
+	</form>
+</div></td></tr>
+		</tbody>
+	
+		</table>
+		
+		
+		
 		<br>
 		<form action="/eunsu/commentsinsert">
 		<table>
@@ -231,7 +268,7 @@ $(function(){
 		<input type="hidden" name="noticeNo" value="<%=notice.getNoticeNo() %>">
 		<input type="hidden" name="commentlev" value="1">
 		<input type="hidden" name="commentReplyRef" value="1">
-		<tr><textarea name="commentcontent"></textarea></tr>
+		<tr><td>댓글을 입력하세요 : <textarea name="commentcontent"></textarea></td></tr>
 		</table>
 		<input align="center" type="submit" value="댓글 등록">
 		</form>
