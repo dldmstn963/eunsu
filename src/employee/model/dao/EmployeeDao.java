@@ -171,7 +171,7 @@ public class EmployeeDao {
 		return list;
 	}
 
-	public int updateStudent(Connection conn, Employee employee) {
+	public int updateEmployee(Connection conn, Employee employee) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = "UPDATE TB_EMPLOYEE SET EMPDEPART_NO= ?, SALARY = ? WHERE EMPLOYEE_NO=?";
@@ -226,7 +226,6 @@ public class EmployeeDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IndexOutOfBoundsException e) {
-			System.out.println("카운트 0됨");
 			listCount = 0;
 		} finally {
 			close(rset);

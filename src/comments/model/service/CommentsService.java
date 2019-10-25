@@ -25,9 +25,9 @@ public class CommentsService {
 		close(conn);
 		return result;
 	}
-	public ArrayList<Comments> selectAll() {
+	public ArrayList<Comments> selectAll(String noticeNo) {
 		Connection conn = getConnection();
-		ArrayList<Comments> list = cdao.selectAll(conn);
+		ArrayList<Comments> list = cdao.selectAll(conn, noticeNo);
 		close(conn);
 		return list;
 	}

@@ -57,7 +57,7 @@ public class EmployeeService {
 
 	public int updateEmployee(Employee employee) {
 		Connection conn = getConnection();
-		int result = edao.updateStudent(conn, employee);
+		int result = edao.updateEmployee(conn, employee);
 		if (result > 0) {
 			commit(conn);
 		} else {

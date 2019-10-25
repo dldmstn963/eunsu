@@ -1,4 +1,4 @@
-
+package classs.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +14,7 @@ import classs.model.service.ClasssService;
 /**
  * Servlet implementation class ClassOpenServlet
  */
-@WebServlet("/ClassOpenServlet")
+@WebServlet("/classopen")
 public class ClassOpenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

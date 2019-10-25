@@ -1,41 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="employee.model.vo.Employee,notice.model.vo.Notice,java.util.ArrayList,comments.model.vo.Comments"%>
+<%@ page
+	import="student.model.vo.Student,grade.model.vo.Grade,java.util.ArrayList"%>
 <%
-	Employee loginEmployee = (Employee) session.getAttribute("loginEmployee");
-	Notice notice = (Notice)request.getAttribute("notice");
-	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
-	ArrayList<Comments> list = (ArrayList<Comments>)request.getAttribute("list");
+	Student loginStudent = (Student) session.getAttribute("loginStudent");
+	ArrayList<Grade> list = (ArrayList<Grade>) request.getAttribute("list");
+	int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
+	int beginPage = ((Integer) request.getAttribute("beginPage")).intValue();
+	int endPage = ((Integer) request.getAttribute("endPage")).intValue();
+	int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
 %>
 <!DOCTYPE html>
 <html>
 <title>메인 페이지</title>
-<script type="text/javascript" src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript"
+	src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-$(function(){
-	$.ajax({
-		url: "/eunsu/commentslist",
-		type: "get",
-		dataType: "json",
-		success : function(data){
-			console.log(data);
-			var jsonStr = JSON.stringify(data);
-			var json = JSON.parse(jsonStr);
-			var values = "";
-			
-			for(var i in json.list){
-				values += "<tr><td>" + json.list[i].user + "</td><td>" + 
-				decodeURIComponent(json.list[i].content).replace(/\+/gi," ")+"</td><td>"+
-				json.list[i].date + "</td></tr>";
-			}
-			$("#toplist").html($("#toplist").html() + values);
-			
-		},
-		error:function(jqXHR,textStatus,errorThrown){
-			console.log("error : " + jqXHR + " , " + textStatus + ", " + errorThrown);
-		}
-	});
-})
+
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,19 +43,19 @@ $(function(){
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
 				title="Messages"><i class="fa fa-envelope"></i></a> <a href="#"
 				class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
-				title="My Account">
-			</a>
+				title="My Account"> </a>
 		</div>
 	</div>
 
 	<!-- Navbar on small screens -->
 	<div id="navDemo"
 		class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-		<a href="/eunsu/views/studentcrud/studentinsert.jsp" class="w3-bar-item w3-button w3-padding-large">학생 추가</a>
-		<a href="/eunsu/views/studentcrud/studentinsert.jsp" class="w3-bar-item w3-button w3-padding-large">학생 추가</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding-large">ㅇㅇ 3</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding-large">My
-			Profile</a>
+		<a href="/eunsu/views/studentcrud/studentinsert.jsp"
+			class="w3-bar-item w3-button w3-padding-large">학생 추가</a> <a
+			href="/eunsu/views/studentcrud/studentinsert.jsp"
+			class="w3-bar-item w3-button w3-padding-large">학생 추가</a> <a href="#"
+			class="w3-bar-item w3-button w3-padding-large">ㅇㅇ 3</a> <a href="#"
+			class="w3-bar-item w3-button w3-padding-large">My Profile</a>
 	</div>
 
 	<!-- Page Container -->
@@ -88,22 +69,29 @@ $(function(){
 				<div class="w3-card w3-round w3-white">
 					<div class="w3-container">
 						<h4 class="w3-center">
-							내 정보 <i class="fa fa-pencil"></i>
+							내 정보
+							<form action="/eunsu/smyinfo" method="post">
+								<input type="hidden" value="<%=loginStudent.getStudentNo()%>"
+									name="empno"> <input type="hidden"
+									value="<%=loginStudent.getStudentPassword()%>" name="emppass">
+								<input type="submit" value="수정">
+							</form>
 						</h4>
 						<p class="w3-center">
-							<img src="<%=loginEmployee.getEmployeeimage()%>"
+							<img src="<%=loginStudent.getStudentImage()%>"
 								class="w3-circle" style="height: 106px; width: 106px"
 								alt="Avatar">
 						</p>
 						<hr>
 						<p>
 							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
-							<%=loginEmployee.getEmployeeName()%>
-						</p>
+							<%=loginStudent.getStudentName()%></p>
 						<p>
 							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
-							<%=loginEmployee.getEmpDepartment()%>
-						</p>
+							<%=loginStudent.getCategory()%></p>
+						<p>
+							<i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
+							<%=loginStudent.getDepartmentname()%></p>
 						<br> <a href="/eunsu/logout" style="text-decoration: none;">로그아웃</a>
 					</div>
 				</div>
@@ -114,36 +102,35 @@ $(function(){
 					<div class="w3-white">
 						<button onclick="myFunction('Demo1')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
-							<i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> 과목 관리
+							<i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> 수강 신청
 						</button>
 						<div id="Demo1" class="w3-hide w3-container">
 							<p>
-								<a href="#">과목 관리</a>
+								<a href="/eunsu/views/studentbasic.jsp">신청하기</a>
 							</p>
 						</div>
 						<button onclick="myFunction('Demo2')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
-							<i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> 학생
-							관리
+							<i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> 수강
+							과목 확인
 						</button>
 						<div id="Demo2" class="w3-hide w3-container">
-							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 추가</a></p>
-							<p><a href="/eunsu/views/studentcrud/studentinsert.jsp">학생 수정</a></p>
+							<p>성적 조회</p>
 						</div>
 						<button onclick="myFunction('Demo3')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
-							<i class="fa fa-users fa-fw w3-margin-right"></i>학교 관리
+							<i class="fa fa-users fa-fw w3-margin-right"></i>증명서
 						</button>
 						<div id="Demo3" class="w3-hide w3-container">
 							<br>
 							<div class="w3-half">
-								<p>교수 관리</p>
+								<p>재학 증명서</p>
 							</div>
 							<div class="w3-half">
-								<p>직원 관리</p>
+								<p>졸업 증명서</p>
 							</div>
 							<div class="w3-half">
-								<p>증명서 관리</p>
+								<p>성적 증명서</p>
 							</div>
 							<div class="w3-half">
 								<p>휴학 증명서</p>
@@ -165,69 +152,93 @@ $(function(){
 				<!-- End Left Column -->
 			</div>
 			<!-- End Grid -->
-		<h1 align="center">공지사항</h1>
-		<form>
-		<table align="center" border="1" cellspacing="0" cellpadding="3">
-			<tr>
-			<th>번호</th>
-			<td><%=notice.getNoticeNo() %></td>
-			</tr>
-			
-			<tr>
-			<th>제목</th>
-			<td><%=notice.getNoticeTitle() %></td>
-			</tr>
-			
-			<tr>
-			<th>글쓴이</th>
-			<td>관리자</td>
-			</tr>
-			
-			<tr>
-			<th>날짜</th>
-			<td><%=notice.getNoticeDate() %></td>
-			</tr>
-			
-			<tr>
-			<th>조회수</th>
-			<td><%=notice.getViews() %></td>
-			</tr>
-			
-			<tr>
-			<th>내용</th>
-			<td><%=notice.getNoticecontent() %></td>
-			</tr>
-			
-			<tr>
-			<th>첨부파일</th>
-			<td>
-			<%if(notice.getOriFile() != null) {%>
-				<a href="/eunsu/noticedown?ofile=<%=notice.getOriFile()%>&rfile=<%=notice.getReFile()%>"><%=notice.getOriFile() %></a>
-			<%}else{ %>
-				첨부파일 없음
-			<%} %>
-			</td>
-			</tr>
-		</table>
-		</form>
-		<br>
-		<center>
-		<table id="toplist" border="1" cellspacint="0">
-		<tr><th>글쓴이</th><th>내용</th><th>작성 날짜</th></tr>
-		 </table>
-	
-		<br>
-		<form action="/eunsu/commentsinsert">
-		<table>
-		<input type="hidden" name="userid" value="<%= loginEmployee.getEmployeeNo()%>">
-		<input type="hidden" name="noticeNo" value="<%=notice.getNoticeNo() %>">
-		<input type="hidden" name="commentlev" value="1">
-		<input type="hidden" name="commentReplyRef" value="1">
-		<tr><textarea name="commentcontent"></textarea></tr>
-		</table>
-		<input align="center" type="submit" value="댓글 등록">
-		</form>
-		</center>
+			<h1 align="center">성적 조회</h1>
+			<div style="display: none;" id="alertbox"></div>
+			<br>
+			<form align="center" action="/eunsu/gradesearch">
+			연도 : <input type="text" name="year" style="width:100px;">
+			학기 : <select>
+			<option name="month" value="">선택해주세요</option>
+			<option name="month" value="01">01</option>
+			<option name="month" value="02">02</option>
+			<option name="month" value="03">03</option>
+			</select>
+			<br><br>
+			<input type="submit" value="검색">
+			</form>
+<br>
+				<table align="center" border="1" cellspacing="0" cellpadding="3">
+					<tr>
+						<th>과목 이름</th>
+						<th>학기</th>
+						<th>점수</th>
+						<th>과목 분류</th>
+						<th>과목 번호</th>
+						<th>학과 이름</th>
+					</tr>
+					<%
+						for (Grade c : list) {
+					%>
+					<tr>
+						<td><%=c.getClassName()%></td>
+						<td><%=c.getTermNo()%> </td>
+						<td><%=c.getPoint()%> </td>
+						<td><%=c.getClassType()%></td>
+						<td><%=c.getClassNo()%></td>
+						<td><%=c.getDepartmentName()%></td>
+						
+					</tr>
+					<%
+						}
+					%>
+
+				</table>
+				<br>
+			<br>
+			<div id="pagebox" align="center">
+				<a href="/eunsu/ClassEnrollListServlet?page=1">|◁</a> &nbsp;
+				<%
+					if ((beginPage - 10) < 1) {
+				%>
+				<a href="/eunsu/ClassEnrollListServlet?page=1">◀◀</a>
+				<%
+					} else {
+				%>
+				<a href="/eunsu/ClassEnrollListServlet?page=<%=beginPage - 10%>">◀◀</a>
+				<%
+					}
+				%>
+				&nbsp;
+				<%
+					for (int p = beginPage; p <= endPage; p++) {
+						if (p == currentPage) {
+				%>
+				<a href="/eunsu/ClassEnrollListServlet?page=<%=p%>"><font
+					color="red"><b>[<%=p%>]
+					</b></font></a>
+				<%
+					} else {
+				%>
+				<a href="/eunsu/ClassEnrollListServlet?page=<%=p%>"><%=p%></a>
+				<%
+					}
+					}
+				%>
+				&nbsp;
+				<%
+					if ((endPage + 10) > maxPage) {
+				%>
+				<a href="/eunsu/ClassEnrollListServlet?page=<%=maxPage%>">▶▶</a>
+				<%
+					} else {
+				%>
+				<a href="/eunsu/ClassEnrollListServlet?page=<%=endPage + 10%>">▶▶</a>
+				<%
+					}
+				%>
+				&nbsp; <a href="/eunsu/ClassEnrollListServlet?page=<%=maxPage%>">▷|</a>
+			</div>
+
 		</div>
 		<!-- End Page Container -->
 	</div>

@@ -16,15 +16,11 @@
 <script type="text/javascript"
 	src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-$(function(){ //전체선택 체크박스 클릭
+$(function(){ 
 	$("#allCheck").click(function(){ 
-		//만약 전체 선택 체크박스가 체크된상태일경우 
 		if($("#allCheck").prop("checked")) {
-		//해당화면에 전체 checkbox들을 체크해준다
 		$("input[type=checkbox]").prop("checked",true); 
-		// 전체선택 체크박스가 해제된 경우
 		} else { 
-		//해당화면에 모든 checkbox들의 체크를해제시킨다. 
 		$("input[type=checkbox]").prop("checked",false); } 
 		}) 
 	})
@@ -33,20 +29,20 @@ $(function(){ //전체선택 체크박스 클릭
 		var result = confirm('신청 하시겠습니까?');
 		if (result) {
 			var lists = [];
-			$("#checkbox:checked").each(function(i) { //jQuery로 for문 돌면서 check 된값 배열에 담는다
+			$("#checkbox:checked").each(function(i) { 
 				lists.push($(this).val());
 			});
 			var list = lists.join(",");
 			$
 					.ajax({
-						url : "/eunsu/ClasssEnrollServlet",
+						url : "/eunsu/classsenroll",
 						type : "post",
 						data : {
 							lists : list,
 							studentNo : '<%=loginStudent.getStudentNo()%>'
 						},
 						success : function(data) {
-							location.href = "http://127.0.0.1:9595/eunsu/ClassEnrollListServlet?page="+<%=currentPage%>;
+							location.href = "http://127.0.0.1:9595/eunsu/classenrollList?page="+<%=currentPage%>;
 							$("#alertbox").html(data);
 						}
 					})
@@ -238,15 +234,15 @@ $(function(){ //전체선택 체크박스 클릭
 			</form>
 			<br>
 			<div id="pagebox" align="center">
-				<a href="/eunsu/ClassEnrollListServlet?page=1">|◁</a> &nbsp;
+				<a href="/eunsu/classenrollList?page=1">|◁</a> &nbsp;
 				<%
 					if ((beginPage - 10) < 1) {
 				%>
-				<a href="/eunsu/ClassEnrollListServlet?page=1">◀◀</a>
+				<a href="/eunsu/classenrollList?page=1">◀◀</a>
 				<%
 					} else {
 				%>
-				<a href="/eunsu/ClassEnrollListServlet?page=<%=beginPage - 10%>">◀◀</a>
+				<a href="/eunsu/classenrollList?page=<%=beginPage - 10%>">◀◀</a>
 				<%
 					}
 				%>
@@ -255,13 +251,13 @@ $(function(){ //전체선택 체크박스 클릭
 					for (int p = beginPage; p <= endPage; p++) {
 						if (p == currentPage) {
 				%>
-				<a href="/eunsu/ClassEnrollListServlet?page=<%=p%>"><font
+				<a href="/eunsu/classenrollList?page=<%=p%>"><font
 					color="red"><b>[<%=p%>]
 					</b></font></a>
 				<%
 					} else {
 				%>
-				<a href="/eunsu/ClassEnrollListServlet?page=<%=p%>"><%=p%></a>
+				<a href="/eunsu/classenrollList?page=<%=p%>"><%=p%></a>
 				<%
 					}
 					}
@@ -270,15 +266,15 @@ $(function(){ //전체선택 체크박스 클릭
 				<%
 					if ((endPage + 10) > maxPage) {
 				%>
-				<a href="/eunsu/ClassEnrollListServlet?page=<%=maxPage%>">▶▶</a>
+				<a href="/eunsu/classenrollList?page=<%=maxPage%>">▶▶</a>
 				<%
 					} else {
 				%>
-				<a href="/eunsu/ClassEnrollListServlet?page=<%=endPage + 10%>">▶▶</a>
+				<a href="/eunsu/classenrollList?page=<%=endPage + 10%>">▶▶</a>
 				<%
 					}
 				%>
-				&nbsp; <a href="/eunsu/ClassEnrollListServlet?page=<%=maxPage%>">▷|</a>
+				&nbsp; <a href="/eunsu/classenrollList?page=<%=maxPage%>">▷|</a>
 			</div>
 
 		</div>

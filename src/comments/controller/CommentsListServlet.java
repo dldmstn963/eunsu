@@ -38,7 +38,8 @@ public class CommentsListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ArrayList<Comments> list = new CommentsService().selectAll();
+		String noticeNo = request.getParameter("noticeno");
+		ArrayList<Comments> list = new CommentsService().selectAll(noticeNo);
 
 		JSONObject sendJson = new JSONObject();
 		JSONArray jarr = new JSONArray();

@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page
-	import="grade.model.vo.Grade,java.util.ArrayList"%>
-	<%@ page import="professor.model.vo.Professor"%>
+<%@ page import="grade.model.vo.Grade,java.util.ArrayList"%>
+<%@ page import="professor.model.vo.Professor"%>
 <%
 	Professor loginProfessor = (Professor) session.getAttribute("loginProfessor");
 	ArrayList<Grade> list = (ArrayList<Grade>) request.getAttribute("list");
@@ -17,7 +16,7 @@
 <script type="text/javascript"
 	src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-
+	
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -68,7 +67,7 @@
 			<div class="w3-col m3">
 				<!-- Profile -->
 				<div class="w3-card w3-round w3-white">
-					
+
 					<div class="w3-container">
 						<h4 class="w3-center">
 							내 정보
@@ -158,7 +157,7 @@
 			<h1 align="center">과목 수정 및 삭제</h1>
 			<div style="display: none;" id="alertbox"></div>
 			<br>
-
+			<form action="/eunsu/gradeupdate">
 				<table align="center" border="1" cellspacing="0" cellpadding="3">
 					<tr>
 						<th>과목 번호</th>
@@ -175,30 +174,40 @@
 					<tr>
 						<td><%=c.getClassNo()%></td>
 						<td><%=c.getClassName()%></td>
-						<td><%=c.getTermNo()%> </td>
-						<td><%=c.getStudentName() %></td>
-						<td><%=c.getStudentNo() %></td>
-						<td><%=c.getPoint()%> </td>
+						<td><%=c.getTermNo()%></td>
+						<td><%=c.getStudentName()%></td>
+						<td><%=c.getStudentNo()%></td>
+						<input type="hidden" name="studentNo"
+							value="<%=c.getStudentNo()%>">
+						<input type="hidden" name="classNo" value="<%=c.getClassNo()%>">
+						<input type="hidden" name="termNo" value="<%=c.getTermNo()%>">
+						<td><input type="text" name="point" style="width:50px;"
+							value="<%=c.getPoint()%>"></td>
 						<td><%=c.getClassType()%></td>
-						
+
 					</tr>
 					<%
 						}
 					%>
 
 				</table>
-				<br>
+				<br> 
+				<center>
+				<input type="submit" value="수정">&nbsp; <input
+					type="reset" value="초기화">
+				</center>
+			</form>
 			<br>
 			<div id="pagebox" align="center">
-				<a href="/eunsu/ClassEnrollListServlet?page=1">|◁</a> &nbsp;
+				<a href="/eunsu/gradelist?page=1">|◁</a> &nbsp;
 				<%
 					if ((beginPage - 10) < 1) {
 				%>
-				<a href="/eunsu/ClassEnrollListServlet?page=1">◀◀</a>
+				<a href="/eunsu/gradelist?page=1">◀◀</a>
 				<%
 					} else {
 				%>
-				<a href="/eunsu/ClassEnrollListServlet?page=<%=beginPage - 10%>">◀◀</a>
+				<a href="/eunsu/gradelist?page=<%=beginPage - 10%>">◀◀</a>
 				<%
 					}
 				%>
@@ -207,13 +216,13 @@
 					for (int p = beginPage; p <= endPage; p++) {
 						if (p == currentPage) {
 				%>
-				<a href="/eunsu/ClassEnrollListServlet?page=<%=p%>"><font
+				<a href="/eunsu/gradelist?page=<%=p%>"><font
 					color="red"><b>[<%=p%>]
 					</b></font></a>
 				<%
 					} else {
 				%>
-				<a href="/eunsu/ClassEnrollListServlet?page=<%=p%>"><%=p%></a>
+				<a href="/eunsu/gradelist?page=<%=p%>"><%=p%></a>
 				<%
 					}
 					}
@@ -222,15 +231,15 @@
 				<%
 					if ((endPage + 10) > maxPage) {
 				%>
-				<a href="/eunsu/ClassEnrollListServlet?page=<%=maxPage%>">▶▶</a>
+				<a href="/eunsu/gradelist?page=<%=maxPage%>">▶▶</a>
 				<%
 					} else {
 				%>
-				<a href="/eunsu/ClassEnrollListServlet?page=<%=endPage + 10%>">▶▶</a>
+				<a href="/eunsu/gradelist?page=<%=endPage + 10%>">▶▶</a>
 				<%
 					}
 				%>
-				&nbsp; <a href="/eunsu/ClassEnrollListServlet?page=<%=maxPage%>">▷|</a>
+				&nbsp; <a href="/eunsu/gradelist?page=<%=maxPage%>">▷|</a>
 			</div>
 
 		</div>

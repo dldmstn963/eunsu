@@ -13,16 +13,16 @@ import notice.model.service.NoticeService;
 import notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeDetailServlet
+ * Servlet implementation class NoticeGoUpdatePageServlet
  */
-@WebServlet("/NoticeDetailServlet")
-public class NoticeDetailServlet extends HttpServlet {
+@WebServlet("/noticegoupdatepage")
+public class NoticeGoUpdatePageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeDetailServlet() {
+    public NoticeGoUpdatePageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,14 +40,13 @@ public class NoticeDetailServlet extends HttpServlet {
 		
 		RequestDispatcher view = null;
 		if(notice != null) {
-			view = request.getRequestDispatcher("views/noticecrud/noticeDetailView.jsp");
+			view = request.getRequestDispatcher("views/noticecrud/noticeUpdate.jsp");
 			request.setAttribute("notice", notice);
 			request.setAttribute("currentPage", currentPage);
 		}else {
 			System.out.println("조회 실패");
 		}
 		view.forward(request, response);
-		
 	}
 
 	/**

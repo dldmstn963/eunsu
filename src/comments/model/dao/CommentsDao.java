@@ -20,15 +20,15 @@ public class CommentsDao {
 	public int insertComments(Connection conn, Comments comments) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query="insert into TB_COMMENTS values(COMMENTS_NO.nextval,?,?,SYSDATE,?,?,?)";
+		String query="insert into TB_COMMENTS values(COMMENTS_NO.nextval,?,?,SYSDATE,?,COMMENTS_NO.currval,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			
 			pstmt.setString(1, comments.getUserId());
 			pstmt.setString(2, comments.getCommentscontent());
 			pstmt.setInt(3, comments.getCommentRef());
-			pstmt.setInt(4, comments.getCommentReplyRef());
-			pstmt.setInt(5, comments.getCommentLev());
+			//pstmt.setInt(4, comments.getCommentReplyRef());
+			pstmt.setInt(4, comments.getCommentLev());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -39,14 +39,16 @@ public class CommentsDao {
 		return result;
 	}
 
-	public ArrayList<Comments> selectAll(Connection conn) {
+	public ArrayList<Comments> selectAll(Connection conn, String noticeNo) {
 		ArrayList<Comments> list = new ArrayList<Comments>();
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		ResultSet rset = null;
-		String query = "select * from TB_COMMENTS order by CM_NO desc";
+		String query = "select * from TB_COMMENTS where CM_REF = ? order by CM_NO asc";
 		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(query);
+			stmt = conn.prepareStatement(query);
+			stmt.setString(1, noticeNo);
+			
+			rset = stmt.executeQuery();
 			while (rset.next()) {
 				Comments comments = new Comments();
 				comments.setCommentscontent(rset.getString("CM_CONTENT"));

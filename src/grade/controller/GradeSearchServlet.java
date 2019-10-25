@@ -11,20 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import employee.model.vo.Employee;
 import grade.model.service.GradeService;
 import grade.model.vo.Grade;
 
 /**
- * Servlet implementation class GradeCheckServlet
+ * Servlet implementation class GradeSearchServlet
  */
-@WebServlet("/gradecheck")
-public class GradeCheckServlet extends HttpServlet {
+@WebServlet("/gradesearch")
+public class GradeSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GradeCheckServlet() {
+    public GradeSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,20 +33,21 @@ public class GradeCheckServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    public String studentNo = "";
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		int currentPage = 1;
 		if (request.getParameter("page") != null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
-		int limit = 10; 
+		int limit = 10;
 		GradeService gservice = new GradeService();
-		if (studentNo == "" ||(!(request.getParameter("studentNo") == null) && !studentNo.equals(request.getParameter("studentNo")))
-				) {
-			studentNo = request.getParameter("studentNo");
-		}
 
-		int listCount = gservice.getGradeListCount(studentNo); 
+		Grade grade = new Grade();
+		grade.setTermNo(request.getParameter("year")+request.getParameter("month"));
+		grade.setStudentNo(request.getParameter("studentno"));
+		
+		
+		int listCount = gservice.getSearchCount(grade);
 		if (listCount == 0) {
 			response.setContentType("text/html; charset=utf-8");
 
@@ -70,32 +72,22 @@ public class GradeCheckServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		int startRow = (currentPage * limit) - 9;
-		int endRow = 0;
-
-		endRow = currentPage * limit;
-
-		ArrayList<Grade> list = gservice.gradeCheckList(startRow, endRow, studentNo);
+		int endRow = currentPage * limit;
+		ArrayList<Grade> list = gservice.searchGrade(startRow, endRow, grade);
 
 		RequestDispatcher view = null;
-
 		if (list.size() > 0) {
-			view = request.getRequestDispatcher("views/gradecrud/gradeCheck.jsp");
+			view = request.getRequestDispatcher("views/gradecrud/gradeSearch.jsp");
 			request.setAttribute("list", list);
 			request.setAttribute("maxPage", maxPage);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("beginPage", beginPage);
 			request.setAttribute("endPage", endPage);
+			request.setAttribute("searchno", request.getParameter("searchno"));
+			request.setAttribute("searchname", request.getParameter("searchname"));
+			request.setAttribute("searchdepart", request.getParameter("searchdepart"));
 			view.forward(request, response);
-		} else {
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('성적 목록 조회 실패');");
-			out.println("history.back();");
-			out.println("</script>");
-		}
-		
-	}
+		}	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

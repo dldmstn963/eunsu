@@ -16,20 +16,20 @@
 <script type="text/javascript">
 	function classEnroll() {
 		var f = document.classEnroll2;
-		f.action = "/eunsu/ClassEnrollListServlet";
+		f.action = "/eunsu/classenrollList";
 		f.method = "post"
 		f.submit();
 	}
 	function gradeCheck() {
 		var f = document.classEnroll2;
-		f.action = "/eunsu/GradeCheckServlet";
+		f.action = "/eunsu/gradecheck";
 		f.method = "post"
 		f.submit();
 	}
 	function classUpdate() {
 		console.log('실행됨');
 		var f = document.classUpdate2;
-		f.action = "/eunsu/gradeupdate";
+		f.action = "/eunsu/gradelist";
 		f.method = "post"
 		f.submit();
 	}

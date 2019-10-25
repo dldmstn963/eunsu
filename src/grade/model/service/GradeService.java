@@ -1,7 +1,9 @@
 package grade.model.service;
 
 import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -38,6 +40,30 @@ public class GradeService {
 		ArrayList<Grade> list = gdao.gradeUpdateList(conn, startRow, endRow, professorNo);
 		close(conn);
 		return list;
+	}
+
+	public int getSearchCount(Grade grade) {
+		Connection conn = getConnection();
+		int listCount = gdao.getSearchCount(conn,grade);
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<Grade> searchGrade(int startRow, int endRow, Grade grade) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int updateGrade(Grade grade) {
+		Connection conn = getConnection();
+		int result = gdao.updateGrade(conn, grade);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 
 }

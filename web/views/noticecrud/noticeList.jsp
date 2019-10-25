@@ -169,25 +169,25 @@ int maxPage = ((Integer)request.getAttribute("maxPage")).intValue();
 		</center>
 		<br>
 		<div id="pagebox" align="center">
-			<a href="/eunsu/employeelist?page=1">|◁</a>&nbsp;
+			<a href="/eunsu/noticelist?page=1">|◁</a>&nbsp;
 			<% if((beginPage - 10) < 1){ %>
-			<a href="/eunsu/employeelist?page=1">◀◀</a>&nbsp;
+			<a href="/eunsu/noticelist?page=1">◀◀</a>&nbsp;
 			<%}else{ %>
-			<a href="/eunsu/employeelist?page=<%= beginPage - 10%>">◀◀</a>&nbsp;
+			<a href="/eunsu/noticelist?page=<%= beginPage - 10%>">◀◀</a>&nbsp;
 			<%} %>
 			<% for(int p = beginPage; p <= endPage; p++){
 				if(p == currentPage){%>
-				<a href="/eunsu/employeelist?page=<%= p%>"><font color="red"><b>[<%=p %>]</b></font></a>&nbsp;			
+				<a href="/eunsu/noticelist?page=<%= p%>"><font color="red"><b>[<%=p %>]</b></font></a>&nbsp;			
 				<%}else{ %>
-				<a href="/eunsu/employeelist?page=<%= p%>"><%=p %></a>&nbsp;
+				<a href="/eunsu/noticelist?page=<%= p%>"><%=p %></a>&nbsp;
 				<%}} %>
 			
 			<% if((endPage + 10)>maxPage){%>
-				<a href="/eunsu/employeelist?page=<%= maxPage%>">▶▶</a>&nbsp;
+				<a href="/eunsu/noticelist?page=<%= maxPage%>">▶▶</a>&nbsp;
 			<%}else{ %>
-				<a href="/eunsu/employeelist?page=<%= endPage + 10%>">▶▶</a>&nbsp;
+				<a href="/eunsu/noticelist?page=<%= endPage + 10%>">▶▶</a>&nbsp;
 			<%} %>
-				<a href="/eunsu/employeelist?page=<%= maxPage%>">▷|</a>&nbsp;
+				<a href="/eunsu/noticelist?page=<%= maxPage%>">▷|</a>&nbsp;
 			
 			
 		</div>

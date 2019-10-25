@@ -148,4 +148,50 @@ public class GradeDao {
 		return list;
 	}
 
+	public int getSearchCount(Connection conn, Grade grade) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select count(*) from TB_GRADE where STUDENT_NO = ? and TERM_NO like ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, grade.getStudentNo());
+			pstmt.setString(2, grade.getTermNo());
+
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IndexOutOfBoundsException e) {
+			listCount = 0;
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;
+	}
+
+	public int updateGrade(Connection conn, Grade grade) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE TB_GRADE SET POINT= ? WHERE STUDENT_NO=? and TERM_NO=? and CLASS_NO=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setDouble(1, grade.getPoint());
+			pstmt.setString(2, grade.getStudentNo());
+			pstmt.setString(3, grade.getTermNo());
+			pstmt.setString(4, grade.getClassNo());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }
