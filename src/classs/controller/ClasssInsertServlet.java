@@ -47,7 +47,6 @@ public class ClasssInsertServlet extends HttpServlet {
 		int result = new ClasssService().insertClass(classs);
 
 		if (result > 0) {
-			System.out.println("과목 등록 성공");
 			response.setContentType("text/html; charset=utf-8");
 
 			PrintWriter out = response.getWriter();
@@ -56,7 +55,6 @@ public class ClasssInsertServlet extends HttpServlet {
 			out.println("history.back();");
 			out.println("</script>");
 		} else {
-			System.out.println("과목 등록 실패");
 			response.setContentType("text/html; charset=utf-8");
 
 			PrintWriter out = response.getWriter();

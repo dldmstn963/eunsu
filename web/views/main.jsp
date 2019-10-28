@@ -59,7 +59,7 @@ a {
 				class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i
 				class="fa fa-home w3-margin-right"></i>수은 대학교</a> <a href="/eunsu/noticelist"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="News"><i class="fa fa-globe"></i></a> <a href="#"
+				title="News"><i class="fa fa-globe"></i></a> <a href="/eunsu/calendarlist"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
 				title="Account Settings"><i class="fa fa-user"></i></a> <a href="#"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"

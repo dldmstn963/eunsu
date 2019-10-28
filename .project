@@ -3,6 +3,7 @@
 	<name>eunsu</name>
 	<comment></comment>
 	<projects>
+		<project>spring-web-3.2.0.RELEASE</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -2,6 +2,9 @@
     <wb-module deploy-name="eunsu">
         <wb-resource deploy-path="/" source-path="/web" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="spring-web-3.2.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/spring-web-3.2.0.RELEASE/spring-web-3.2.0.RELEASE">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="eunsu"/>
         <property name="java-output-path" value="/eunsu/build/classes"/>
     </wb-module>
