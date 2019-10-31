@@ -47,7 +47,7 @@ public class CalendarInsertServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('일정 등록 성공!');");
-			out.println("history.back();");
+			out.println("window.location = document.referrer;");
 			out.println("</script>");
 		} else {
 			response.setContentType("text/html; charset=utf-8");
@@ -55,7 +55,7 @@ public class CalendarInsertServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('일정 등록 실패!');");
-			out.println("history.back();");
+			out.println("window.location = document.referrer;");
 			out.println("</script>");
 		}	}
 

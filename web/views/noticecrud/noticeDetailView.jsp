@@ -36,6 +36,7 @@ function commentReply(commentNo){
 	$("#commentsreply").css("display","block");
 	$("#coNo2").val(commentNo);
 }
+
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

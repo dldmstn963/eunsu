@@ -61,7 +61,7 @@ a {
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
 				title="News"><i class="fa fa-globe"></i></a> <a href="/eunsu/calendarlist"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="Account Settings"><i class="fa fa-user"></i></a> <a href="#"
+				title="Account Settings"><i class="fa fa-user"></i></a> <a href="/eunsu/views/chatting/chatting.jsp"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
 				title="Messages"><i class="fa fa-envelope"></i></a> <a href="#"
 				class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
@@ -73,7 +73,7 @@ a {
 	<div id="navDemo"
 		class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
 		<a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-		<a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+		<a href="/eunsu/views/chatting/chatting.jsp" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
 		<a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
 		<a href="#" class="w3-bar-item w3-button w3-padding-large">My
 			Profile</a>

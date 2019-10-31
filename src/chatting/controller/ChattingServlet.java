@@ -1,4 +1,4 @@
-package comments.controller;
+package chatting.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import comments.model.service.CommentsService;
-import comments.model.vo.Comments;
+import chatting.model.service.ChattingService;
+import chatting.model.vo.Chat;
 
 /**
- * Servlet implementation class CommentsInsertServelt
+ * Servlet implementation class ChattingServlet
  */
-@WebServlet("/commentsinsert")
-public class CommentsInsertServelt extends HttpServlet {
+@WebServlet("/chatting")
+public class ChattingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommentsInsertServelt() {
+    public ChattingServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,31 +31,28 @@ public class CommentsInsertServelt extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		Comments comments = new Comments();
-		comments.setUserId(request.getParameter("userid"));
-		comments.setCommentRef(Integer.parseInt(request.getParameter("noticeNo")));
-		comments.setCommentLev(Integer.parseInt(request.getParameter("commentlev")));
-		comments.setCommentscontent(request.getParameter("commentcontent"));
 		
-		int result = new CommentsService().insertComments(comments);
-		if(result > 0) {
+		Chat chat = new Chat();
+		chat.setSender(request.getParameter("sender"));
+		chat.setReceiver(request.getParameter("receiver"));
+		chat.setContent(request.getParameter("inputMessage"));
+		
+		int result = new ChattingService().insertChat(chat);
+		if (result > 0) {
+			
+		} else {
 			response.setContentType("text/html; charset=utf-8");
 
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			//out.println("window.location.reload();");
-			out.println("window.location = document.referrer;");
-			out.println("</script>");
-		}else {
-			response.setContentType("text/html; charset=utf-8");
-
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('댓글 등록 실패!');");
-			out.println("window.location = document.referrer;");
+			out.println("alert('없는 아이디 입니다!');");
 			out.println("</script>");
 		}
+
+		
+		
+		
+		
 	}
 
 	/**

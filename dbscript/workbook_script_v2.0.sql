@@ -15227,4 +15227,24 @@ NULL );
 
 COMMIT;
 
+drop table tb_chat;
+
+
+create table tb_chat(
+chat_no number primary key,
+chat_sender varchar2(40BYTE),
+chat_EMPreceiver varchar2(40byte),
+chat_STUreceiver varchar2(40byte),
+chat_PROreceiver varchar2(40byte),
+chat_content varchar2(4000byte),
+chat_date varchar2(40BYTE),
+FOREIGN KEY (CHAT_EMPRECEIVER) REFERENCES TB_EMPLOYEE(EMPLOYEE_NO) ON DELETE CASCADE
+,FOREIGN KEY (CHAT_STURECEIVER) REFERENCES TB_STUDENT(STUDENT_NO) ON DELETE CASCADE
+,FOREIGN KEY (CHAT_PRORECEIVER) REFERENCES TB_PROFESSOR(PROFESSOR_NO) ON DELETE CASCADE
+);
+
+
+create SEQUENCE chat;
+
+
 

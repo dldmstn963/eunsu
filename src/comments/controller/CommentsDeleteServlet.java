@@ -35,8 +35,7 @@ public class CommentsDeleteServlet extends HttpServlet {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("history.back();");
-			//out.println("opener.window.location.reload(true);");
+			out.println("window.location = document.referrer;");
 			out.println("</script>");
 		} else {
 			
