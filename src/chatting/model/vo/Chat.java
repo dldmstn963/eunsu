@@ -8,7 +8,15 @@ public class Chat implements java.io.Serializable{
 	private String sender;
 	private String receiver;
 	private String content;
-	private java.sql.Date chatDate;
+	private String chatDate;
+	private int chat_notification;
+	
+	public int getChat_notification() {
+		return chat_notification;
+	}
+	public void setChat_notification(int chat_notification) {
+		this.chat_notification = chat_notification;
+	}
 	public Chat() {
 		super();
 	}
@@ -36,13 +44,13 @@ public class Chat implements java.io.Serializable{
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public java.sql.Date getChatDate() {
+	public String getChatDate() {
 		return chatDate;
 	}
-	public void setChatDate(java.sql.Date chatDate) {
-		this.chatDate = chatDate;
+	public void setChatDate(String string) {
+		this.chatDate = string;
 	}
-	public Chat(int chattingNo, String sender, String receiver, String content, Date chatDate) {
+	public Chat(int chattingNo, String sender, String receiver, String content, String chatDate) {
 		super();
 		this.chattingNo = chattingNo;
 		this.sender = sender;
@@ -53,8 +61,9 @@ public class Chat implements java.io.Serializable{
 	@Override
 	public String toString() {
 		return "Chat [chattingNo=" + chattingNo + ", sender=" + sender + ", receiver=" + receiver + ", content="
-				+ content + ", chatDate=" + chatDate + "]";
+				+ content + ", chatDate=" + chatDate + ", chat_notification=" + chat_notification + "]";
 	}
+
 	
 	
 	

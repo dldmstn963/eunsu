@@ -9,11 +9,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import comments.model.service.CommentsService;
 import comments.model.vo.Comments;
+import employee.model.vo.Employee;
 import notice.model.service.NoticeService;
 import notice.model.vo.Notice;
+import professor.model.vo.Professor;
+import student.model.vo.Student;
 
 /**
  * Servlet implementation class NoticeDetailServlet
@@ -42,6 +46,22 @@ public class NoticeDetailServlet extends HttpServlet {
 		Notice notice = nservice.selectOne(noticeNo);
 		
 		RequestDispatcher view = null;
+		
+		Student loginStudent = null;
+		Professor loginProfessor = null;
+		Employee loginEmployee = null;
+	
+		if (loginStudent != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginStudent", loginStudent);
+		} else if (loginProfessor != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginProfessor", loginProfessor);
+		} else if (loginEmployee != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginEmployee", loginEmployee);
+		}
+		
 		if(notice != null) {
 			view = request.getRequestDispatcher("views/noticecrud/noticeDetailView.jsp");
 			request.setAttribute("list", list);

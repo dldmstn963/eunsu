@@ -12,7 +12,7 @@
 %>
 <!DOCTYPE html>
 <html>
-<title>메인 페이지</title>
+<title>수은대학교</title>
 <script type="text/javascript"
 	src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
@@ -49,6 +49,12 @@ $(function(){
 			return false;
 		}
 	}
+function Chat() {
+	var f = document.Chat2;
+	f.action = "/eunsu/chattinglist";
+	f.method = "get"
+	f.submit();
+}
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -67,28 +73,31 @@ $(function(){
 				href="javascript:void(0);" onclick="openNav()"><i
 				class="fa fa-bars"></i></a> <a href="/eunsu/views/main.jsp"
 				class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i
-				class="fa fa-home w3-margin-right"></i>수은 대학교</a> <a href="#"
+				class="fa fa-home w3-margin-right"></i>수은 대학교</a> <a href="/eunsu/noticelist"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="News"><i class="fa fa-globe"></i></a> <a href="#"
+				title="News"><i class="fa fa-flag"></i></a> <a href="/eunsu/calendarlist"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="Account Settings"><i class="fa fa-user"></i></a> <a href="#"
+				title="Account Settings"><i class="fa fa-calendar"></i></a> <a href="#" onclick="Chat();"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="Messages"><i class="fa fa-envelope"></i></a> <a href="#"
+				title="Messages"><i class="fa fa-comments"></i></a> <a href="#"
 				class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
 				title="My Account"> </a>
+							<form name="Chat2">
+								<input type="hidden" name="employeeNo" value="<%=loginStudent.getStudentNo()%>" />
+							</form>
+				
 		</div>
 	</div>
 
 	<!-- Navbar on small screens -->
 	<div id="navDemo"
 		class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-		<a href="/eunsu/views/studentcrud/studentinsert.jsp"
-			class="w3-bar-item w3-button w3-padding-large">학생 추가</a> <a
-			href="/eunsu/views/studentcrud/studentinsert.jsp"
-			class="w3-bar-item w3-button w3-padding-large">학생 추가</a> <a href="#"
-			class="w3-bar-item w3-button w3-padding-large">ㅇㅇ 3</a> <a href="#"
-			class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+		<a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+		<a href="/eunsu/noticelist" class="w3-bar-item w3-button w3-padding-large">공지사항</a>
+		<a href="/eunsu/calendarlist" class="w3-bar-item w3-button w3-padding-large">일정</a>
+		<a href="#" onclick="Chat();" class="w3-bar-item w3-button w3-padding-large">채팅</a>
 	</div>
+
 
 	<!-- Page Container -->
 	<div class="w3-container w3-content"
@@ -99,7 +108,7 @@ $(function(){
 			<div class="w3-col m3">
 				<!-- Profile -->
 				<div class="w3-card w3-round w3-white">
-					<div class="w3-container">
+						<div class="w3-container">
 						<h4 class="w3-center">
 							내 정보
 							<form action="/eunsu/smyinfo" method="post">
@@ -130,16 +139,23 @@ $(function(){
 				<br>
 
 				<!-- Accordion -->
-				<div class="w3-card w3-round">
+					<div class="w3-card w3-round">
 					<div class="w3-white">
 						<button onclick="myFunction('Demo1')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
-							<i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> 수강 신청
+							<i class="fa fa-graduation-cap fa-fw w3-margin-right"></i> 수강 신청
 						</button>
 						<div id="Demo1" class="w3-hide w3-container">
 							<p>
-								<a href="/eunsu/views/studentbasic.jsp">신청하기</a>
+								<a href="#" onclick="classEnroll();">신청하기</a>
 							</p>
+
+							<form name="classEnroll2">
+								<input type="hidden" name="studentNo"
+									value="<%=loginStudent.getStudentNo()%>" />
+							</form>
+
+
 						</div>
 						<button onclick="myFunction('Demo2')"
 							class="w3-button w3-block w3-theme-l1 w3-left-align">
@@ -147,35 +163,11 @@ $(function(){
 							과목 확인
 						</button>
 						<div id="Demo2" class="w3-hide w3-container">
-							<p>성적 조회</p>
+							<p>
+								<a href="#" onclick="gradeCheck();">성적 조회</a>
+							</p>
 						</div>
-						<button onclick="myFunction('Demo3')"
-							class="w3-button w3-block w3-theme-l1 w3-left-align">
-							<i class="fa fa-users fa-fw w3-margin-right"></i>증명서
-						</button>
-						<div id="Demo3" class="w3-hide w3-container">
-							<br>
-							<div class="w3-half">
-								<p>재학 증명서</p>
-							</div>
-							<div class="w3-half">
-								<p>졸업 증명서</p>
-							</div>
-							<div class="w3-half">
-								<p>성적 증명서</p>
-							</div>
-							<div class="w3-half">
-								<p>휴학 증명서</p>
-							</div>
-							<div class="w3-half">
-								<p>
-									졸업 예정 <br>증명서
-								</p>
-							</div>
-							<div class="w3-half">
-								<p>수료 증명서</p>
-							</div>
-						</div>
+					
 					</div>
 				</div>
 				<br>

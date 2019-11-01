@@ -6,9 +6,12 @@ import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import chatting.model.dao.ChattingDao;
 import chatting.model.vo.Chat;
+import classs.model.vo.Classs;
+import comments.model.vo.Comments;
 
 public class ChattingService {
 	ChattingDao cdao = new ChattingDao();
@@ -23,6 +26,27 @@ public class ChattingService {
 		}
 		close(conn);
 		return result;
+	}
+
+	public int getListCount(String employeeNo) {
+		Connection conn = getConnection();
+		int listCount = cdao.getListCount(conn,employeeNo);
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<Chat> selectList(int startRow, int endRow, String employeeNo) {
+		Connection conn = getConnection();
+		ArrayList<Chat> list = cdao.selectList(conn, startRow, endRow, employeeNo);
+		close(conn);
+		return list;
+	}
+
+	public ArrayList<Chat> selectAll(String sender, String receiver) {
+		Connection conn = getConnection();
+		ArrayList<Chat> list = cdao.selectAll(conn, sender,receiver);
+		close(conn);
+		return list;
 	}
 
 }

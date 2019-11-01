@@ -10,9 +10,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import employee.model.vo.Employee;
 import notice.model.service.NoticeService;
 import notice.model.vo.Notice;
+import professor.model.vo.Professor;
+import student.model.vo.Student;
 
 /**
  * Servlet implementation class NoticeListServlet
@@ -67,6 +71,23 @@ public class NoticeListServlet extends HttpServlet {
 		ArrayList<Notice> list = nservice.selectList(startRow, endRow);
 
 		RequestDispatcher view = null;
+		
+		Student loginStudent = null;
+		Professor loginProfessor = null;
+		Employee loginEmployee = null;
+	
+		if (loginStudent != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginStudent", loginStudent);
+		} else if (loginProfessor != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginProfessor", loginProfessor);
+		} else if (loginEmployee != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginEmployee", loginEmployee);
+		}
+		
+		
 		if (list.size() > 0) {
 			view = request.getRequestDispatcher("views/noticecrud/noticeList.jsp");
 			request.setAttribute("list", list);
@@ -79,7 +100,7 @@ public class NoticeListServlet extends HttpServlet {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('직원 조회 실패');");
+			out.println("alert('공지사항 조회 실패');");
 			out.println("history.back();");
 			out.println("</script>");
 		}
