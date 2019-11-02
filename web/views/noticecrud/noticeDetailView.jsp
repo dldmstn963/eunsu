@@ -34,6 +34,10 @@ function Chat() {
 	f.method = "get"
 	f.submit();
 }
+function dellist(){
+	location.href = "/eunsu/noticedelete?nono=<%=notice.getNoticeNo()%>";
+	return false;
+}
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -343,7 +347,7 @@ function Chat() {
 			<!-- End Grid -->
 		<h1 align="center">공지사항</h1>
 		<form>
-		<table style="width:100%; background:white;"align="center" border="1" cellspacing="0" cellpadding="3">
+		<table style="width:70%;float:right; background:white;"align="center" border="1" cellspacing="0" cellpadding="3">
 			<tr>
 			<th>번호</th>
 			<td><%=notice.getNoticeNo() %></td>
@@ -363,7 +367,19 @@ function Chat() {
 			<tr>
 			
 			<th>내용</th>
-			<td colspan="7" style="height:300px;"><%=notice.getNoticecontent() %></td>
+			<td colspan="7" style="height:300px;">
+			<%if (notice.getNoticecontent() == null){ %>
+			
+			<%}else {%>
+			<%=notice.getNoticecontent() %>
+			<%} %>
+			
+			<%if(notice.getOriFile() != null){ %>
+			<%if(notice.getOriFile().substring(notice.getOriFile().lastIndexOf(".") + 1).equals("jpg")){ %>
+			<img src="/eunsu/resources/nofile/<%=notice.getReFile()%>">
+			<%}%>
+			<%} %>
+			</td>
 			</tr>
 			
 			<tr>
@@ -379,15 +395,14 @@ function Chat() {
 		</table>
 		</form>
 		<br>
-		<center>
 		<%if (loginEmployee != null && notice.getEmployeeNo().equals(loginEmployee.getEmployeeNo())) {%>
-		<form action="/eunsu/noticegoupdatepage">
+		<form action="/eunsu/noticegoupdatepage" >
 		<input type="hidden" value="<%=currentPage %>" name="page">
 		<input type="hidden" value="<%=notice.getNoticeNo() %>" name="nno">
 		<input type="submit" value="글수정">
 		</form>
+		<input type="button" value="삭제" onclick="return dellist();">
 		<%} %>
-		 </center>
 		 <br>
 		 
 		 

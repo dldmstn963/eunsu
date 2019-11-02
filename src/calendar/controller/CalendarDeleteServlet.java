@@ -1,8 +1,7 @@
-package classs.controller;
+package calendar.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import calendar.model.service.CalendarService;
 import classs.model.service.ClasssService;
-import classs.model.vo.Classs;
 
 /**
- * Servlet implementation class ClasssUpdateServlet
+ * Servlet implementation class CalendarDeleteServlet
  */
-@WebServlet("/classsupdate")
-public class ClasssUpdateServlet extends HttpServlet {
+@WebServlet("/calendardelete")
+public class CalendarDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ClasssUpdateServlet() {
+	public CalendarDeleteServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,39 +34,24 @@ public class ClasssUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+
+		String checkBox = request.getParameter("lists");
+		String check[] = checkBox.split(",");
 		int result = 0;
-		String[] classNo = request.getParameterValues("classNo");
-		String[] className = request.getParameterValues("className");
-		String[] classType = request.getParameterValues("classType");
-		String[] departmentNo = request.getParameterValues("departmentNo");
-		String[] preatendingClassNo = request.getParameterValues("preatendingClassNo");
-
-		for (int i = 0; i < classNo.length; i++) {
-			Classs classs = new Classs();
-
-			classs.setClassNo(classNo[i]);
-			classs.setClassName(className[i]);
-			classs.setClassType(classType[i]);
-			classs.setDepartmentNo(departmentNo[i]);
-			classs.setPreatendingClassNo(preatendingClassNo[i]);
-			result = new ClasssService().updateClass(classs);
+		for (int i = 0; i < check.length; i++) {
+			result = new CalendarService().deleteCalendar(check[i]);
 		}
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		if (result > 0) {
 			out.println("<script>");
-			out.println("alert('과목 수정 성공!');");
-			out.println("window.location = document.referrer;");
+			out.println("alert('삭제 성공!');");
 			out.println("</script>");
 		} else {
-
 			out.println("<script>");
-			out.println("alert('과목 수정 실패!');");
-			out.println("window.location = document.referrer;");
+			out.println("alert('삭제 실패!');");
 			out.println("</script>");
-
 		}
-
 	}
 
 	/**

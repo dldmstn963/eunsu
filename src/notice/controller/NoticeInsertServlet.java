@@ -22,24 +22,22 @@ import notice.model.vo.Notice;
 /**
  * Servlet implementation class NoticeInsertServlet
  */
-@WebServlet("/NoticeInsertServlet")
+@WebServlet("/noticeinsert")
 public class NoticeInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public NoticeInsertServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public NoticeInsertServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 
 		int maxSize = 1024 * 1024 * 10;
@@ -83,7 +81,7 @@ public class NoticeInsertServlet extends HttpServlet {
 		int result = new NoticeService().insertBoard(notice);
 		RequestDispatcher view = null;
 		if (result > 0) {
-			response.sendRedirect("/eunsu/NoticeListServlet");
+			response.sendRedirect("/eunsu/noticelist");
 		} else {
 			response.setContentType("text/html; charset=utf-8");
    			PrintWriter out = response.getWriter();
@@ -96,11 +94,9 @@ public class NoticeInsertServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

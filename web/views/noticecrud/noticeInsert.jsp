@@ -175,7 +175,7 @@ function Chat() {
 			</div>
 			<!-- End Grid -->
 		<h1 align="center">공지사항</h1>
-		<form action="/eunsu/NoticeInsertServlet" method="post" enctype="multipart/form-data">
+		<form action="/eunsu/noticeinsert" method="post" enctype="multipart/form-data">
 		<table align="center" border="1" cellspacing="0" cellpadding="3">
 			<input type="hidden" value="<%=loginEmployee.getEmployeeNo()%>" name="writer">
 			<tr>

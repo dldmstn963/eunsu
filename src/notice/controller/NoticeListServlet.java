@@ -88,7 +88,6 @@ public class NoticeListServlet extends HttpServlet {
 		}
 		
 		
-		if (list.size() > 0) {
 			view = request.getRequestDispatcher("views/noticecrud/noticeList.jsp");
 			request.setAttribute("list", list);
 			request.setAttribute("maxPage", maxPage);
@@ -96,14 +95,6 @@ public class NoticeListServlet extends HttpServlet {
 			request.setAttribute("beginPage", beginPage);
 			request.setAttribute("endPage", endPage);
 			view.forward(request, response);
-		} else {
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('공지사항 조회 실패');");
-			out.println("history.back();");
-			out.println("</script>");
-		}
 	}
 
 	/**
