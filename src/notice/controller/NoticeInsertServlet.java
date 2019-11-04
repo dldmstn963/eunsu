@@ -48,14 +48,26 @@ public class NoticeInsertServlet extends HttpServlet {
 		notice.setNoticeTitle(mrequest.getParameter("title"));
 		notice.setEmployeeNo(mrequest.getParameter("writer"));
 		notice.setNoticecontent(mrequest.getParameter("content"));
-		String originalFileName = mrequest.getFilesystemName("nofile");
-		
-		if (originalFileName != null) {
+		String[] originalFileName = new String[] {
+				mrequest.getFilesystemName("nofile1"),
+				mrequest.getFilesystemName("nofile2"),
+				mrequest.getFilesystemName("nofile3"),
+				mrequest.getFilesystemName("nofile4"),
+				mrequest.getFilesystemName("nofile5")
+		};
+		System.out.println("인서트 서블릿 배열 길이 " + originalFileName.length);
+		String original = "";
+		String rename = "";
+		for(int i = 0; i<originalFileName.length; i++) {
+		if (originalFileName[i] != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-			String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
-					+ originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
-
-			File originFile = new File(savePath + "\\" + originalFileName);
+			String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis()))+i+ "."
+					+ originalFileName[i].substring(originalFileName[i].lastIndexOf(".") + 1);
+			
+			original += originalFileName[i]+"/";
+			rename += renameFileName+"/";
+			
+			File originFile = new File(savePath + "\\" + originalFileName[i]);
 			File renameFile = new File(savePath + "\\" + renameFileName);
 
 			if (!originFile.renameTo(renameFile)) {
@@ -74,10 +86,10 @@ public class NoticeInsertServlet extends HttpServlet {
 				originFile.delete();
 			}
 
-			notice.setOriFile(originalFileName);
-			notice.setReFile(renameFileName);
 
-		} 
+		} }
+		notice.setOriFile(original);
+		notice.setReFile(rename);
 		int result = new NoticeService().insertBoard(notice);
 		RequestDispatcher view = null;
 		if (result > 0) {

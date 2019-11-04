@@ -190,7 +190,13 @@ function Chat() {
 			
 			<tr>
 			<th>파일 첨부</th>
-			<td><input type="file" name="nofile"></td>
+			<td>
+			<input type="file" name="nofile1">
+			<input type="file" name="nofile2">
+			<input type="file" name="nofile3">
+			<input type="file" name="nofile4">
+			<input type="file" name="nofile5">
+			</td>
 			</tr>
 		</table>
 		<br>

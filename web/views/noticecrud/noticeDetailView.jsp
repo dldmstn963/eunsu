@@ -374,9 +374,13 @@ function dellist(){
 			<%=notice.getNoticecontent() %>
 			<%} %>
 			
-			<%if(notice.getOriFile() != null){ %>
-			<%if(notice.getOriFile().substring(notice.getOriFile().lastIndexOf(".") + 1).equals("jpg")){ %>
-			<img src="/eunsu/resources/nofile/<%=notice.getReFile()%>">
+			<%if(notice.getOriFile() != null){
+				String[] Rfiles = (notice.getReFile()).split("/");%>
+				<%for(int i = 0; i < Rfiles.length; i++){
+					String co = Rfiles[i].substring(Rfiles[i].lastIndexOf(".") + 1);%>
+			<%if(co.equals("jpg")||co.equals("png")||co.equals("jpeg")||co.equals("gif")){ %>
+			<img src="/eunsu/resources/nofile/<%=Rfiles[i]%>"><br>
+			<%}%>
 			<%}%>
 			<%} %>
 			</td>
@@ -385,8 +389,14 @@ function dellist(){
 			<tr>
 			<th >첨부파일</th>
 			<td colspan="7">
-			<%if(notice.getOriFile() != null) {%>
-				<a href="/eunsu/noticedown?ofile=<%=notice.getOriFile()%>&rfile=<%=notice.getReFile()%>"><%=notice.getOriFile() %></a>
+			<%if(notice.getOriFile() != null) {
+				String[] Ofiles = (notice.getOriFile()).split("/");
+				String[] Rfiles = (notice.getReFile()).split("/");
+			%>
+				<%for(int i = 0; i < Ofiles.length; i++){ %>
+				<a href="/eunsu/noticedown?ofile=<%=Ofiles[i]%>&rfile=<%=Rfiles[i]%>"><%=Ofiles[i]%></a>
+				<br>
+				<%} %>
 			<%}else{ %>
 				첨부파일 없음
 			<%} %>
