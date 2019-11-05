@@ -32,7 +32,7 @@ $(function (){
 			url : "/eunsu/employeesearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/employeesearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})//ajax
 		return false;
@@ -44,7 +44,7 @@ $(function (){
 			url : "/eunsu/employeesearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/employeesearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})//ajax
 		return false;
@@ -56,7 +56,7 @@ $(function (){
 			url:"/eunsu/employeesearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/employeesearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})
 		return false;
@@ -68,7 +68,7 @@ $(function (){
 			url:"/eunsu/employeesearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/employeesearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})
 		return false;
@@ -80,7 +80,7 @@ $(function (){
 			url:"/eunsu/employeesearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/employeesearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})
 		return false;
@@ -92,7 +92,7 @@ $(function (){
 			url:"/eunsu/employeesearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/employeesearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})
 		return false;
@@ -104,7 +104,7 @@ $(function (){
 			url:"/eunsu/employeesearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/employeesearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})
 		return false;
@@ -116,7 +116,7 @@ $(function (){
 			url:"/eunsu/employeesearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/employeesearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})
 		return false;
@@ -127,7 +127,7 @@ $(function (){
 			url:"/eunsu/employeesearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/employeesearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})
 		return false;
@@ -138,7 +138,7 @@ $(function (){
 			url:"/eunsu/employeesearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/employeesearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})
 		return false;
@@ -163,7 +163,7 @@ function dellist(){
 			lists : list
 		},
 		success : function(data){
-			location.href = "http://127.0.0.1:9595/eunsu/employeesearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+			location.reload();
 			$("#alertbox").html(data);
 		}
 	})

@@ -315,7 +315,7 @@ body {
 									<a href="/eunsu/views/classcrud/classinsert.jsp">과목 추가</a>
 								</p>
 								<p>
-									<a href="/eunsu/classslist">과목 수정 및 삭제</a>
+									<a href="/eunsu/calendarlist">과목 수정 및 삭제</a>
 								</p>
 							</p>
 						</div>
@@ -477,15 +477,15 @@ body {
 			
 			<br>
 				<div id="pagebox" align="center">
-					<a href="/eunsu/classslist?page=1">|◁</a> &nbsp;
+					<a href="/eunsu/calendarlist?page=1">|◁</a> &nbsp;
 					<%
 						if ((beginPage - 10) < 1) {
 					%>
-					<a href="/eunsu/classslist?page=1">◀◀</a>
+					<a href="/eunsu/calendarlist?page=1">◀◀</a>
 					<%
 						} else {
 					%>
-					<a href="/eunsu/classslist?page=<%=beginPage - 10%>">◀◀</a>
+					<a href="/eunsu/calendarlist?page=<%=beginPage - 10%>">◀◀</a>
 					<%
 						}
 					%>
@@ -494,12 +494,12 @@ body {
 						for (int p = beginPage; p <= endPage; p++) {
 							if (p == currentPage) {
 					%>
-					<a href="/eunsu/classslist?page=<%=p%>"><font color="red"><b>[<%=p%>]
+					<a href="/eunsu/calendarlist?page=<%=p%>"><font color="red"><b>[<%=p%>]
 						</b></font></a>
 					<%
 						} else {
 					%>
-					<a href="/eunsu/classslist?page=<%=p%>"><%=p%></a>
+					<a href="/eunsu/calendarlist?page=<%=p%>"><%=p%></a>
 					<%
 						}
 						}
@@ -508,15 +508,15 @@ body {
 					<%
 						if ((endPage + 10) > maxPage) {
 					%>
-					<a href="/eunsu/classslist?page=<%=maxPage%>">▶▶</a>
+					<a href="/eunsu/calendarlist?page=<%=maxPage%>">▶▶</a>
 					<%
 						} else {
 					%>
-					<a href="/eunsu/classslist?page=<%=endPage + 10%>">▶▶</a>
+					<a href="/eunsu/calendarlist?page=<%=endPage + 10%>">▶▶</a>
 					<%
 						}
 					%>
-					&nbsp; <a href="/eunsu/classslist?page=<%=maxPage%>">▷|</a>
+					&nbsp; <a href="/eunsu/calendarlist?page=<%=maxPage%>">▷|</a>
 				</div>
 				<%
 				}

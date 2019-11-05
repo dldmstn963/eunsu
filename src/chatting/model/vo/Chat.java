@@ -10,7 +10,15 @@ public class Chat implements java.io.Serializable{
 	private String content;
 	private String chatDate;
 	private int chat_notification;
+	private String receiverName;
+
 	
+	public String getReceiverName() {
+		return receiverName;
+	}
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
+	}
 	public int getChat_notification() {
 		return chat_notification;
 	}

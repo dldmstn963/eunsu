@@ -459,6 +459,24 @@
 				</fieldset>
 			</div>
 			<script type="text/javascript">
+			$(function(){ 
+				$.ajax({
+					url : "/eunsu/chattingnoti",
+					data : {
+						sender : $('#sender').val(),
+						receiver : $('#receiver').val()
+					}
+				})//ajax});
+			});
+
+			
+			
+			
+			
+			
+			
+			
+			
 	var objDiv = document.getElementById("messageWindow");
 	var d = new Date();
 	//상대방과 연결할 웹소켓 객체 준비
@@ -486,7 +504,7 @@
 		사용되는 프로토콜은 ws:// 임.
 		*/	
 		webSocket = new WebSocket(
-				"ws://192.168.20.7:9595/" +
+				"ws://192.168.20.7:9345/" +
 				"<%=request.getContextPath()%>/unicast");
 
 					//웹소켓을 통해서 연결이 될 때 동작할 이벤트핸들러 작성
@@ -527,15 +545,26 @@
 							success : function(data) {
 								$("#p1").html(data);
 							}
-						})//ajax
-
+						});//ajax
+						
+						$.ajax({
+							url : "/eunsu/chattingnoti",
+							data : {
+								sender : $('#sender').val(),
+								receiver : $('#receiver').val()
+							}
+						});//ajax
+						
+						
 						$textarea.html($textarea.html() + "<p>"
 								+ d.getFullYear() + "." + (d.getMonth() + 1)
 								+ "." + d.getDate() + " " + d.getHours() + ":"
 								+ d.getMinutes()
 								+ "</p><p class='chat_content'>나 : "
 								+ $inputMessage.val() + "</p>");
-						webSocket.send($('#sender').val() + "|"+ $inputMessage.val()+ "|"+$('#receiver').val());
+						webSocket.send($('#sender').val() + "|"
+								+ $inputMessage.val() + "|"
+								+ $('#receiver').val());
 						$inputMessage.val(''); //기록된 메세지 삭제함
 						objDiv.scrollTop = objDiv.scrollHeight;
 					}
@@ -557,7 +586,8 @@
 					//전송온 메세지가 비었거나, 보낸사람이 내가 연결한
 					//사람이 아닐 경우 아무 내용도 실행하지 않는다.
 					if (content == ""
-							|| !receiverID.match($('#receiver').val()) || !senderID.match($('#sender').val())) {
+							|| !receiverID.match($('#receiver').val())
+							|| !senderID.match($('#sender').val())) {
 						//비워 놓음
 					} else {
 						$textarea.html($textarea.html()
@@ -568,7 +598,13 @@
 								+ d.getHours() + ":" + d.getMinutes() + "</p>");
 						//화면이 위로 스크롤되게 처리함
 						objDiv.scrollTop = objDiv.scrollHeight;
-
+						$.ajax({
+							url : "/eunsu/chattingnoti",
+							data : {
+								sender : $('#sender').val(),
+								receiver : $('#receiver').val()
+							}
+						});//ajax
 					}
 
 				} //onMessage()
@@ -589,6 +625,7 @@
 					//채팅창  안 보이게 함
 					$('#endBtn').on('click', function() {
 						webSocket.close();
+						window.location = document.referrer;
 					});
 
 				});

@@ -58,7 +58,10 @@ public class StudentDao {
 	public int insertStudent(Connection conn, Student student) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "insert into tb_student values(?, ?, ?, ?, ?, ?,'N',?,?,?)";
+		String query = "INSERT ALL " + 
+				"INTO tb_student values(?, ?, ?, ?, ?, ?,'N',?,?,?) " + 
+				"INTO TB_CHATID VALUES(?,?) " + 
+				"SELECT * FROM DUAL";
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -71,6 +74,8 @@ public class StudentDao {
 			pstmt.setString(7, student.getCoachprofessor());
 			pstmt.setString(8, student.getStudentPassword());
 			pstmt.setString(9, student.getStudentImage());
+			pstmt.setString(10, student.getStudentNo());
+			pstmt.setString(11, student.getStudentName());
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -187,9 +192,9 @@ public class StudentDao {
 			pstmt.setString(3, student.getStudentName());
 			pstmt.setString(4, student.getAbsenceYN());
 			pstmt.setString(1, student.getCoachprofessor());
-
 			result = pstmt.executeUpdate();
-
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -213,6 +218,11 @@ public class StudentDao {
 			pstmt.setString(1, STUDENT_NO);
 			result = pstmt.executeUpdate();
 		
+			query="DELETE FROM TB_CHATID WHERE IDNO=?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, STUDENT_NO);
+			pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -329,6 +339,12 @@ public class StudentDao {
 				pstmt.setString(6, student.getStudentNo());
 			}
 			result = pstmt.executeUpdate();
+			
+			query="UPDATE TB_CHATID SET NAME=? WHERE IDNO=?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, student.getStudentName());
+			pstmt.setString(2, student.getStudentNo());
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

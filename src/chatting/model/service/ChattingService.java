@@ -49,4 +49,44 @@ public class ChattingService {
 		return list;
 	}
 
+	public int chatNoti(Chat chat) {
+		Connection conn = getConnection();
+		int result = cdao.chatNoti(conn, chat);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int getListCount() {
+		Connection conn = getConnection();
+		int listCount = cdao.getListCount(conn);
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<Chat> selectList(int startRow, int endRow) {
+		Connection conn = getConnection();
+		ArrayList<Chat> list = cdao.selectList(conn, startRow, endRow);
+		close(conn);
+		return list;
+	}
+
+	public int getListCount(String type, String id, String name) {
+		Connection conn = getConnection();
+		int listCount = cdao.getListCount(conn,type,id,name);
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<Chat> selectList(int startRow, int endRow, String type, String id, String name) {
+		Connection conn = getConnection();
+		ArrayList<Chat> list = cdao.selectList(conn, startRow, endRow,type, id, name);
+		close(conn);
+		return list;
+	}
+
 }

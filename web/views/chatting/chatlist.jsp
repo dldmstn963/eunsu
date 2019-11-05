@@ -353,7 +353,8 @@
 				id="myTable2">
 				<tr>
 					<th>아이디</th>
-					<th>온 메세지</th>
+					<th>이 름</th>
+					<th>안 읽은 메세지</th>
 				</tr>
 				<%
 					for (Chat c : list) {
@@ -364,22 +365,21 @@
 					%>
 					<td><a
 						href="/eunsu/chattinggo?sender=<%=loginProfessor.getProfessorNo()%>&receiver=<%=c.getReceiver()%>"><%=c.getReceiver()%></a></td>
-					<td>니나누</td>
 					<%
 						} else if (loginEmployee != null) {
 					%>
 					<td><a
 						href="/eunsu/chattinggo?sender=<%=loginEmployee.getEmployeeNo()%>&receiver=<%=c.getReceiver()%>"><%=c.getReceiver()%></a></td>
-					<td>니나누</td>
 					<%
 						} else if (loginStudent != null) {
 					%>
 					<td><a
 						href="/eunsu/chattinggo?sender=<%=loginStudent.getStudentNo()%>&receiver=<%=c.getReceiver()%>"><%=c.getReceiver()%></a></td>
-					<td>니나누</td>
 					<%
 						}
 					%>
+					<td><%=c.getReceiverName() %></td>
+					<td><%=c.getChat_notification() %></td>
 				</tr>
 				<%
 					}

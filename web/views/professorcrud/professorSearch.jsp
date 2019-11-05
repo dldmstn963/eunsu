@@ -32,7 +32,7 @@ $(function (){
 			url : "/eunsu/professorsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/professorsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})//ajax
 	});//click
@@ -43,7 +43,7 @@ $(function (){
 			url : "/eunsu/professorsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/professorsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})//ajax
 	});//click
@@ -54,7 +54,7 @@ $(function (){
 			url:"/eunsu/professorsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/professorsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})
 	});//click
@@ -65,7 +65,7 @@ $(function (){
 			url:"/eunsu/professorsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/professorsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})
 	});//click
@@ -76,7 +76,7 @@ $(function (){
 			url:"/eunsu/professorsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/professorsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})
 	});//click
@@ -87,7 +87,7 @@ $(function (){
 			url:"/eunsu/professorsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/professorsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})
 	});//click
@@ -98,7 +98,7 @@ $(function (){
 			url:"/eunsu/professorsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/professorsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})
 	});//click
@@ -109,7 +109,7 @@ $(function (){
 			url:"/eunsu/professorsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/professorsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})
 	});//click
@@ -119,7 +119,7 @@ $(function (){
 			url:"/eunsu/professorsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/professorsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})
 		return false;
@@ -130,7 +130,7 @@ $(function (){
 			url:"/eunsu/professorsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/professorsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+				location.reload();
 			}
 		})
 		return false;
@@ -155,7 +155,7 @@ function dellist(){
 			lists : list
 		},
 		success : function(data){
-			location.href = "http://127.0.0.1:9595/eunsu/professorsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>";
+			location.reload();
 			$("#alertbox").html(data);
 		}
 	})

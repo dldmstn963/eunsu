@@ -55,7 +55,6 @@ public class NoticeInsertServlet extends HttpServlet {
 				mrequest.getFilesystemName("nofile4"),
 				mrequest.getFilesystemName("nofile5")
 		};
-		System.out.println("인서트 서블릿 배열 길이 " + originalFileName.length);
 		String original = "";
 		String rename = "";
 		for(int i = 0; i<originalFileName.length; i++) {

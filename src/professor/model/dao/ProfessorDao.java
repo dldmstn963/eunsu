@@ -56,8 +56,9 @@ public class ProfessorDao {
 	public int insertProfessor(Connection conn, Professor professor) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "insert into tb_professor values(?,?,?,?,?,?,?)";
-
+		String query = "INSERT ALL into tb_professor values(?,?,?,?,?,?,?)"
+						+" INTO TB_CHATID VALUES(?,?) " + 
+						"SELECT * FROM DUAL";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, professor.getProfessorNo());
@@ -67,7 +68,8 @@ public class ProfessorDao {
 			pstmt.setString(5, professor.getDepartmentNo());
 			pstmt.setString(6, professor.getProfessorPassword());
 			pstmt.setString(7, professor.getProfessorImage());
-
+			pstmt.setString(8, professor.getProfessorNo());
+			pstmt.setString(9, professor.getProfessorName());
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -200,7 +202,12 @@ public class ProfessorDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, PROFESSOR_NO);
 			result = pstmt.executeUpdate();
-		
+			
+			query="DELETE FROM TB_CHATID WHERE IDNO=?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, PROFESSOR_NO);
+			pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -303,6 +310,12 @@ public class ProfessorDao {
 				pstmt.setString(6, professor.getProfessorNo());
 			}
 			result = pstmt.executeUpdate();
+			
+			query="UPDATE TB_CHATID SET NAME=? WHERE IDNO=?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, professor.getProfessorName());
+			pstmt.setString(2, professor.getProfessorNo());
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

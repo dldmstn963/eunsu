@@ -1,10 +1,7 @@
 package chatting.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,36 +14,33 @@ import chatting.model.service.ChattingService;
 import chatting.model.vo.Chat;
 
 /**
- * Servlet implementation class ChattingListServlet
+ * Servlet implementation class ChatIDSearchServlet
  */
-@WebServlet("/chattinglist")
-public class ChattingListServlet extends HttpServlet {
+@WebServlet("/idsearch")
+public class ChatIDSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ChatIDSearchServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public ChattingListServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int currentPage = 1;
 		if (request.getParameter("page") != null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 
 		}
 		int limit = 10; // 한 페이지에 출력할 목록 갯수
-		String employeeNo = request.getParameter("employeeNo");
 		ChattingService cservice = new ChattingService();
 
-		int listCount = cservice.getListCount(employeeNo); // 테이블의 전체 목록 갯수 조회
+		int listCount = cservice.getListCount(); // 테이블의 전체 목록 갯수 조회
 		// 총 페이지 수 계산
 		int maxPage = listCount / limit;
 		if (listCount % limit > 0) {
@@ -67,28 +61,26 @@ public class ChattingListServlet extends HttpServlet {
 		// currentPage 에 출력할 목록의 조회할 행 번호 계산
 		int startRow = (currentPage * limit) - 9;
 		int endRow = currentPage * limit;
-		ArrayList<Chat> list = cservice.selectList(startRow, endRow, employeeNo);
+		ArrayList<Chat> list = cservice.selectList(startRow, endRow);
 
 		
 
 		RequestDispatcher view = null;
 
-		view = request.getRequestDispatcher("views/chatting/chatlist.jsp");
+		view = request.getRequestDispatcher("views/chatting/idsearch.jsp");
 		request.setAttribute("list", list);
 		request.setAttribute("maxPage", maxPage);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("beginPage", beginPage);
 		request.setAttribute("endPage", endPage);
-		request.setAttribute("employeeNo", request.getParameter("employeeNo"));
 		view.forward(request, response);
+		
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

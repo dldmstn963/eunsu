@@ -58,7 +58,9 @@ public class EmployeeDao {
 	public int insertEmployee(Connection conn, Employee employee) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "insert into TB_EMPLOYEE values(?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT ALL into TB_EMPLOYEE values(?,?,?,?,?,?,?,?,?)"
+				+" INTO TB_CHATID VALUES(?,?) " + 
+				"SELECT * FROM DUAL";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, employee.getEmployeeNo());
@@ -70,7 +72,8 @@ public class EmployeeDao {
 			pstmt.setString(7, employee.getEmployeeimage());
 			pstmt.setDate(8, employee.getHire_date());
 			pstmt.setInt(9, employee.getSalary());
-
+			pstmt.setString(10, employee.getEmployeeNo());
+			pstmt.setString(11, employee.getEmployeeName());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -199,7 +202,12 @@ public class EmployeeDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, EMPLOYEE_NO);
 			result = pstmt.executeUpdate();
-
+			
+			query="DELETE FROM TB_CHATID WHERE IDNO=?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, EMPLOYEE_NO);
+			pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -311,6 +319,12 @@ public class EmployeeDao {
 				pstmt.setString(6, employee.getEmployeeNo());
 			}
 			result = pstmt.executeUpdate();
+			
+			query="UPDATE TB_CHATID SET NAME=? WHERE IDNO=?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, employee.getEmployeeName());
+			pstmt.setString(2, employee.getEmployeeNo());
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

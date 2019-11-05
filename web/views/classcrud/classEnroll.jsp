@@ -42,7 +42,7 @@ $(function(){
 							studentNo : '<%=loginStudent.getStudentNo()%>'
 						},
 						success : function(data) {
-							location.href = "http://127.0.0.1:9595/eunsu/classenrollList?page="+<%=currentPage%>;
+							location.reload();
 							$("#alertbox").html(data);
 						}
 					})

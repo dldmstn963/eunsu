@@ -219,11 +219,16 @@ function Chat() {
 			<th>첨부파일</th>
 			<td>
 			<%if(notice.getOriFile() != null) {%>
-				<a href="/eunsu/noticedown?ofile=<%=notice.getOriFile()%>&rfile=<%=notice.getReFile()%>"><%=notice.getOriFile() %></a>
+				<%=notice.getOriFile() %>
 			<%}else{ %>
 				첨부파일 없음
 			<%} %>
-			<br><input type="file" name="nofile">
+			<br>
+			<input type="file" name="nofile1">
+			<input type="file" name="nofile2">
+			<input type="file" name="nofile3">
+			<input type="file" name="nofile4">
+			<input type="file" name="nofile5">
 			</td>
 			</tr>
 		</table>

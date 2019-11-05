@@ -34,7 +34,7 @@ $(function (){
 			url : "/eunsu/studentsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/studentsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>&searchopen=<%= searchopen%>&searchpro=<%= searchpro%>";
+				location.reload();
 			}
 		})//ajax
 	});//click
@@ -45,7 +45,7 @@ $(function (){
 			url : "/eunsu/studentsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/studentsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>&searchopen=<%= searchopen%>&searchpro=<%= searchpro%>";
+				location.reload();
 			}
 		})//ajax
 	});//click
@@ -56,7 +56,7 @@ $(function (){
 			url:"/eunsu/studentsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/studentsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>&searchopen=<%= searchopen%>&searchpro=<%= searchpro%>";
+				location.reload();
 			}
 		})
 	});//click
@@ -67,7 +67,7 @@ $(function (){
 			url:"/eunsu/studentsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/studentsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>&searchopen=<%= searchopen%>&searchpro=<%= searchpro%>";
+				location.reload();
 			}
 		})
 	});//click
@@ -78,7 +78,7 @@ $(function (){
 			url:"/eunsu/studentsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/studentsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>&searchopen=<%= searchopen%>&searchpro=<%= searchpro%>";
+				location.reload();
 			}
 		})
 	});//click
@@ -89,7 +89,7 @@ $(function (){
 			url:"/eunsu/studentsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/studentsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>&searchopen=<%= searchopen%>&searchpro=<%= searchpro%>";
+				location.reload();
 			}
 		})
 	});//click
@@ -100,7 +100,7 @@ $(function (){
 			url:"/eunsu/studentsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/studentsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>&searchopen=<%= searchopen%>&searchpro=<%= searchpro%>";
+				location.reload();
 			}
 		})
 	});//click
@@ -111,7 +111,7 @@ $(function (){
 			url:"/eunsu/studentsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/studentsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>&searchopen=<%= searchopen%>&searchpro=<%= searchpro%>";
+				location.reload();
 			}
 		})
 	});//click
@@ -121,7 +121,7 @@ $(function (){
 			url:"/eunsu/studentsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/studentsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>&searchopen=<%= searchopen%>&searchpro=<%= searchpro%>";
+				location.reload();
 			}
 		})
 		return false;
@@ -132,7 +132,7 @@ $(function (){
 			url:"/eunsu/studentsearch",
 			data : {sort : sort},
 			success : function(data) {
-				location.href = "http://127.0.0.1:9595/eunsu/studentsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>&searchopen=<%= searchopen%>&searchpro=<%= searchpro%>";
+				location.reload();
 			}
 		})
 		return false;
@@ -157,7 +157,7 @@ function dellist(){
 			lists : list
 		},
 		success : function(data){
-			location.href = "http://127.0.0.1:9595/eunsu/studentsearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchdepart=<%=searchdepart %>&searchopen=<%= searchopen%>&searchpro=<%= searchpro%>";
+			location.reload();
 			$("#alertbox").html(data);
 		}
 	})

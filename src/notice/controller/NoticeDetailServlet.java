@@ -61,15 +61,6 @@ public class NoticeDetailServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginEmployee", loginEmployee);
 		}
-		String[] Ofiles = notice.getOriFile().split("|");
-		String[] Rfiles = notice.getReFile().split("|");
-		System.out.println("-------------------");
-		System.out.println("1 : " + Ofiles[0]);
-		System.out.println("2 : " + Ofiles[1]);
-		System.out.println("3 : " + Rfiles[0]);
-		System.out.println("4 : " + Rfiles[1]);
-		System.out.println("5 : " + notice.getOriFile());
-		System.out.println("6 : " + notice.getReFile());
 		
 		if(notice != null) {
 			view = request.getRequestDispatcher("views/noticecrud/noticeDetailView.jsp");

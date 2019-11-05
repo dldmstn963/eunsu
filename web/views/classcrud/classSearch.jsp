@@ -29,7 +29,7 @@ $("#classNoSortD").click(function() {
 		url : "/eunsu/classssearch",
 		data : {sort : sort},
 		success : function(data) {
-			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+			location.reload();
 		}
 	})//ajax
 	return false;
@@ -41,7 +41,7 @@ $("#classNoSortA").click(function() {
 		url : "/eunsu/classssearch",
 		data : {sort : sort},
 		success : function(data) {
-			location.href ="http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+			location.reload();
 		}
 	})//ajax
 	return false;
@@ -53,7 +53,7 @@ $("#classNameSortD").click(function(){
 		url:"/eunsu/classssearch",
 		data : {sort : sort},
 		success : function(data) {
-			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+			location.reload();
 		}
 	})
 	return false;
@@ -65,7 +65,7 @@ $("#classNameSortA").click(function(){
 		url:"/eunsu/classssearch",
 		data : {sort : sort},
 		success : function(data) {
-			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+			location.reload();
 		}
 	})
 	return false;
@@ -77,7 +77,7 @@ $("#classTypeSortD").click(function(){
 		url:"/eunsu/classssearch",
 		data : {sort : sort},
 		success : function(data) {
-			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+			location.reload();
 		}
 	})
 	return false;
@@ -89,7 +89,7 @@ $("#classTypeSortA").click(function(){
 		url:"/eunsu/classssearch",
 		data : {sort : sort},
 		success : function(data) {
-			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+			location.reload();
 		}
 	})
 	return false;
@@ -101,7 +101,7 @@ $("#classDepartSortD").click(function(){
 		url:"/eunsu/classssearch",
 		data : {sort : sort},
 		success : function(data) {
-			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+			location.reload();
 		}
 	})
 	return false;
@@ -113,7 +113,7 @@ $("#classDepartSortA").click(function(){
 		url:"/eunsu/classssearch",
 		data : {sort : sort},
 		success : function(data) {
-			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+			location.reload();
 		}
 	})
 	return false;
@@ -124,7 +124,7 @@ $("#classPreSortD").click(function(){
 		url:"/eunsu/classssearch",
 		data : {sort : sort},
 		success : function(data) {
-			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+			location.reload();
 		}
 	})
 	return false;
@@ -135,7 +135,7 @@ $("#classPreSortA").click(function(){
 		url:"/eunsu/classssearch",
 		data : {sort : sort},
 		success : function(data) {
-			location.href = "http://127.0.0.1:9595/eunsu/classssearch?page=<%=currentPage%>&searchno=<%= searchno%>&searchname=<%=searchname %>&searchtype=<%=searchtype %>&searchdepart=<%= searchdepart%>";
+			location.reload();
 		}
 	})
 	return false;
@@ -159,7 +159,7 @@ $("#classPreSortA").click(function(){
 				lists : list
 			},
 			success : function(data){
-				location.href = "http://127.0.0.1:9595/eunsu/classslist?page="+<%=currentPage%>;
+				location.reload();
 				$("#alertbox").html(data);
 			}
 		})

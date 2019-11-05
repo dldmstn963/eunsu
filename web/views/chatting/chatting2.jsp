@@ -403,7 +403,7 @@ Professor loginProfessor = (Professor) session.getAttribute("loginProfessor");
 				}
 			%>
 			
-상대방 아이디 : <input type="text" id="receiver" size="10" > <br>
+상대방 아이디 : <input type="text" id="receiver" size="10" > &nbsp;&nbsp;&nbsp; <input type="button" value="찾기" id="idsearch"> <br>
 <button id="start">채팅하기</button>
 <hr>
 <!-- 채팅방 화면 구현하기 -->
@@ -446,7 +446,7 @@ Professor loginProfessor = (Professor) session.getAttribute("loginProfessor");
 		사용되는 프로토콜은 ws:// 임.
 		*/	
 		webSocket = new WebSocket(
-				"ws://192.168.20.7:9595/" +
+				"ws://192.168.20.7:9345/" +
 				"<%= request.getContextPath() %>/unicast");
 	
 		//웹소켓을 통해서 연결이 될 때 동작할 이벤트핸들러 작성
@@ -542,6 +542,10 @@ $(function(){
 	//'채팅하기' 버튼 클릭시, 서버와 연결되고 
 	//채팅창이 나타나게 함
 	$('#start').on('click', function(){
+		if($("#receiver").val()==""){
+			alert("상대방 아이디를 입력하세요");
+			return false
+		}
 		//채팅창 영역 보이게 함
 		$('#chatbox').css("display", "block");
 		//클릭한 버튼은 안 보이게 함
@@ -553,19 +557,19 @@ $(function(){
 	//'나가기' 버튼 클릭시 소켓닫기
 	//채팅창  안 보이게 함
 	$('#endBtn').on('click', function(){
-		//채팅창 안 보이게 함
-		$('#chatbox').css("display", "none");
-		//채팅하기 버튼은 다시 보이게 함
-		$('#start').css("display", "inline");
-		//서버로 종료 메세지 전송함
-		webSocket.send($('#sender').val() 
-				+ "님이 퇴장하였습니다.");
-		//소켓닫기
 		webSocket.close();
+		window.location = document.referrer;
+	});
+	
+	$('#idsearch').on('click', function(){
+		window.open("/eunsu/idsearch","test","width = 500, height = 500, top = 100, left = 200, location = no");
 	});
 	
 });
-
+	
+function testCheck(name){
+   $("#receiver").val(name);
+}
 
 	//전송할 메세지 입력하면서, 키보드 키에서 손뗄때마다
 	//실행되는 이벤트핸들러 함수
