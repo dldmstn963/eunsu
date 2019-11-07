@@ -116,7 +116,7 @@ function Chat() {
 						</button>
 						<div id="Demo1" class="w3-hide w3-container">
 							<p>
-								<a href="/eunsu/views/professorbasic.jsp">강의 과목 보기</a>
+								<a href="/eunsu/classcheck?pno=<%=loginProfessor.getProfessorNo()%>">강의 과목 보기</a>
 							</p>
 						</div>
 						<button onclick="myFunction('Demo2')"
@@ -143,7 +143,7 @@ function Chat() {
 				<!-- End Left Column -->
 			</div>
 			<!-- End Grid -->
-			<h1 align="center">과목 수정 및 삭제</h1>
+			<h1 align="center">학점 입력 및 수정</h1>
 			<div style="display: none;" id="alertbox"></div>
 			<br>
 			<form action="/eunsu/gradeupdate">

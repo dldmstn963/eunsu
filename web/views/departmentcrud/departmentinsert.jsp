@@ -237,7 +237,7 @@ function Chat() {
 		<h1 align="center">학과 추가</h1>
 		<table align="center" border="1" cellspacing="0" cellpadding="10">
 		<form name="join" onsubmit="return validate();" action="/eunsu/departmentinsert" method="post">
-		<tr><th>학과 번호</th><td><input type="text" name="DEPARTMENT_NO" id="departno">
+		<tr><th>학과 번호</th><td><input type="text" name="DEPARTMENT_NO" id="departno"  placeholder="000">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="confirm" value="중복확인">
 		<p id="result" style="display:none;"></p></td></tr>
 		<tr><th>학과 이름</th><td><input type="text" name="DEPARTMENT_NAME" id="DEPARTMENT_NAME"></td></tr>
@@ -249,7 +249,7 @@ function Chat() {
 		<option value="인문사회">인문사회</option> 
 		<option value="자연과학">자연과학</option> 
 		</select></td></tr>
-		<tr><th>학과 정원</th><td><input type="number" name="CAPACITY" id="CAPACITY"></td></tr>
+		<tr><th>학과 정원</th><td><input type="number" name="CAPACITY" id="CAPACITY"  placeholder="1~100"></td></tr>
 		<tr><th colspan="2">
 		<input type="submit" value="추가"> &nbsp;
 		<input type="reset" value="초기화">

@@ -247,27 +247,27 @@
 			<table align="center" border="1" cellspacing="0" cellpadding="10">
 				<form onsubmit="return validate();" name="join" action="/eunsu/classsinsert" method="post">
 					<tr>
-						<th>과목 번호</th>
-						<td><input type="text" name="classno" id="classno">
+						<th>*과목 번호</th>
+						<td><input type="text" name="classno" id="classno"  placeholder="000">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button"
 							id="confirm" value="중복확인">
 							<p id="result" style="display: none;"></p></td>
 					</tr>
 					<tr>
-						<th>학과 번호</th>
+						<th>*학과 번호</th>
 						<td><input type="text" name="classdepartno"
-							id="classdepartno"></td>
+							id="classdepartno"  placeholder="000"></td>
 					</tr>
 					<tr>
 						<th>선행 과목 번호</th>
 						<td><input type="text" name="preatending" id="preatending"></td>
 					</tr>
 					<tr>
-						<th>과목 이름</th>
+						<th>*과목 이름</th>
 						<td><input type="text" name="classname" id="classname"></td>
 					</tr>
 					<tr>
-						<th>과목 분류</th>
+						<th>*과목 분류</th>
 						<td><select name="classtype" id="classtype">
 								<option value="">선택 해주세요</option>
 								<option value="공통과목">공통과목</option>
@@ -277,9 +277,9 @@
 						</select></td>
 					</tr>
 					<tr>
-						<th>담당 교수 번호</th>
+						<th>*담당 교수 번호</th>
 						<td><input type="text" name="classprofessor"
-							id="classprofessor"></td>
+							id="classprofessor"  placeholder="P000"></td>
 					</tr>
 					<tr>
 						<th colspan="2"><input type="submit" value="추가">

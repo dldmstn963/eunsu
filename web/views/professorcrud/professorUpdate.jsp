@@ -269,7 +269,7 @@ function dellist(){
 				<!-- End Left Column -->
 			</div>
 			<!-- End Grid -->
-		<h1 align="center">학과 수정 및 삭제</h1>
+		<h1 align="center">교수 수정 및 삭제</h1>
 		<div style="display:none;" id="alertbox"></div>
 		<form action="/eunsu/professorsearch" align="center">
 			교수 번호 : <input type="text" style="width: 90px;" name="searchno" value="">

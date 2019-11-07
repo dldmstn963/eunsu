@@ -179,7 +179,7 @@
 			</div>
 			<!-- End Grid -->
 			<h1 align="center">학기 추가</h1>
-				<form align="center" onsubmit="return validate();" action="/eunsu/ClassOpenServlet" method="post">
+				<form align="center" onsubmit="return validate();" action="/eunsu/classopen" method="post">
 					년도 입력 : 
 					<input type="number" name="year" style="width:100px;" id="year">
 					학기 입력 : 

@@ -285,22 +285,22 @@ function Chat() {
 					enctype="multipart/form-data">
 					<tr>
 						<th>학번</th>
-						<td><input type="text" name="studentno" id="studentno">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+						<td><input type="text" name="studentno" id="studentno" placeholder="A000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
 							type="button" id="confirm" value="중복확인">
 							<p id="result" style="display: none;"></p></td>
 					</tr>
 					<tr>
 						<th>학과 번호</th>
 						<td><input type="text" name="studentdepartno"
-							id="studentdepartno"></td>
+							id="studentdepartno" placeholder="000"></td>
 					</tr>
 					<tr>
 						<th>학생 이름</th>
-						<td><input type="text" name="studentname" id="studentname"></td>
+						<td><input type="text" name="studentname" id="studentname"  ></td>
 					</tr>
 					<tr>
 						<th>학생 주민 번호</th>
-						<td><input type="text" name="studentssn" id="studentssn"></td>
+						<td><input type="text" name="studentssn" id="studentssn"  placeholder="000000-0000000"></td>
 					</tr>
 					<tr>
 						<th>학생 주소</th>
@@ -314,12 +314,12 @@ function Chat() {
 					</tr>
 					<tr>
 						<th>담당 교수 번호</th>
-						<td><input type="text" name="studentcoach" id="studentcoach"></td>
+						<td><input type="text" name="studentcoach" id="studentcoach"  placeholder="P000"></td>
 					</tr>
 					<tr>
 						<th>학생 비밀번호</th>
 						<td><input type="text" name="studentpassword"
-							id="studentpassword"></td>
+							id="studentpassword" placeholder="4~12글자 영어,숫자만 가능"></td>
 					</tr>
 					<tr>
 						<th>학생 증명사진</th>

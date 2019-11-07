@@ -100,7 +100,7 @@
 		이름 검색 : <input type="text" name="name" value="">
 		<br>
 		<br>
-		<input type="submit">
+		<input type="submit" value="검색">
 	</form>
 
 

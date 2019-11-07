@@ -269,7 +269,7 @@ function Chat() {
 					enctype="multipart/form-data">
 					<tr>
 						<th>교수 번호</th>
-						<td><input type="text" name="PROFESSOR_NO" id="professorno">
+						<td><input type="text" name="PROFESSOR_NO" id="professorno"  placeholder="P000">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button"
 							id="confirm" value="중복확인">
 							<p id="result" style="display: none;"></p></td>
@@ -282,7 +282,7 @@ function Chat() {
 					<tr>
 						<th>교수 주민 번호</th>
 						<td><input type="text" name="PROFESSOR_SSN"
-							id="PROFESSOR_SSN"></td>
+							id="PROFESSOR_SSN" placeholder="000000-0000000"></td>
 					</tr>
 					<tr>
 						<th>교수 주소</th>
@@ -292,12 +292,12 @@ function Chat() {
 					<tr>
 						<th>교수 학과 번호</th>
 						<td><input type="text" name="DEPARTMENT_NO"
-							id="DEPARTMENT_NO"></td>
+							id="DEPARTMENT_NO" placeholder="000"></td>
 					</tr>
 					<tr>
 						<th>교수 비밀번호</th>
 						<td><input type="text" name="PROFESSOR_PASSWORD"
-							id="PROFESSOR_PASSWORD"></td>
+							id="PROFESSOR_PASSWORD" placeholder="4~12글자 영어,숫자만 가능"></td>
 					</tr>
 					<tr>
 						<th>교수 증명사진</th>

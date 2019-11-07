@@ -16,6 +16,12 @@ Professor loginProfessor = (Professor) session.getAttribute("loginProfessor");
 <title>수은 대학교</title>
 <script type="text/javascript" src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+function classEnroll() {
+	var f = document.classEnroll2;
+	f.action = "/eunsu/classenrollList";
+	f.method = "post"
+	f.submit();
+}
 
 function commentUpdate(commentNo,commentContent){
 	$("#commentupdate").css("display","block");
@@ -36,6 +42,11 @@ function Chat() {
 }
 function dellist(){
 	location.href = "/eunsu/noticedelete?nono=<%=notice.getNoticeNo()%>";
+	return false;
+}
+
+function dellist2(){
+	location.href = "/eunsu/noticegoupdatepage?page=<%= currentPage%>&nno=<%=notice.getNoticeNo()%>";
 	return false;
 }
 </script>
@@ -205,7 +216,7 @@ function dellist(){
 						</button>
 						<div id="Demo1" class="w3-hide w3-container">
 							<p>
-								<a href="/eunsu/views/professorbasic.jsp">강의 과목 보기</a>
+								<a href="/eunsu/classcheck?pno=<%=loginProfessor.getProfessorNo()%>">강의 과목 보기</a>
 							</p>
 						</div>
 						<button onclick="myFunction('Demo2')"
@@ -379,7 +390,7 @@ function dellist(){
 				<%for(int i = 0; i < Rfiles.length; i++){
 					String co = Rfiles[i].substring(Rfiles[i].lastIndexOf(".") + 1);%>
 			<%if(co.equals("jpg")||co.equals("png")||co.equals("jpeg")||co.equals("gif")){ %>
-			<img src="/eunsu/resources/nofile/<%=Rfiles[i]%>"><br>
+			<img src="/eunsu/resources/nofile/<%=Rfiles[i]%>" width="60%"><br>
 			<%}%>
 			<%}%>
 			<%} %>
@@ -402,22 +413,13 @@ function dellist(){
 			<%} %>
 			</td>
 			</tr>
-		</table>
-		</form>
-		<br>
-		<%if (loginEmployee != null && notice.getEmployeeNo().equals(loginEmployee.getEmployeeNo())) {%>
-		<form action="/eunsu/noticegoupdatepage" >
-		<input type="hidden" value="<%=currentPage %>" name="page">
-		<input type="hidden" value="<%=notice.getNoticeNo() %>" name="nno">
-		<input type="submit" value="글수정">
-		</form>
+			<%if (loginEmployee != null && notice.getEmployeeNo().equals(loginEmployee.getEmployeeNo())) {%>
+			<tr><td colspan="8" align="center">
+		<input type="button" value="글수정" onclick="return dellist2();">
 		<input type="button" value="삭제" onclick="return dellist();">
+		</td></tr>
 		<%} %>
-		 <br>
-		 
-		 
-		 
-		<center>
+		<tr><td colspan="8"><br>		<div align="center"style=" display:block;">
 		 <table style="background:white;">
 		<thead>
 		<tr>
@@ -490,7 +492,7 @@ function dellist(){
 	<form action="/eunsu/commentsupdate">
 	<input type="hidden" id="coNo" name="coNo">
 		수정할 내용을 입력하세요 : <textarea name="comments" id="comments"></textarea>
-		<input type="submit" value="수정">
+		<input type="submit" value="수정"onclick="return checknull3()">
 	</form>
 </div></td></tr>
 		<tr><td colspan="3">	<div id="commentsreply" style="display:none;">
@@ -507,8 +509,8 @@ function dellist(){
 	
 	<input type="hidden" name="noticeNo" value="<%=notice.getNoticeNo() %>">
 	<input type="hidden" name="commentlev" value="2">
-		답변할 내용을 입력하세요 : <textarea name="comments"></textarea>
-		<input type="submit" value="답변">
+		답변할 내용을 입력하세요 : <textarea name="comments" id="comments2"></textarea>
+		<input type="submit" value="답변" onclick="return checknull2()">
 	</form>
 </div></td></tr>
 		</tbody>
@@ -529,13 +531,20 @@ function dellist(){
 			<%} %>
 		<input type="hidden" name="noticeNo" value="<%=notice.getNoticeNo() %>">
 		<input type="hidden" name="commentlev" value="1">
-		<tr><td>댓글을 입력하세요 : <textarea name="commentcontent"></textarea></td></tr>
+		<tr><td>댓글을 입력하세요 : <textarea name="commentcontent" id="commentcontent"></textarea></td></tr>
 		</table>
-		<input align="center" type="submit" value="댓글 등록">
+		<input align="center" type="submit" value="댓글 등록" onclick="return checknull()">
 		</form>
-		</center>
-		</div>
+			</div> <br></td></tr>
+		</table>
+		</form>
+		<br>
 		
+		 <br>
+		 
+		 
+		
+		</div>
 		
 		
 		
@@ -553,6 +562,24 @@ function dellist(){
 	</footer>
 
 	<script>
+	function checknull(){
+		if($("#commentcontent").val()==""){
+			alert("댓글을 입력해주세요");
+			return false;
+		}
+	}
+	function checknull2(){
+		if($("#comments2").val()==""){
+			alert("답변을 입력해주세요");
+			return false;
+		}
+	}
+	function checknull3(){
+		if($("#comments").val()==""){
+			alert("수정할 내용을 입력해주세요");
+			return false;
+		}
+	}
 		// Accordion
 		function myFunction(id) {
 			var x = document.getElementById(id);

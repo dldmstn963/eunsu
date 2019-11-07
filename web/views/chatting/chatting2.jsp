@@ -14,13 +14,24 @@ Professor loginProfessor = (Professor) session.getAttribute("loginProfessor");
 <script type="text/javascript"
 	src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+function classEnroll() {
+	var f = document.classEnroll2;
+	f.action = "/eunsu/classenrollList";
+	f.method = "post"
+	f.submit();
+}
 	function Chat() {
 		var f = document.Chat2;
 		f.action = "/eunsu/chattinglist";
 		f.method = "get"
 		f.submit();
 	}
-	
+	function gradeCheck() {
+		var f = document.classEnroll2;
+		f.action = "/eunsu/gradecheck";
+		f.method = "post"
+		f.submit();
+	}
 </script>
 <style type="text/css">
 	#messageWindow {
@@ -244,7 +255,7 @@ Professor loginProfessor = (Professor) session.getAttribute("loginProfessor");
 						</button>
 						<div id="Demo1" class="w3-hide w3-container">
 							<p>
-								<a href="/eunsu/views/professorbasic.jsp">강의 과목 보기</a>
+								<a href="/eunsu/classcheck?pno=<%=loginProfessor.getProfessorNo()%>">강의 과목 보기</a>
 							</p>
 						</div>
 						<button onclick="myFunction('Demo2')"
@@ -446,7 +457,7 @@ Professor loginProfessor = (Professor) session.getAttribute("loginProfessor");
 		사용되는 프로토콜은 ws:// 임.
 		*/	
 		webSocket = new WebSocket(
-				"ws://192.168.20.7:9345/" +
+				"ws://192.168.20.4:9345/" +
 				"<%= request.getContextPath() %>/unicast");
 	
 		//웹소켓을 통해서 연결이 될 때 동작할 이벤트핸들러 작성
@@ -493,11 +504,13 @@ Professor loginProfessor = (Professor) session.getAttribute("loginProfessor");
 			})//ajax
 			
 			
-			$textarea.html($textarea.html() + 
-					"<p>"+d.getFullYear()+"."+(d.getMonth()+1)+"."+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+"</p><p class='chat_content'>나 : "
-				+ $inputMessage.val() + "</p>");
+			$textarea.html($textarea.html() + "<p class='chat_content'>"
+					+ $inputMessage.val() + "</p><br><p align='right'>"+ d.getFullYear() + "." + (d.getMonth() + 1)
+					+ "." + d.getDate() + " " + d.getHours() + ":"
+					+ d.getMinutes()+"</p>");
 			webSocket.send($('#sender').val() + "|"
-				+ $inputMessage.val());
+					+ $inputMessage.val() + "|"
+					+ $('#receiver').val());
 			$inputMessage.val('');  //기록된 메세지 삭제함
 			objDiv.scrollTop = objDiv.scrollHeight;
 		}
@@ -520,10 +533,12 @@ Professor loginProfessor = (Professor) session.getAttribute("loginProfessor");
 				!receiverID.match($('#receiver').val())){
 			//비워 놓음
 		}else{
-			$textarea.html($textarea.html() +
-					"<p class='chat_content other-side'>"
-					+ receiverID + " : " + content 
-					+ "</p><br><br><p>"+d.getFullYear()+"."+(d.getMonth()+1)+"."+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+"</p>");
+			$textarea.html($textarea.html()
+					+ "<p class='chat_content other-side'>"
+					+ receiverID + " : " + content
+					+ "</p><br><p>"+ d.getFullYear() + "." + (d.getMonth() + 1)
+					+ "." + d.getDate() + " " + d.getHours() + ":"
+					+ d.getMinutes()+"</p>");
 			//화면이 위로 스크롤되게 처리함
 			objDiv.scrollTop = objDiv.scrollHeight;
 

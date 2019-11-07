@@ -55,6 +55,15 @@ function Chat() {
 	f.method = "get"
 	f.submit();
 }
+
+function gradeCheck() {
+	var f = document.classEnroll2;
+	f.action = "/eunsu/gradecheck";
+	f.method = "post"
+	f.submit();
+}
+
+
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -176,7 +185,7 @@ function Chat() {
 				<!-- End Left Column -->
 			</div>
 			<!-- End Grid -->
-			<h1 align="center">과목 수정 및 삭제</h1>
+			<h1 align="center">수강 신청</h1>
 			<div style="display: none;" id="alertbox"></div>
 			<br>
 

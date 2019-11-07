@@ -211,7 +211,7 @@ a {
 						</button>
 						<div id="Demo1" class="w3-hide w3-container">
 							<p>
-								<a href="/eunsu/views/professorbasic.jsp">강의 과목 보기</a>
+								<a href="/eunsu/classcheck?pno=<%=loginProfessor.getProfessorNo()%>">강의 과목 보기</a>
 							</p>
 						</div>
 						<button onclick="myFunction('Demo2')"
@@ -351,8 +351,19 @@ a {
 				<!-- End Left Column -->
 			</div>
 			<div>
-				
-				
+				<br>
+				<br>
+				<br>
+				<br>
+				&nbsp;
+				&nbsp;
+				&nbsp;
+				&nbsp;
+				&nbsp;
+				&nbsp;
+				&nbsp;
+				&nbsp;
+				<img src="/eunsu/resources/images/icons/logo.png" width="60%">
 				
 				
 				

@@ -269,7 +269,7 @@ function check(re, what, message) {
 		<h1 align="center">직원 추가</h1>
 		<table align="center" border="1" cellspacing="0" cellpadding="10">
 		<form name="join" action="/eunsu/employeeinsert" method="post" enctype="multipart/form-data" onsubmit="return validate();">
-		<tr><th>사번</th><td><input type="text" name="EMPLOYEE_NO" id="empno">
+		<tr><th>사번</th><td><input type="text" name="EMPLOYEE_NO" id="empno"  placeholder="E000">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="confirm" value="중복확인">
 		<p id="result" style="display:none;"></p></td></tr>
 		<tr><th>소속 부서 번호</th><td>
@@ -279,11 +279,11 @@ function check(re, what, message) {
 		<option value="2">경영</option>
 		</select></td></tr>
 		<tr><th>사원 이름</th><td><input type="text" name="EMPLOYEE_NAME" id="EMPLOYEE_NAME"></td></tr>
-		<tr><th>사원 주민 번호</th><td><input type="text" name="EMPLOYEE_SSN" id="EMPLOYEE_SSN"></td></tr>
+		<tr><th>사원 주민 번호</th><td><input type="text" name="EMPLOYEE_SSN" id="EMPLOYEE_SSN" placeholder="000000-0000000"></td></tr>
 		<tr><th>사원 주소</th><td><input type="text" name="EMPLOYEE_ADDRESS" id="EMPLOYEE_ADDRESS"></td></tr>
 		<tr><th>입사일</th><td><input type="date" name="HIRE_DATE" id="HIRE_DATE"></td></tr>
 		<tr><th>월급</th><td><input type="number" name="SALARY" id="SALARY"></td></tr>
-		<tr><th>사원 비밀번호</th><td><input type="text" name="EMPLOYEE_PASSWORD" id="EMPLOYEE_PASSWORD"></td></tr>
+		<tr><th>사원 비밀번호</th><td><input type="text" name="EMPLOYEE_PASSWORD" id="EMPLOYEE_PASSWORD" placeholder="4~12글자 영어,숫자만 가능"></td></tr>
 		<tr><th>사원 증명사진</th><td><input type="file" name="EMPLOYEE_IMAGE" id="EMPLOYEE_IMAGE"></td></tr>
 		<tr><th colspan="2">
 		<input type="submit" value="추가"> &nbsp;

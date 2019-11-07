@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import classs.model.vo.Classs;
+import grade.model.vo.Grade;
 
 public class ClasssDao {
 
@@ -288,7 +289,7 @@ public class ClasssDao {
 		} finally {
 			close(pstmt);
 		}
-
+		System.out.println("dao 리절트" + result);
 		return result;
 	}
 
@@ -398,6 +399,76 @@ public class ClasssDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public int getProClassListCount(Connection conn, String professorNo) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "SELECT count(*) " + 
+				"FROM TB_CLASS " + 
+				"NATURAL JOIN TB_CLASS_PROFESSOR " + 
+				"WHERE TB_CLASS_PROFESSOR.PROFESSOR_NO = ? ";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, professorNo);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IndexOutOfBoundsException e) {
+			listCount = 0;
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return listCount;
+	}
+
+	public ArrayList<Classs> classCheckList(Connection conn, int startRow, int endRow, String professorNo) {
+		ArrayList<Classs> list = new ArrayList<Classs>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "SELECT * FROM( " + 
+				"SELECT ROWNUM RNUM, CLASS_NO, PREATTENDING_CLASS_NO,CLASS_NAME,CLASS_TYPE,DEPARTMENT_NO,DEPARTMENT_NAME,CATEGORY,CAPACITY FROM( " + 
+				"SELECT * " + 
+				"FROM TB_CLASS " + 
+				"NATURAL JOIN TB_CLASS_PROFESSOR " + 
+				"NATURAL JOIN TB_DEPARTMENT " + 
+				"WHERE TB_CLASS_PROFESSOR.PROFESSOR_NO = ?)) " + 
+				"WHERE RNUM >= ? AND RNUM <= ?";
+
+		try {
+
+			pstmt = conn.prepareStatement(query);
+
+			pstmt.setString(1, professorNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Classs classs = new Classs();
+				classs.setClassNo(rset.getString("CLASS_NO"));
+				classs.setClassName(rset.getString("CLASS_NAME"));
+				classs.setPreatendingClassNo(rset.getString("PREATTENDING_CLASS_NO"));
+				classs.setClassType(rset.getString("CLASS_TYPE"));
+				classs.setDepartmentNo(rset.getString("DEPARTMENT_NO"));
+				classs.setProfessorName(rset.getString("DEPARTMENT_NAME"));
+				classs.setProfessorNo(rset.getString("CAPACITY"));
+				
+				list.add(classs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 
 }

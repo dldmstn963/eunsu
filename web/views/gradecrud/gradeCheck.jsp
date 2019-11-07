@@ -16,6 +16,13 @@
 <script type="text/javascript"
 	src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+function classEnroll() {
+	var f = document.classEnroll2;
+	f.action = "/eunsu/classenrollList";
+	f.method = "post"
+	f.submit();
+}
+
 function Chat() {
 	var f = document.Chat2;
 	f.action = "/eunsu/chattinglist";

@@ -101,7 +101,7 @@
 	</select><br><bt>
 	아이디 검색 : <input type="text" name="id"><br>
 	이름 검색 : <input type="text" name="name"><br><br>
-	<input type="submit">
+	<input type="submit" value="검색">
 	</form>
 
 

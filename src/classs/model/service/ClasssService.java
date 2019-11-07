@@ -1,7 +1,5 @@
 package classs.model.service;
 
-import static common.JDBCTemplate.getConnection;
-
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -10,6 +8,7 @@ import javax.swing.plaf.synth.SynthSpinnerUI;
 import static common.JDBCTemplate.*;
 import classs.model.dao.ClasssDao;
 import classs.model.vo.Classs;
+import grade.model.vo.Grade;
 
 public class ClasssService {
 
@@ -125,6 +124,20 @@ public class ClasssService {
 			rollback(conn);
 		}
 		return result;
+	}
+
+	public int getProClassListCount(String professorNo) {
+		Connection conn = getConnection();
+		int listCount = cdao.getProClassListCount(conn, professorNo);
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<Classs> classCheckList(int startRow, int endRow, String professorNo) {
+		Connection conn = getConnection();
+		ArrayList<Classs> list = cdao.classCheckList(conn, startRow, endRow, professorNo);
+		close(conn);
+		return list;
 	}
 
 }

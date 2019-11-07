@@ -18,6 +18,13 @@ int maxPage = ((Integer)request.getAttribute("maxPage")).intValue();
 <title>수은 대학교</title>
 <script type="text/javascript" src="/eunsu/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+function classEnroll() {
+	var f = document.classEnroll2;
+	f.action = "/eunsu/classenrollList";
+	f.method = "post"
+	f.submit();
+}
+
 function Chat() {
 	var f = document.Chat2;
 	f.action = "/eunsu/chattinglist";
@@ -191,7 +198,7 @@ function Chat() {
 						</button>
 						<div id="Demo1" class="w3-hide w3-container">
 							<p>
-								<a href="/eunsu/views/professorbasic.jsp">강의 과목 보기</a>
+								<a href="/eunsu/classcheck?pno=<%=loginProfessor.getProfessorNo()%>">강의 과목 보기</a>
 							</p>
 						</div>
 						<button onclick="myFunction('Demo2')"

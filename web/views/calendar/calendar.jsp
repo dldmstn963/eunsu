@@ -34,7 +34,12 @@
 <script type='text/javascript'
 	src='/eunsu/resources/fullcalendar.min.js'></script>
 <script type='text/javascript'>
-
+function classEnroll() {
+	var f = document.classEnroll2;
+	f.action = "/eunsu/classenrollList";
+	f.method = "post"
+	f.submit();
+}
 	$(document).ready(function() {
 	
 		var date = new Date();
@@ -83,6 +88,28 @@
 		})
 		return false;
 	}}
+	
+	function checknull2(){
+		if($("#title").val()==""){
+			alert("일정 내용을 입력해주세요");
+			return false;
+		}
+		if($("#startDate").val()==""){
+			alert("시작일을 입력해주세요");
+			return false;
+		}
+		if($("#endDate").val()==""){
+			alert("끝날일을 입력해주세요");
+			return false;
+		}
+	}
+	
+	function gradeCheck() {
+		var f = document.classEnroll2;
+		f.action = "/eunsu/gradecheck";
+		f.method = "post"
+		f.submit();
+	}
 </script>
 <style type='text/css'>
 body {
@@ -276,7 +303,7 @@ body {
 						</button>
 						<div id="Demo1" class="w3-hide w3-container">
 							<p>
-								<a href="/eunsu/views/professorbasic.jsp">강의 과목 보기</a>
+								<a href="/eunsu/classcheck?pno=<%=loginProfessor.getProfessorNo()%>">강의 과목 보기</a>
 							</p>
 						</div>
 						<button onclick="myFunction('Demo2')"
@@ -424,18 +451,18 @@ body {
 				<table align="center" border="1" cellspacing="0" cellpadding="10">
 					<tr>
 						<th>일정 이름</th>
-						<td><input type="text" name="title"></td>
+						<td><input type="text" name="title" id="title"></td>
 					</tr>
 					<tr>
 						<th>시작 날짜</th>
-						<td><input type="date" name="startDate"></td>
+						<td><input type="date" name="startDate" id="startDate"></td>
 					</tr>
 					<tr>
 						<th>종료 날짜</th>
-						<td><input type="date" name="endDate"></td>
+						<td><input type="date" name="endDate" id="endDate"></td>
 					</tr>
 					<tr>
-						<td colspan="2"><input type="submit" value="등록">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+						<td colspan="2"><input type="submit" value="등록" onclick="return checknull2()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
 							type="reset" value="초기화"></td>
 					</tr>
 				</table>
@@ -454,23 +481,41 @@ body {
 						for (Calendar c : list2) {
 					%>
 					<tr>
+					<script type='text/javascript'>
+					function checknull1(){
+							console.log("<%=c.getCalendarNo()%><%=c.getTitle()%>");
+						if($("#<%=c.getCalendarNo()%><%=c.getTitle()%>").val()==""){
+							console.log("실행됨");
+							alert("일정 내용을 입력해주세요");
+							return false;
+						}
+						if($("#<%=c.getCalendarNo()%><%=c.getStart()%>").val()==""){
+							alert("시작일을 입력해주세요");
+							return false;
+						}
+						if($("#<%=c.getCalendarNo()%><%=c.getEnd()%>").val()==""){
+							alert("끝날일을 입력해주세요");
+							return false;
+						}
+					}
+					</script>
 						<td align="center"><input type="checkbox" id="checkbox"
 							name="checkbox" value="<%=c.getCalendarNo()%>"></td>
 						<td style="display: none;"><input type="text" name="calNo"
 							value="<%=c.getCalendarNo()%>"></td>
 						<td><%=c.getCalendarNo()%></td>
 						<td><input type="text" style="width: 170px;" name="calTitle"
-							value="<%=c.getTitle()%>"></td>
+							value="<%=c.getTitle()%>" id="<%=c.getCalendarNo()%><%=c.getTitle()%>"></td>
 						<td><input type="date" style="width: 130px;" name="calStart"
-							value="<%=c.getStart()%>"></td>
+							value="<%=c.getStart()%>" id="<%=c.getCalendarNo()%><%=c.getStart()%>"></td>
 						<td><input type="date" style="width: 130px;"
-							name="calEnd" value="<%=c.getEnd()%>"></td>
+							name="calEnd" value="<%=c.getEnd()%>" id="<%=c.getCalendarNo()%><%=c.getEnd()%>"></td>
 					</tr>
 					<%
 						}
 					%>
 				</table>
-				<br> <center> <input type="submit" value="수정">
+				<br> <center> <input type="submit" value="수정" onclick="return checknull1()">
 						&nbsp; <input type="reset" value="초기화"> &nbsp; <input
 							type="button" value="삭제" onclick="return dellist();"></center>
 			</form>

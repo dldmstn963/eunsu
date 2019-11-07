@@ -32,7 +32,6 @@ public class ClassOpenServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String term = request.getParameter("year")+request.getParameter("term");
 		int result = new ClasssService().classOpen(term);
-		
 		response.setContentType("text/html; charset=utf-8"); 
 		PrintWriter out = response.getWriter();
 		if(result > 0) {

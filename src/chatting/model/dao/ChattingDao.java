@@ -53,7 +53,7 @@ public class ChattingDao {
 
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
-				listCount = rset.getInt(1);
+				listCount= rset.getInt(1);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
