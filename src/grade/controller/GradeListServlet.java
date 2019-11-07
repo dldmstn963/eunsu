@@ -32,7 +32,6 @@ public class GradeListServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    public String professorNo = "";
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int currentPage = 1;
 		if (request.getParameter("page") != null) {
@@ -40,10 +39,7 @@ public class GradeListServlet extends HttpServlet {
 		}
 		int limit = 10; 
 		GradeService gservice = new GradeService();
-		if (professorNo == "" ||(!(request.getParameter("professorNo") == null) && !professorNo.equals(request.getParameter("professorNo")))
-				) {
-			professorNo = request.getParameter("professorNo");
-		}
+			String professorNo = request.getParameter("professorNo");
 
 		int listCount = gservice.getProGradeListCount(professorNo); 
 		if (listCount == 0) {

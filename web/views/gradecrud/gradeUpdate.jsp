@@ -188,15 +188,15 @@ function Chat() {
 			</form>
 			<br>
 			<div id="pagebox" align="center">
-				<a href="/eunsu/gradelist?page=1">|◁</a> &nbsp;
+				<a href="/eunsu/gradelist?page=1&professorNo=<%=loginProfessor.getProfessorNo() %>">|◁</a> &nbsp;
 				<%
 					if ((beginPage - 10) < 1) {
 				%>
-				<a href="/eunsu/gradelist?page=1">◀◀</a>
+				<a href="/eunsu/gradelist?page=1&professorNo=<%=loginProfessor.getProfessorNo() %>">◀◀</a>
 				<%
 					} else {
 				%>
-				<a href="/eunsu/gradelist?page=<%=beginPage - 10%>">◀◀</a>
+				<a href="/eunsu/gradelist?page=<%=beginPage - 10%>&professorNo=<%=loginProfessor.getProfessorNo() %>">◀◀</a>
 				<%
 					}
 				%>
@@ -205,13 +205,13 @@ function Chat() {
 					for (int p = beginPage; p <= endPage; p++) {
 						if (p == currentPage) {
 				%>
-				<a href="/eunsu/gradelist?page=<%=p%>"><font
+				<a href="/eunsu/gradelist?page=<%=p%>&professorNo=<%=loginProfessor.getProfessorNo() %>"><font
 					color="red"><b>[<%=p%>]
 					</b></font></a>
 				<%
 					} else {
 				%>
-				<a href="/eunsu/gradelist?page=<%=p%>"><%=p%></a>
+				<a href="/eunsu/gradelist?page=<%=p%>&professorNo=<%=loginProfessor.getProfessorNo() %>"><%=p%></a>
 				<%
 					}
 					}
@@ -220,15 +220,15 @@ function Chat() {
 				<%
 					if ((endPage + 10) > maxPage) {
 				%>
-				<a href="/eunsu/gradelist?page=<%=maxPage%>">▶▶</a>
+				<a href="/eunsu/gradelist?page=<%=maxPage%>&professorNo=<%=loginProfessor.getProfessorNo() %>">▶▶</a>
 				<%
 					} else {
 				%>
-				<a href="/eunsu/gradelist?page=<%=endPage + 10%>">▶▶</a>
+				<a href="/eunsu/gradelist?page=<%=endPage + 10%>&professorNo=<%=loginProfessor.getProfessorNo() %>">▶▶</a>
 				<%
 					}
 				%>
-				&nbsp; <a href="/eunsu/gradelist?page=<%=maxPage%>">▷|</a>
+				&nbsp; <a href="/eunsu/gradelist?page=<%=maxPage%>&professorNo=<%=loginProfessor.getProfessorNo() %>">▷|</a>
 			</div>
 
 		</div>

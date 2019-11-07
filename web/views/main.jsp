@@ -221,7 +221,7 @@ a {
 						</button>
 						<div id="Demo2" class="w3-hide w3-container">
 							<p>
-								<a href="#" onclick="classUpdate();">성적 수정</a>
+								<a href="/eunsu/gradelist?professorNo=<%=loginProfessor.getProfessorNo()%>">성적 수정</a>
 							</p>
 
 							<form name="classUpdate2">
